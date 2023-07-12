@@ -48,11 +48,12 @@ body {
     padding: 0 18px;
     flex-basis: auto;
 }
-.name {
+.title-h1 {
     color: var(--white-color);
     font-family: 'Forum';
-    font-size: 14px;
-    letter-spacing: 2%;
+    font-size: 28px;
+    font-weight: 100;
+    letter-spacing: 1px;
 }
 .menu {
     /* min-width: 640px; */
@@ -64,18 +65,20 @@ body {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
+    margin-right: 40px;
 }
 .nav-link {
     text-decoration: none;
     color: var(--white-color);
     font-family: 'Inter', sans-serif;
     font-size: 20px;
-    padding: 0 19px;
+    letter-spacing: 0.8px;
+    padding-left: 30px;
 }
 .profile-icon {
     width: 28px;
     height: 28px;
-    margin-left: 25px;
+    /* margin-left: 25px; */
 }
 .container-img {
     height: 600px;
@@ -107,12 +110,13 @@ body {
     text-align: center;
     padding-top: 15px;
 }
-.title-p {
+.title-h2 {
     color: var(--dark-color);
     font-family: 'Forum';
     font-size: 40px;
     letter-spacing: 1px;
     margin-bottom: 17px;
+    font-weight: 100;
 }
 .line {
     width: 50px;
