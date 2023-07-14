@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="icon" href="assets/ico/favicon.ico"> -->
+    <link rel="icon" href="assets/ico/favicon.ico">
     <title>Brooklyn Public Library</title>
 </head>
 <body>
     <header class="header">
         <div class="container_header">
-            <!-- <div class="name"> -->
             <h1 class="title-h1">Brooklyn Public Library</h1>
-            <!-- </div> -->
             <div class="menu">
                 <nav class="nav">
                     <ul class="nav-list">
@@ -23,7 +21,6 @@
                         <li class="nav-item"><a href="#library-card" class="nav-link">Library Card</a></li>
                     </ul>
                 </nav>
-                <!-- <img  src="assets/img/profile-icon.png" alt="profile-icon"> -->
                 <svg class="profile-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z"
@@ -33,28 +30,169 @@
         </div>
     </header>
     <main>
+
         <section class="welcome">
-            <div class="container container-img">
+            <div class="container_img">
+
                 <div class="overlay"></div>
-                <div class="dark-box"><p class="title">Welcome<br>to the Brooklyn<br>Library</p></div>
-            </div>
-        </section>
-        <section class="about">
-            <div class="container">
-                <div class="title-box">
-                    <h2 class="title-h2">About</h2>
-                    <div class="line"></div>
-                    <p class="text-p">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
+                <div class="dark-box">
+                    <h3 class="bg-title">Welcome<br>to the Brooklyn<br>Library</h3>
                 </div>
-                <img class="img-1" src="assets/img/library-1.png" alt="Photo of the library">
-                <img class="img-2" src="assets/img/library-2.png" alt="Photo of the library">
-                <img class="img-3" src="assets/img/library-3.png" alt="Photo of the library">
+
             </div>
         </section>
+
+        <section class="about" id="about">
+            <div class="container">
+
+                <div class="title-box">
+                    <h2 class="section-title">About</h2>
+                </div>
+                <div class="text">
+                    <p class="about_inter20">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
+                </div>
+
+                <div class="about_flex">
+                    <div class="about_flex-item"><img class="about_img" src="assets/img/library-1.png" alt="Photo of the library"></div>
+                    <div class="about_flex-item"><img class="about_img" src="assets/img/library-2.png" alt="Photo of the library"></div>
+                    <div class="about_flex-item"><img class="about_img" src="assets/img/library-3.png" alt="Photo of the library"></div>
+                    <div class="about_flex-item about_item-inactive"><img class="about_img" src="assets/img/library-4.png" alt="Photo of the library"></div>
+                    <div class="about_flex-item about_item-inactive"><img class="about_img" src="assets/img/library-5.png" alt="Photo of the library"></div>
+                </div>
+
+                <div class="about_pagination">
+                    <button class="pagination pagination-active"></button>
+                    <button class="pagination"></button>
+                    <button class="pagination"></button>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="favorites" id="favorites">
+            <div class="container">
+
+                <div class="title-box">
+                    <h2 class="section-title">Favorites</h2>
+                </div>
+                <div class="text">
+                    <p class="favorites_inter20-bold">Pick favorites of season</p>
+                </div>
+
+                <div class="favorites_radio">
+                    <ul class="radio-list_flex">
+                        <li class="radio-item">
+                            <label class="label">
+                                <input type="radio" class="radio" name="season">
+                                <span class="fake"></span>
+                                <span class="radio-inter20">Winter</span>
+                            </label>
+                        </li>
+                        <li class="radio-item">
+                            <label class="label">
+                                <input type="radio" class="radio" name="season">
+                                <span class="fake"></span>
+                                <span class="radio-inter20">Spring</span>
+                            </label>
+                        </li>
+                        <li class="radio-item">
+                            <label class="label">
+                                <input type="radio" class="radio" name="season">
+                                <span class="fake"></span>
+                                <span class="radio-inter20">Summer</span>
+                            </label>
+                        </li>
+                        <li class="radio-item">
+                            <label class="label">
+                                <input type="radio" class="radio" name="season">
+                                <span class="fake"></span>
+                                <span class="radio-inter20">Autumn</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="favorites_flex">
+                    <div class="favorites_flex-item">
+                        <div class="book-description-card">
+                            <div class="titles">
+                                <h2 class="category-title">Staff Picks</h2>
+                                <h3 class="book-title">
+                                    <span class="book-name">The book eaters</span>
+                                    <br>By Sunyi Dean
+                                </h3>
+                                <p class="text-description">An unusual sci-fi story about a book eater woman who tries desperately to save her dangerous mind-eater son from tradition and certain death. Complete with dysfunctional family values, light Sapphic romance, and a strong, complex
+                                protagonist. Not for the faint of heart.</p>
+                                <button class="buy_btn">Buy</button>
+                            </div>
+                        </div>
+                        <img class="book" src="assets/img/book-1.png" alt="book cover">
+                    </div>
+                    <div class="favorites_flex-item">
+                        <div class="book-description-card">
+                            <div class="titles">
+                                <h2 class="category-title">Staff Picks</h2>
+                                <h3 class="book-title">
+                                    <span class="book-name">Cackle
+                                    </span><br>
+                                    By Rachel Harrison
+                                </h3>
+                                <p class="text-description">Are your Halloween movies of choice The Witches of Eastwick and Practical Magic? Look no further than here - where a woman recovering from a breakup moves to a quaint town in upstate New York and befriends a beautiful witch.</p>
+                                <button class="buy_btn">Buy</button>
+                            </div>
+                        </div>
+                        <img class="book" src="assets/img/book-2.png" alt="book cover">
+                    </div>
+                    <div class="favorites_flex-item">
+                        <div class="book-description-card">
+                            <div class="titles">
+                                <h2 class="category-title">Staff Picks</h2>
+                                <h3 class="book-title">
+                                    <span class="book-name">Dante: Poet of the Secular World</span>
+                                    <br>By Erich Auerbach
+                                </h3>
+                                <p class="text-description">Auerbach's engaging book places the 'Comedy' within the tradition of epic, tragedy, and philosophy in general, arguing for Dante's uniqueness as one who raised the individual and his drama of soul into something of divine significance — an inspired introduction to Dante's main themes.</p>
+                                <button class="buy_btn">Buy</button>
+                            </div>
+                        </div>
+                        <img class="book" src="assets/img/book-3.png" alt="book cover">
+                    </div>
+                    <div class="favorites_flex-item">
+                        <div class="book-description-card">
+                            <div class="titles">
+                                <h2 class="category-title">Staff Picks</h2>
+                                <h3 class="book-title">
+                                    <span class="book-name">The Last Queen</span>
+                                    <br>By Clive Irving
+                                </h3>
+                                <p class="text-description">A timely and revelatory new biography of Queen Elizabeth (and her family) exploring how the Windsors have evolved and thrived as the modern world has changed around them.</p>
+                                <button class="buy_btn">Buy</button>
+                            </div>
+                        </div>
+                        <img class="book" src="assets/img/book-4.png" alt="book cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="coffee-shop" id="coffee-shop">
+            <div class="container">
+
+            </div>
+        </section>
+
+        <section class="contacts" id="contacts">
+            <div class="container">
+        
+            </div>
+        </section>
+
+        <section class="library-card" id="library-card">
+            <div class="container">
+        
+            </div>
+        </section>
+
     </main>
 </body>
 </html>
-
-
-<!-- Underline using pseudo styles: https://codepen.io/elb96/pen/aXKXBx -->
-<!-- в ютубе много видосов как сделать кастомные чекбоксы/радиокнопки суть в том, что скрывается дефолтный и на его месте рисуется кастомный: https://youtu.be/L0M9Q6tt5Ss -->
