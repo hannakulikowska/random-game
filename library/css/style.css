@@ -41,6 +41,7 @@ body {
     --inter10-bold: 700 10px/12.1px Inter, sans-serif;
     --inter15-bold: 700 15px/40px Inter, sans-serif;
     --inter20-bold: 700 20px/24.2px Inter, sans-serif;
+    --inter20-40-bold: 700 20px/40px Inter, sans-serif;
 }
 
 .header {
@@ -138,20 +139,25 @@ body {
     color: var(--dark-color);
     font: var(--section-title);
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 61px;
+}
+
+.title-box {
+    position: relative;
 }
 
 .title-box:after {
+    position: absolute;
     content: '';
     background-color: var(--accent-color);
     width: 50px;
     height: 1px;
     display: block;
-    margin: 0 auto;
+    top: calc(100% + 20px);
+    right: calc(50% - 25px);
 }
 
 .text {
-    padding-top: 40px;
     margin-bottom: 20px;
 }
 
@@ -371,7 +377,6 @@ body {
 
 .menu_flex {
     display: flex;
-    min-height: 520px;
     flex-direction: column;
     gap: 40px;
 }
@@ -442,8 +447,48 @@ body {
     height: 1px;
 }
 
+.contacts_flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+.contacts-title {
+    font: var(--inter20-40-bold);
+    letter-spacing: 2px;
+    text-align: left;
+    margin-bottom: 40px;
+    color: var(--black-color);
+}
+
+.contact {
+    font: var(--inter20);
+    letter-spacing: 2px;
+    text-align: left;
+    color: var(--black-color);
+}
+
+.phone-info {
+    margin-bottom: 40px;
+}
+
+.staff {
+    margin-bottom: 20px;
+}
+
+.contact span {
+    font: var(--inter20-40-bold);
+}
+
 @media (max-width: 1260px) {
     .favorites_flex {
         justify-content: center;
+    }
+}
+
+@media (max-width: 1000px) {
+    .menu-right_flex {
+        margin-left: auto;
     }
 }
