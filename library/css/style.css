@@ -273,8 +273,6 @@ body {
 .favorites_flex-item {
     width: 590px;
     height: 555px;
-    flex-wrap: nowrap;
-    justify-content: space-between;
     position: relative;
 }
 
@@ -338,6 +336,110 @@ body {
     letter-spacing: 1px;
     position: absolute;
     top: 510px;
+}
+
+.own_btn {
+    width: 75px;
+    height: 30px;
+    border-radius: 2px;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    background-color: var(--white-color);
+    font: var(--inter10-bold);
+    letter-spacing: 1px;
+    position: absolute;
+    top: 510px;
+}
+
+.coffee-shop_inter20 {
+    color: var(--black-color);
+    font: var(--inter20);
+    letter-spacing: 2.7px;
+    margin-bottom: 40px;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.cofee-shop_flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.menu_flex {
+    display: flex;
+    min-height: 520px;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.menu-left_flex {
+    min-width: 438px;
+}
+
+.menu-right_flex {
+    min-width: 462px;
+}
+
+.menu-title {
+    color: var(--accent-color);
+    font: var(--section-title);
+    letter-spacing: 2px;
+}
+
+.menu-title-left {
+    text-align: left;
+}
+
+.menu-title-right {
+    text-align: right;
+}
+
+.menu_flex-item {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.dish {
+    color: var(--black-color);
+    font: var(--inter20);
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    display: block;
+}
+
+.dish-left {
+    text-align: left;
+    min-width: 190px;
+}
+
+.dish-right {
+    text-align: right;
+    min-width: 210px;
+}
+
+.price {
+    color: var(--black-color);
+    font: var(--forum20);
+    letter-spacing: 2px;
+}
+
+.price span {
+    position: relative;
+}
+
+.price span::before {
+    display: block;
+    width: 100px;
+    content: "";
+    position: absolute;
+    background-color: var(--accent-color);
+    top: 50%;
+    right: calc(100% + 60px);
+    height: 1px;
 }
 
 @media (max-width: 1260px) {
