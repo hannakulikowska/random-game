@@ -32,12 +32,14 @@ body {
     --grey-color: #8E8E8E;
     --white-color: #fff;
     --forum-h1: 400 30px Forum;
+    --forum30: 400 30px/50px Forum, normal;
     --section-title: 400 40px/40px Forum;
     --bg-title: 400 40px/50px Forum;
     --forum20: 400 20px/40px Forum;
     --nav-font: 400 20px/50px Inter, sans-serif;
     --inter15: 400 15px/40px Inter, sans-serif;
     --inter20: 400 20px/40px Inter, sans-serif;
+    --inter30: 400 30px/normal Inter, sans-serif;
     --inter10-bold: 700 10px/12.1px Inter, sans-serif;
     --inter15-bold: 700 15px/40px Inter, sans-serif;
     --inter20-bold: 700 20px/24.2px Inter, sans-serif;
@@ -460,6 +462,7 @@ body {
     text-align: left;
     margin-bottom: 40px;
     color: var(--black-color);
+    text-transform: capitalize;
 }
 
 .contact {
@@ -479,6 +482,106 @@ body {
 
 .contact span {
     font: var(--inter20-40-bold);
+}
+
+.library-cards_flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 21px;
+}
+
+.find-card_title {
+    font: var(--inter30);
+    text-align: center;
+    letter-spacing: 0.6px;
+    margin-bottom: 30px;
+}
+
+.white-bg {
+    border: 3px solid var(--accent-color);
+    background-color: var(--white-color);
+    width: 600px;
+    height: 386px;
+    flex-shrink: 0;
+    padding: 20px 20px 30px;
+}
+
+.gold-bg {
+    background-color: var(--accent-color);
+    width: 560px;
+    height: 272px;
+    flex-shrink: 0;
+    padding: 20px 20px 25px;
+    margin-bottom: 20px;
+}
+
+.name_input, .card-number_input {
+    display: block;
+    font: var(--forum30);
+    color: var(--grey-color);
+    width: 520px;
+    height: 66px;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    flex-shrink: 0;
+    border: none;
+    padding: 8px 20px;
+    margin-bottom: 25px;
+}
+
+.library-title {
+    font: var(--forum30);
+    color: var(--black-color);
+    letter-spacing: 0.6px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.check-card_btn {
+    width: auto;
+    height: auto;
+    padding: 0px 40px;
+    border-radius: 2px;
+    border: 1px solid var(--dark-color);
+    background-color: var(--white-color);
+    color: var(--dark-color);
+    font: var(--inter20-40-bold);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.get-card_title {
+    color: var(--black-color);
+    font: var(--forum30);
+    text-align: right;
+    margin-bottom: 35px;
+}
+
+.get-card_text {
+    color: var(--black-color);
+    font: var(--inter20);
+    letter-spacing: 0.4px;
+    text-align: right;
+    width: 456px;
+    margin-bottom: 35px;
+}
+
+.btn_flex {
+    display: flex;
+    justify-content: end;
+    column-gap: 20px;
+}
+
+.sign-log_btn {
+    color: var(--dark-color);
+    font: var(--inter10-bold);
+    letter-spacing: 1px;
+    border-radius: 2px;
+    border: 1px solid var(--dark-color);
+    width: 75px;
+    padding: 10px 0;
+    background-color: var(--white-color);
 }
 
 @media (max-width: 1260px) {
