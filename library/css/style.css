@@ -47,27 +47,27 @@ body {
 }
 
 .header {
-    background-color: var(--dark-color);
     height: 90px;
     line-height: 90px;
-}
-
-.container_header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 18px;
-    flex-basis: auto;
 }
 
 .container {
     max-width: 1440px;
     margin: 0 auto;
     text-align: center;
-    padding: 20px 20px 40px;
+    padding: 20px 20px 37px;
+}
+
+.header_flex {
+    max-width: 1440px;
+    background-color: var(--dark-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 18px;
+    flex-basis: auto;
 }
 
 .title-h1 {
@@ -189,23 +189,23 @@ body {
     padding-top: 35px;
 }
 
-.pagination {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
+.pagination-outer {
     display: inline-block;
-    background-color: var(--dark-color);
-    margin-right: 6px;
-    border: none;
+    width: 26px;
+    height: 26px;
 }
 
-.pagination:last-child {
-    margin-right: 0px;
+.pagination-inner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--dark-color);
+    border-radius: 50%;
+    border: none;    
 }
 
 .pagination-active {
     background-color: var(--accent-color);
-    margin-right: 6px;
     border: none;
 }
 
@@ -287,7 +287,7 @@ body {
 .book-description-card {
     width: 550px;
     height: 555px;
-    padding: 13px 165px 13px 20px;
+    padding: 13px 20px 13px 20px;
     text-align: left;
     border: 1px solid var(--black-color);
 }
@@ -327,10 +327,12 @@ body {
 }
 
 .text-description {
+    display: block;
     color: var(--black-color);
     font: var(--inter15);
     letter-spacing: 2px;
     text-transform: capitalize;
+    margin-right: 170px;
     margin-bottom: 15px;
 }
 
@@ -466,10 +468,15 @@ body {
 }
 
 .contact {
+    color: var(--black-color);
     font: var(--inter20);
     letter-spacing: 2px;
     text-align: left;
-    color: var(--black-color);
+    text-transform: capitalize;
+}
+
+.contact span {
+    font: var(--inter20-40-bold);
 }
 
 .phone-info {
@@ -478,10 +485,6 @@ body {
 
 .staff {
     margin-bottom: 20px;
-}
-
-.contact span {
-    font: var(--inter20-40-bold);
 }
 
 .library-cards_flex {
@@ -556,6 +559,8 @@ body {
     font: var(--forum30);
     text-align: right;
     margin-bottom: 35px;
+    line-height: normal;
+    letter-spacing: 0.6px;
 }
 
 .get-card_text {
@@ -582,6 +587,96 @@ body {
     width: 75px;
     padding: 10px 0;
     background-color: var(--white-color);
+}
+
+.footer .container {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    min-height: 250px;
+}
+
+.frame_flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin-bottom: 65px;
+    position: relative;
+}
+
+.frame_flex:after {
+    position: absolute;
+    content: '';
+    background-color: var(--white-color);
+    width: 100%;
+    height: 1px;
+    display: block;
+    top: calc(100% + 20px);
+    left: 0%;
+}
+
+.frame_flex-item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.address,
+.open-hours {
+    font: var(--inter15);
+    line-height: 20px;
+    font-style: normal;
+    display: inline;
+}
+
+.address {
+    text-align: left;
+}
+
+.icon {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    text-align: center4;
+}
+
+.social-media {
+    text-align: left;
+    display: inline-block;
+}
+
+svg {
+    fill: var(--white-color);
+}
+
+.open-hours {
+    text-align: right;
+}
+
+.footer-rss_flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font: var(--inter20);
+    letter-spacing: 2px;
+}
+
+.rss_item {
+    width: calc(100%/3);
+}
+
+.year {
+    text-align: left;
+}
+
+.username {
+    text-align: right;
+}
+
+.school-name a,
+.username a {
+    text-decoration: none;
+    color: var(--white-color);
 }
 
 @media (max-width: 1260px) {
