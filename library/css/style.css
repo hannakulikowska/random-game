@@ -53,7 +53,7 @@ body {
 }
 
 .container {
-    max-width: 1440px;
+    width: 1440px;
     margin: 0 auto;
     text-align: center;
     background-color: var(--white-color);
@@ -385,6 +385,7 @@ body {
     border: 1px solid var(--dark-color);
     background-color: var(--white-color);
     font: var(--inter10-bold);
+    color: var(--dark-color);
     letter-spacing: 1px;
     position: absolute;
     top: 510px;
@@ -761,16 +762,4 @@ body {
 .username a {
     text-decoration: none;
     color: var(--white-color);
-}
-
-@media (max-width: 1260px) {
-    .favorites_flex {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 1000px) {
-    .menu-right_flex {
-        margin-left: auto;
-    }
 }
