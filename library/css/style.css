@@ -235,6 +235,7 @@ body {
     height: 26px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .pagination-inner {
@@ -262,6 +263,7 @@ body {
 
 .label {
     padding: 5px 0;
+    cursor: pointer;
 }
 
 .radio-list_flex {
@@ -401,6 +403,7 @@ body {
     letter-spacing: 1px;
     position: absolute;
     top: 510px;
+    cursor: pointer;
 }
 
 .buy_btn:hover,
@@ -629,6 +632,7 @@ body {
     font: var(--inter20-40-bold);
     letter-spacing: 1px;
     text-align: center;
+    cursor: pointer;
 }
 
 .get-card_title {
@@ -664,6 +668,7 @@ body {
     width: 75px;
     padding: 10px 0;
     background-color: var(--white-color);
+    cursor: pointer;
 }
 
 .footer {
