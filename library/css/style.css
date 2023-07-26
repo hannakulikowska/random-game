@@ -1,7 +1,4 @@
-@font-face {
-    font-family: Forum, normal;
-    src: url("assets/fonts/Forum-Regular.ttf");
-}
+@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
 
 @font-face {
     font-family: Inter, sans-serif;
@@ -33,9 +30,9 @@ body {
     --grey-color: #8E8E8E;
     --white-color: #fff;
     --forum-h1: 400 30px Forum;
-    --forum30: 400 30px/50px Forum, normal;
+    --forum30: 400 30px/50px Forum;
     --section-title: 400 40px/40px Forum;
-    --bg-title: 400 40px/50px Forum, normal;
+    --bg-title: 400 40px/50px Forum;
     --forum20: 400 20px/40px Forum;
     --nav-font: 400 20px/50px Inter, sans-serif;
     --inter15: 400 15px/40px Inter, sans-serif;
@@ -81,7 +78,7 @@ body {
 .title-h1 {
     color: var(--white-color);
     font: var(--forum-h1);
-    letter-spacing: 2%;
+    letter-spacing: 0.7px;
 }
 
 .menu {
@@ -148,7 +145,7 @@ body {
     font: var(--bg-title);
     text-transform: uppercase;
     text-align: center;
-    letter-spacing: -1px;
+    letter-spacing: 2.9px;
 }
 
 .about {
@@ -181,7 +178,7 @@ body {
 .section-title:after {
     position: absolute;
     content: '';
-    background-color: var(--accent-color);
+    background-color: var(--dark-color);
     width: 50px;
     height: 1px;
     display: block;
