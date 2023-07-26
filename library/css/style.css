@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Forum;
+    font-family: Forum, normal;
     src: url("assets/fonts/Forum-Regular.ttf");
 }
 
@@ -23,7 +23,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     justify-content: space-between;
-    background-color: var(--black-color);
+    background-color: var(--white-color);
 }
 
 :root {
@@ -48,19 +48,15 @@ body {
 }
 
 .header {
+    width: 100%;
     height: 90px;
     line-height: 90px;
+    background-color: var(--dark-color);
 }
 
-.container {
+.header_container {
     width: 1440px;
     margin: 0 auto;
-    text-align: center;
-    background-color: var(--white-color);
-}
-
-.header {
-    width: 100%;
 }
 
 .header_flex {
@@ -72,6 +68,14 @@ body {
     margin: 0 auto;
     padding: 0 18px;
     flex-basis: auto;
+}
+
+.container {
+    width: 1440px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: var(--white-color);
+    padding: 0 20px;
 }
 
 .title-h1 {
@@ -125,6 +129,11 @@ body {
     background: linear-gradient(rgba(12, 12, 14, 1), rgba(18, 18, 21, 0.1));
 }
 
+.welcome_container {
+    width: 1440px;
+    margin: 0 auto;
+}
+
 .dark-box {
     background-color: var(--dark-color);
     min-width: 600px;
@@ -139,10 +148,13 @@ body {
     font: var(--bg-title);
     text-transform: uppercase;
     text-align: center;
+    letter-spacing: -1px;
 }
+
 .about {
     text-align: center;
 }
+
 .about,
 .footer {
     padding: 20px 20px 34px;
@@ -153,7 +165,7 @@ body {
 }
 
 .library-card {
-    padding: 30px 20px 44px;
+    padding: 30px 20px 42px;
 }
 
 .coffee-shop,
@@ -522,7 +534,7 @@ body {
 .contact {
     color: var(--black-color);
     font: var(--inter20);
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-align: left;
     text-transform: capitalize;
 }
@@ -537,7 +549,7 @@ body {
 }
 
 .phone-info {
-    margin-bottom: 40px;
+    margin-bottom: 45px;
 }
 
 .map {
@@ -562,7 +574,7 @@ body {
 .find-card_title {
     font: var(--inter30);
     text-align: center;
-    letter-spacing: 0.6px;
+    letter-spacing: 1.5px;
     margin-bottom: 30px;
 }
 
@@ -573,6 +585,7 @@ body {
     height: 386px;
     flex-shrink: 0;
     padding: 20px 20px 30px;
+    box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
 }
 
 .gold-bg {
@@ -601,7 +614,6 @@ body {
 .library-title {
     font: var(--forum30);
     color: var(--black-color);
-    letter-spacing: 0.6px;
     text-align: left;
     margin-bottom: 20px;
 }
@@ -625,13 +637,13 @@ body {
     text-align: right;
     margin-bottom: 35px;
     line-height: normal;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.8px;
 }
 
 .get-card_text {
     color: var(--black-color);
     font: var(--inter20);
-    letter-spacing: 0.4px;
+    letter-spacing: 1px;
     text-align: right;
     width: 456px;
     margin-bottom: 35px;
@@ -658,6 +670,12 @@ body {
     background-color: var(--dark-color);
     color: var(--white-color);
     min-height: 250px;
+}
+
+.footer_container {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .frame_flex {
@@ -690,6 +708,7 @@ body {
 .open-hours {
     font: var(--inter15);
     line-height: 20px;
+    letter-spacing: 0.4px;
     font-style: normal;
     display: inline;
 }
@@ -701,6 +720,10 @@ body {
 .address a {
     text-decoration: none;
     color: var(--white-color);
+}
+
+.open-hours {
+    text-align: right;
 }
 
 .icon-list {
@@ -730,12 +753,9 @@ body {
     position: absolute;
     top: calc(50% + 12px);
 }
+
 .media-link path {
     fill: var(--white-color);
-}
-
-.open-hours {
-    text-align: right;
 }
 
 .footer-rss_flex {
@@ -743,7 +763,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     font: var(--inter20);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .rss_item {
@@ -752,6 +772,11 @@ body {
 
 .year {
     text-align: left;
+}
+
+.school-name {
+    text-align: center;
+    letter-spacing: 2.5px;
 }
 
 .username {
