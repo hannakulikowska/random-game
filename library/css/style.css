@@ -757,7 +757,7 @@ body {
 }
 
 .media-link path {
-    fill: var(--white-color);
+    fill: #F5EFDB;
 }
 
 .footer-rss_flex {
