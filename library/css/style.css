@@ -151,24 +151,24 @@ body {
 
 .about {
     text-align: center;
+    padding: 20px 0px 34px;
 }
 
-.about,
 .footer_container {
     padding: 20px 20px 34px;
 }
 
 .favorites {
-    padding: 20px 20px 30px;
+    padding: 20px 0px 30px;
 }
 
 .library-card {
-    padding: 30px 20px 42px;
+    padding: 30px 0px 42px;
 }
 
 .coffee-shop,
 .contacts {
-    padding: 30px 20px;
+    padding: 30px 0px;
 }
 
 .section-title {
@@ -665,6 +665,7 @@ body {
     border-radius: 2px;
     border: 1px solid var(--dark-color);
     width: 75px;
+    height: 30px;
     padding: 10px 0;
     background-color: var(--white-color);
     cursor: pointer;
