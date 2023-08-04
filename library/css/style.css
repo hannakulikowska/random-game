@@ -170,12 +170,16 @@ body {
     padding: 30px 0px;
 }
 
-.section-title {
+.title-h2 {
     text-align: center;
     position: relative;
+    color: var(--dark-color);
+    font: var(--section-title);
+    letter-spacing: 2px;
+    margin-bottom: 61px;
 }
 
-.section-title:after {
+.title-h2:after {
     position: absolute;
     content: '';
     background-color: var(--dark-color);
@@ -184,13 +188,6 @@ body {
     display: block;
     top: calc(100% + 20px);
     right: calc(50% - 25px);
-}
-
-.title-h2 {
-    color: var(--dark-color);
-    font: var(--section-title);
-    letter-spacing: 2px;
-    margin-bottom: 61px;
 }
 
 .text {
@@ -261,6 +258,7 @@ body {
 .label {
     padding: 5px 0;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .radio-list_flex {
@@ -319,6 +317,10 @@ body {
     transition: .2s;
 }
 
+.invisible {
+    display: none;
+}
+
 .favorites_flex {
     display: flex;
     flex-wrap: wrap;
@@ -326,30 +328,30 @@ body {
     gap: 40px;
 }
 
-.favorites_flex-item {
+.favorites_article-wrapper {
     width: 590px;
     height: 555px;
-    position: relative;
 }
 
-.invisible {
-    display: none;
-}
-
-.book-description-card {
+.favorites_book-card {
     width: 550px;
     height: 555px;
     padding: 13px 20px 13px 20px;
     text-align: left;
     border: 1px solid var(--black-color);
+    position: relative;
 }
 
-.book {
+.book-img {
     width: 200px;
     height: 300px;
     position: absolute;
-    top: calc(100% - 300px);
-    left: calc(100% - 200px);
+    top: calc(100% - 299px);
+    left: calc(100% - 159px);
+}
+
+.book_list li {
+    list-style: none;
 }
 
 .category-title {
@@ -357,6 +359,7 @@ body {
     font: var(--forum20);
     letter-spacing: 2px;
     margin-bottom: 20px;
+    display: block;
 }
 
 .category-title::after {
@@ -370,12 +373,14 @@ body {
 .book-title {
     color: var(--black-color);
     font: var(--inter15-bold);
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
 }
 
-.book-name {
-    text-transform: uppercase;
+.book-author {
+    margin-bottom: 20px;
+    letter-spacing: 1.8px;
+    font: var(--inter15-bold);
 }
 
 .text-description {
@@ -526,12 +531,12 @@ body {
     font: var(--inter20-40-bold);
     letter-spacing: 2px;
     text-align: left;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     color: var(--black-color);
     text-transform: capitalize;
 }
 
-.contact {
+.contact_text {
     color: var(--black-color);
     font: var(--inter20);
     letter-spacing: 2.5px;
@@ -539,17 +544,33 @@ body {
     text-transform: capitalize;
 }
 
-.contact a {
+.contact_link {
+    color: var(--black-color);
+    font: var(--inter20);
+    letter-spacing: 2.3px;
     text-decoration: none;
     color: var(--black-color);
 }
 
-.contact span {
+.contact_text a {
     font: var(--inter20-40-bold);
 }
 
-.phone-info {
-    margin-bottom: 45px;
+.contact_text a:hover,
+.contact_link:hover {
+    color: var(--accent-color);
+    transition: 0.3s;
+}
+
+.contacts_list {
+    margin-bottom: 40px;
+    list-style: none;
+    text-align: left;
+}
+
+.contact-item {
+    padding-top: 20px;
+    line-height: 30px;
 }
 
 .map {
@@ -747,11 +768,6 @@ body {
     transition: .3s;
     padding: 5px;
     position: relative;
-}
-
-.social-media {
-    text-align: left;
-    display: inline-block;
 }
 
 .media-link svg {
