@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brooklyn Public Library (BPL) is an independent library system for the 2.6 million residents of Brooklyn.">
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/ico/favicon.ico">
@@ -23,12 +24,21 @@
                                 <li class="nav-item"><a href="#contacts" class="nav-link">Contacts</a></li>
                                 <li class="nav-item"><a href="#library-card" class="nav-link">Library Card</a></li>
                             </ul>
+                            <div class="nav-close">
+                                <span class="nav-close-line"></span>
+                                <span class="nav-close-line"></span>
+                            </div>
                         </nav>
                         <svg class="profile-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z"
                                 fill="white" />
                         </svg>
+                        <div class="header_burger burger">
+                            <span class="burger_line burger_line-first"></span>
+                            <span class="burger_line burger_line-second"></span>
+                            <span class="burger_line burger_line-third"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,6 +67,12 @@
                         <div class="about-img_flex-item"><img class="about-img" src="assets/img/library-3.png" alt="Photo of the library"></div>
                         <div class="about-img_flex-item about-img_item-inactive"><img class="about-img" src="assets/img/library-4.png" alt="Photo of the library"></div>
                         <div class="about-img_flex-item about-img_item-inactive"><img class="about-img" src="assets/img/library-5.png" alt="Photo of the library"></div>
+                        <svg class="carret-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                            <path class="carret-color" d="M15 7.5L9 12.5L15 17.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg class="carret-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                            <path class="carret-color" d="M9 17.5L15 12.5L9 7.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                     </div>
 
                     <div class="about-pagination_flex">
@@ -120,7 +136,6 @@
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-1.png" alt="book cover">
-                                <!-- <ul class="book_list"> -->
                                 <h4 class="book-title">The book eaters</h4>
                                 <h4 class="book-author">By Sunyi Dean</h4>
                                 <p class="text-description">An unusual sci-fi story about a book eater woman who tries desperately to save her
@@ -278,7 +293,7 @@
                                 <p class="text-description">The harrowing story of an ordinary American and a principled Naval officer who, horrified by the burning of Smyrna, led an extraordinary rescue effort that saved a quarter of a million refugees from the Armenian Genocide</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
                         <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
@@ -474,10 +489,8 @@
         
                 <div class="footer-rss_flex">
                     <p class="rss_item year">2023</p>
-                    <p class="rss_item school-name"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes
-                            School</a></p>
-                    <p class="rss_item username"><a href="https://github.com/hannakulikowska/" target="_blank">Hanna
-                            Kulikowska</a></p>
+                    <p class="rss_item school-name"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a></p>
+                    <p class="rss_item username"><a href="https://github.com/hannakulikowska/" target="_blank">H.Kulikowska</a></p>
                 </div>
             </div>
         </footer>
