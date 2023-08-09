@@ -873,8 +873,8 @@ body {
     .pagination-outer:nth-last-child(2) {
         display: flex;
     }
-    .about-img_flex {
-        margin-bottom: 20px;
+    .about {
+        padding: 20px 0px;
     }
 }
 
@@ -903,7 +903,7 @@ body {
         position: fixed;
         top: 0;
         right: 0;
-        background-color: var(--black-color);
+        background-color: var(--dark-color);
         z-index: 9;
         padding: 100px 10px;
         transform: translateX(100%);
@@ -934,14 +934,14 @@ body {
     }
     .profile-icon-fixed {
         position: fixed; 
-        right: 53px;
+        right: 65px;
     }
     .nav-close {
         width: 45px;
         height: 45px;
         position: absolute;
         top: 22px;
-        right: 14px;
+        right: 20px;
         z-index: 11;
     }
     .nav-close-line {
