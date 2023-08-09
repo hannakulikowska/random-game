@@ -36,7 +36,7 @@ console.log(`Самопроверка:
 
   document.addEventListener('click', (event) => {
     const target = event.target;
-    if (!menu.contains(target) && !burgerItem.contains(target)) {
+    if (!menu.contains(target) && !burgerItem.contains(target) && !icon.contains(target)) {
       closeMenu();
     }
   });
