@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brooklyn Public Library (BPL) is an independent library system for the 2.6 million residents of Brooklyn.">
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/ico/favicon.ico">
@@ -23,12 +24,21 @@
                                 <li class="nav-item"><a href="#contacts" class="nav-link">Contacts</a></li>
                                 <li class="nav-item"><a href="#library-card" class="nav-link">Library Card</a></li>
                             </ul>
+                            <div class="nav-close">
+                                <span class="nav-close-line"></span>
+                                <span class="nav-close-line"></span>
+                            </div>
                         </nav>
                         <svg class="profile-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z"
                                 fill="white" />
                         </svg>
+                        <div class="header_burger burger">
+                            <span class="burger_line burger_line-first"></span>
+                            <span class="burger_line burger_line-second"></span>
+                            <span class="burger_line burger_line-third"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,11 +67,23 @@
                         <div class="about-img_flex-item"><img class="about-img" src="assets/img/library-3.png" alt="Photo of the library"></div>
                         <div class="about-img_flex-item about-img_item-inactive"><img class="about-img" src="assets/img/library-4.png" alt="Photo of the library"></div>
                         <div class="about-img_flex-item about-img_item-inactive"><img class="about-img" src="assets/img/library-5.png" alt="Photo of the library"></div>
+                        <svg class="carret-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                            <path class="carret-color" d="M15 7.5L9 12.5L15 17.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg class="carret-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                            <path class="carret-color" d="M9 17.5L15 12.5L9 7.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                     </div>
 
                     <div class="about-pagination_flex">
                         <div class="pagination-outer">
                             <div class="pagination-inner pagination-active"></div>
+                        </div>
+                        <div class="pagination-outer">
+                            <div class="pagination-inner"></div>
+                        </div>
+                        <div class="pagination-outer">
+                            <div class="pagination-inner"></div>
                         </div>
                         <div class="pagination-outer">
                             <div class="pagination-inner"></div>
@@ -109,239 +131,193 @@
                         </li>
                     </ul>
 
-                    <div class="favorites_flex">
-                        
-                        <div class="favorites_article-wrapper">
+                    <ul class="favorites_flex">
+                        <li class="favorites_article-wrapper">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-1.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>The book eaters</h4></li>
-                                    <li class="book-author"><h4>By Sunyi Dean</h4></li>
-                                    <li class="text-description"><p>An unusual sci-fi story about a book eater woman who tries desperately to save her
-                                        dangerous mind-eater son from tradition and certain death. Complete with dysfunctional family values, light
-                                        Sapphic romance, and a strong, complex protagonist. Not for the faint of heart.</p></li>
-                                </ul>
+                                <h4 class="book-title">The book eaters</h4>
+                                <h4 class="book-author">By Sunyi Dean</h4>
+                                <p class="text-description">An unusual sci-fi story about a book eater woman who tries desperately to save her
+                                    dangerous mind-eater son from tradition and certain death. Complete with dysfunctional family values, light
+                                    Sapphic romance, and a strong, complex protagonist. Not for the faint of heart.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
                         
-                        <div class="favorites_article-wrapper">
+                        <li class="favorites_article-wrapper">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-2.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Cackle</h4></li>
-                                    <li class="book-author"><h4>By Rachel Harrison</h4></li>
-                                    <li class="text-description"><p>Are your Halloween movies of choice The Witches of Eastwick and Practical Magic? Look no further than here - where a
-                                    woman recovering from a breakup moves to a quaint town in upstate New York and befriends a beautiful witch.</p></li>
-                                </ul>
+                                <h4 class="book-title">Cackle</h4>
+                                <h4 class="book-author">By Rachel Harrison</h4>
+                                <p class="text-description">Are your Halloween movies of choice The Witches of Eastwick and Practical Magic? Look no further than here - where a woman recovering from a breakup moves to a quaint town in upstate New York and befriends a beautiful witch.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper">
+                        <li class="favorites_article-wrapper">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-3.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Dante: Poet of the Secular World</h4></li>
-                                    <li class="book-author"><h4>By Erich Auerbach</h4></li>
-                                    <li class="text-description"><p>Auerbach's engaging book places the 'Comedy' within the tradition of epic, tragedy, and philosophy in general, arguing
+                                <h4 class="book-title">Dante: Poet of the Secular World</h4>
+                                <h4 class="book-author">By Erich Auerbach</h4>
+                                <p class="text-description">Auerbach's engaging book places the 'Comedy' within the tradition of epic, tragedy, and philosophy in general, arguing
                                     for Dante's uniqueness as one who raised the individual and his drama of soul into something of divine significance — an
-                                    inspired introduction to Dante's main themes.</p></li>
-                                </ul>
+                                    inspired introduction to Dante's main themes.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper">
+                        <li class="favorites_article-wrapper">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-4.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>The Last Queen</h4></li>
-                                    <li class="book-author"><h4>By Clive Irving</h4></li>
-                                    <li class="text-description"><p>A timely and revelatory new biography of Queen Elizabeth (and her family) exploring how the Windsors have evolved and
-                                    thrived as the modern world has changed around them.</p></li>
-                                </ul>
+                                <h4 class="book-title">The Last Queen</h4>
+                                <h4 class="book-author">By Clive Irving</h4>
+                                <p class="text-description">A timely and revelatory new biography of Queen Elizabeth (and her family) exploring how the Windsors have evolved and thrived as the modern world has changed around them.</p>
                                 <button class="own_btn" disabled>Own</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-5.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>The Body</h4></li>
-                                    <li class="book-author"><h4>By Stephen King</h4></li>
-                                    <li class="text-description"><p>Powerful novel that takes you back to a nostalgic time, exploring both the beauty and danger and loss of innocence that
-                                    is youth.</p></li>
-                                </ul>
+                                <h4 class="book-title">The Body</h4>
+                                <h4 class="book-author">By Stephen King</h4>
+                                <p class="text-description">Powerful novel that takes you back to a nostalgic time, exploring both the beauty and danger and loss of innocence that is youth.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-6.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Carry: A Memoir of Survival on Stolen Land</h4></li>
-                                    <li class="book-author"><h4>By Toni Jenson</h4></li>
-                                    <li class="text-description"><p>This memoir about the author's relationship with gun violence feels both expansive and intimate, resulting in a lyrical
-                                    indictment of the way things are.</p></li>
-                                </ul>
+                                <h4 class="book-title">Carry: A Memoir of Survival on Stolen Land</h4>
+                                <h4 class="book-author">By Toni Jenson</h4>
+                                <p class="text-description">This memoir about the author's relationship with gun violence feels both expansive and intimate, resulting in a lyrical indictment of the way things are.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-7.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Days of Distraction</h4></li>
-                                    <li class="book-author"><h4>By Alexandra Chang</h4></li>
-                                    <li class="text-description"><p>A sardonic view of Silicon Valley culture, a meditation on race, and a journal of displacement and belonging, all in one
-                                    form-defying package of spare prose.</p></li>
-                                </ul>
+                                <h4 class="book-title">Days of Distraction</h4>
+                                <h4 class="book-author">By Alexandra Chang</h4>
+                                <p class="text-description">A sardonic view of Silicon Valley culture, a meditation on race, and a journal of displacement and belonging, all in one form-defying package of spare prose.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-8.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Dominicana</h4></li>
-                                    <li class="book-author"><h4>By Angie Cruz</h4></li>
-                                    <li class="text-description"><p>A fascinating story of a teenage girl who marries a man twice her age with the promise to bring her to America. Her
-                                    marriage is an opportunity for her family to eventually immigrate. For fans of Isabel Allende and Julia Alvarez.</p></li>
-                                </ul>
+                                <h4 class="book-title">Dominicana</h4>
+                                <h4 class="book-author">By Angie Cruz</h4>
+                                <p class="text-description">A fascinating story of a teenage girl who marries a man twice her age with the promise to bring her to America. Her
+                                marriage is an opportunity for her family to eventually immigrate. For fans of Isabel Allende and Julia Alvarez.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-9.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Crude: A Memoir</h4></li>
-                                    <li class="book-author"><h4>By Pablo Fajardo & ​​Sophie Tardy-Joubert</h4></li>
-                                    <li class="text-description"><p>Drawing and color by Damien Roudeau | This book illustrates the struggles of a group of indigenous Ecuadoreans as they
-                                    try to sue the ChevronTexaco company for damage their oil fields did to the Amazon and her people</p></li>
-                                </ul>
+                                <h4 class="book-title">Crude: A Memoir</h4>
+                                <h4 class="book-author">By Pablo Fajardo & ​​Sophie Tardy-Joubert</h4>
+                                <p class="text-description">Drawing and color by Damien Roudeau | This book illustrates the struggles of a group of indigenous Ecuadoreans as they
+                                try to sue the ChevronTexaco company for damage their oil fields did to the Amazon and her people</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-10.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Let My People Go Surfing</h4></li>
-                                    <li class="book-author"><h4>By Yvon Chouinard</h4></li>
-                                    <li class="text-description"><p>Chouinard—climber, businessman, environmentalist—shares tales of courage and persistence from his experience of founding
-                                    and leading Patagonia, Inc. Full title: Let My People Go Surfing: The Education of a Reluctant Businessman, Including 10
-                                    More Years of Business Unusual.</p></li>
-                                </ul>
+                                <h4 class="book-title">Let My People Go Surfing</h4>
+                                <h4 class="book-author">By Yvon Chouinard</h4>
+                                <p class="text-description">Chouinard—climber, businessman, environmentalist—shares tales of courage and persistence from his experience of founding and leading Patagonia, Inc. Full title: Let My People Go Surfing: The Education of a Reluctant Businessman, Including 10 More Years of Business Unusual.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-11.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>The Octopus Museum: Poems</h4></li>
-                                    <li class="book-author"><h4>By Brenda Shaughnessy</h4></li>
-                                    <li class="text-description"><p>This collection of bold and scathingly beautiful feminist poems imagines what comes after our current age of
-                                    environmental destruction, racism, sexism, and divisive politics.</p></li>
-                                </ul>
+                                <h4 class="book-title">The Octopus Museum: Poems</h4>
+                                <h4 class="book-author">By Brenda Shaughnessy</h4>
+                                <p class="text-description">This collection of bold and scathingly beautiful feminist poems imagines what comes after our current age of environmental destruction, racism, sexism, and divisive politics.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-12.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Shark Dialogues: A Novel</h4></li>
-                                    <li class="book-author"><h4>By Kiana Davenport</h4></li>
-                                    <li class="text-description"><p>An epic saga of seven generations of one family encompasses the tumultuous history of Hawaii as a Hawaiian woman gathers
-                                    her four granddaughters together in an erotic tale of villains and dreamers, queens and revolutionaries, lepers and
-                                    healers.</p></li>
-                                </ul>
+                                <h4 class="book-title">Shark Dialogues: A Novel</h4>
+                                <h4 class="book-author">By Kiana Davenport</h4>
+                                <p class="text-description">An epic saga of seven generations of one family encompasses the tumultuous history of Hawaii as a Hawaiian woman gathers
+                                her four granddaughters together in an erotic tale of villains and dreamers, queens and revolutionaries, lepers and healers.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
                         
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-13.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Casual Conversation</h4></li>
-                                    <li class="book-author"><h4>By Renia White</h4></li>
-                                    <li class="text-description"><p>White's impressive debut collection takes readers through and beyond the concepts of conversation and the casual - both
-                                    what we say to each other and what we don't, examining the possibilities around how we construct and communicate
-                                    identity.</p></li>
-                                </ul>
+                                <h4 class="book-title">Casual Conversation</h4>
+                                <h4 class="book-author">By Renia White</h4>
+                                <p class="text-description">White's impressive debut collection takes readers through and beyond the concepts of conversation and the casual - both
+                                what we say to each other and what we don't, examining the possibilities around how we construct and communicate
+                                identity.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-14.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>The Great Fire</h4></li>
-                                    <li class="book-author"><h4>By Lou Ureneck</h4></li>
-                                    <li class="text-description"><p>The harrowing story of an ordinary American and a principled Naval officer who, horrified by the burning of Smyrna, led
-                                    an extraordinary rescue effort that saved a quarter of a million refugees from the Armenian Genocide</p></li>
-                                </ul>
+                                <h4 class="book-title">The Great Fire</h4>
+                                <h4 class="book-author">By Lou Ureneck</h4>
+                                <p class="text-description">The harrowing story of an ordinary American and a principled Naval officer who, horrified by the burning of Smyrna, led an extraordinary rescue effort that saved a quarter of a million refugees from the Armenian Genocide</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-15.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Rickey: The Life and Legend</h4></li>
-                                    <li class="book-author"><h4>By Howard Bryant</h4></li>
-                                    <li class="text-description"><p>With the fall rolling around, one can't help but think of baseball's postseason coming up! And what better way to
-                                    prepare for it than reading the biography of one of the game's all-time greatest performers, the Man of Steal, Rickey
-                                    Henderson?</p></li>
-                                </ul>
+                                <h4 class="book-title">Rickey: The Life and Legend</h4>
+                                <h4 class="book-author">By Howard Bryant</h4>
+                                <p class="text-description">With the fall rolling around, one can't help but think of baseball's postseason coming up! And what better way to prepare for it than reading the biography of one of the game's all-time greatest performers, the Man of Steal, Rickey Henderson?</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
 
-                        <div class="favorites_article-wrapper invisible">
+                        <li class="favorites_article-wrapper invisible">
                             <article class="favorites_book-card">
                                 <span class="category-title">Staff Picks</span>
                                 <img class="book-img" src="assets/img/book-16.png" alt="book cover">
-                                <ul class="book_list">
-                                    <li class="book-title"><h4>Slug: And Other Stories</h4></li>
-                                    <li class="book-author"><h4>By Megan Milks</h4></li>
-                                    <li class="text-description"><p>Exes Tegan and Sara find themselves chained together by hairballs of codependency. A father and child experience the
-                                    shared trauma of giving birth to gods from their wounds.</p></li>
-                                </ul>
+                                <h4 class="book-title">Slug: And Other Stories</h4>
+                                <h4 class="book-author">By Megan Milks</h4>
+                                <p class="text-description">Exes Tegan and Sara find themselves chained together by hairballs of codependency. A father and child experience the shared trauma of giving birth to gods from their wounds.</p>
                                 <button class="buy_btn">Buy</button>
                             </article>
-                        </div>
+                        </li>
+                    </ul>
 
-                    </div>
                 </div>
             </section>
 
@@ -455,9 +431,7 @@
                         </div>
                         <div class="library-card_flex-item">
                             <h4 class="get-card_title">Get a reader card</h4>
-                            <div class="get-card_text">
-                                <p>You will be able to see a reader card after logging into account or you can register a new account</p>
-                            </div>
+                            <p class="get-card_text">You will be able to see a reader card after logging into account or you can register a new account</p>
                             <div class="btn_flex">
                                 <button class="sign-log_btn">Sign Up</button>
                                 <button class="sign-log_btn">Log in</button>
@@ -515,10 +489,8 @@
         
                 <div class="footer-rss_flex">
                     <p class="rss_item year">2023</p>
-                    <p class="rss_item school-name"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes
-                            School</a></p>
-                    <p class="rss_item username"><a href="https://github.com/hannakulikowska/" target="_blank">Hanna
-                            Kulikowska</a></p>
+                    <p class="rss_item school-name"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a></p>
+                    <p class="rss_item username"><a href="https://github.com/hannakulikowska/" target="_blank">H.Kulikowska</a></p>
                 </div>
             </div>
         </footer>
