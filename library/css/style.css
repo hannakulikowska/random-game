@@ -907,6 +907,7 @@ body {
         z-index: 9;
         padding: 100px 10px;
         transform: translateX(100%);
+        transition: .3s;
     }
     .nav-active {
         transform: translateX(0);
@@ -999,6 +1000,12 @@ body {
     }
     .coffee-shop_p {
         letter-spacing: 2.5px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bg-img {
+        background-image: url(../assets/img/welcome-sm.jpg);
     }
 }
 
