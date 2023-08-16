@@ -592,23 +592,28 @@ body {
     text-transform: capitalize;
 }
 
-.contact_text {
+.contact-item {
     color: var(--black-color);
     font: var(--inter20);
-    letter-spacing: 2.5px;
+    letter-spacing: 2.6px;
     text-align: left;
     text-transform: capitalize;
+    padding-top: 20px;
+    line-height: 30px;
+}
+
+.contact-item-director {
+    padding-top: 0px;
 }
 
 .contact_link {
     color: var(--black-color);
     font: var(--inter20);
-    letter-spacing: 2.3px;
     text-decoration: none;
     color: var(--black-color);
 }
 
-.contact_text a {
+.contact_name {
     font: var(--inter20-40-bold);
 }
 
@@ -622,11 +627,6 @@ body {
     margin-bottom: 40px;
     list-style: none;
     text-align: left;
-}
-
-.contact-item {
-    padding-top: 20px;
-    line-height: 30px;
 }
 
 .map {
@@ -907,11 +907,13 @@ body {
         z-index: 9;
         padding: 100px 10px;
         transform: translateX(100%);
-        transition: .3s;
     }
     .nav-active {
         transform: translateX(0);
         transition: .3s all linear;
+    }
+    .nav-close-transition {
+        transition: .3s;
     }
     .nav-item {
         width: 100%;
