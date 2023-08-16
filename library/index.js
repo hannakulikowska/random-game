@@ -9,28 +9,31 @@ console.log(`Самопроверка:
 // Burger handler
 
 (function () {
-  const burgerItem = document.querySelector('.burger');
+  const burgerItem = document.querySelector('.header_burger');
   const menu = document.querySelector('.nav');
   const icon = document.querySelector('.profile-icon');
   const menuCloseItem = document.querySelector('.nav-close');
+  const menuCloseTransition = document.querySelector('.nav-close-transition');
   const menuLinks = document.querySelectorAll('.nav-link');
+
+  const openMenu = () => {
+    menu.classList.add('nav-active');
+    icon.classList.add('profile-icon-fixed');
+    
+  };
 
   const closeMenu = () => {
     menu.classList.remove('nav-active');
     icon.classList.remove('profile-icon-fixed');
+    menu.classList.add('nav-close-transition');
   };
 
-  burgerItem.addEventListener('click', () => {
-    menu.classList.add('nav-active');
-    icon.classList.add('profile-icon-fixed');
-  });
-
+  burgerItem.addEventListener('click', openMenu);
   menuCloseItem.addEventListener('click', closeMenu);
 
   if (window.innerWidth <= 1124) {
     for (let i = 0; i < menuLinks.length; i++) {
       menuLinks[i].addEventListener('click', closeMenu);
-      icon.classList.remove('profile-icon-fixed');
     }
   }
 
