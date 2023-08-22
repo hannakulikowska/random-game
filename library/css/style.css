@@ -44,6 +44,18 @@ body {
     --inter20-40-bold: 700 20px/40px Inter, sans-serif;
 }
 
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: var(--white-color);
+    padding: 0 20px;
+}
+
+
+
+/* Header start */
+
 .header {
     width: 100%;
     height: 90px;
@@ -68,14 +80,6 @@ body {
     height: 90px;
 }
 
-.container {
-    max-width: 1440px;
-    margin: 0 auto;
-    text-align: center;
-    background-color: var(--white-color);
-    padding: 0 20px;
-}
-
 .title-h1 {
     color: var(--white-color);
     font: var(--forum-h1);
@@ -86,6 +90,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav-list {
@@ -112,6 +117,35 @@ body {
     width: 28px;
     height: 28px;
 }
+
+.drop-menu {
+    width: 80px;
+    height: 115px;
+    background-color: var(--white-color);
+    position: absolute;
+    top: 75px;
+    right: 0px;
+    z-index: 9;
+    /* transform: translateX(100%); */
+}
+
+.drop-menu_title {
+    color: var(--black-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 5px 16px;
+ }
+
+ .drop-menu-active {
+     transform: translateX(0);
+     transition: .3s all linear;
+ }
+
+ .drop-menu-close {
+     transition: .3s;
+ }
 
 .header_burger {
     display: none;
@@ -141,6 +175,12 @@ body {
 .burger_line-third {
     bottom: 0;
 }
+
+/* Header end */
+
+
+
+/* Welcome section start */
 
 .bg-img {
     height: 600px;
@@ -178,22 +218,15 @@ body {
     letter-spacing: 2.9px;
 }
 
+/* Welcome section end */
+
+
+
+/* About section start */
+
 .about {
     text-align: center;
     padding: 20px 0px 34px;
-}
-
-.favorites {
-    padding: 20px 0px 30px;
-}
-
-.library-card {
-    padding: 30px 0px 42px;
-}
-
-.coffee-shop,
-.contacts {
-    padding: 30px 0px;
 }
 
 .title-h2 {
@@ -226,46 +259,35 @@ body {
     letter-spacing: 0.6px;
 }
 
-.about-img_flex {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-    margin-bottom: 35px;
+.carousel-container {
     position: relative;
 }
 
-.about-img_flex-item {
-    width: 450px;
+.carrets-container {
+    display: none;
+    position: absolute;
+    left: 8%;
+    top: 47.4%;
+    justify-content: space-between;
+    width: 84%;
+}
+
+.slider {
+    overflow: hidden;
+    position: relative;
+    width: 1400px;
     height: 560px;
+    margin: 0 auto 25px;
 }
 
-.about-img_item-inactive {
-    display: none;
-}
-
-.carret-left {
-    display: none;
-    position: absolute;
-    top: calc(50% + 9px);
-    left: calc(50% - 308px);
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-
-.carret-right {
-    display: none;
-    position: absolute;
-    top: calc(50% + 9px);
-    right: calc(50% - 308px);
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-
-.carret-color:hover, .carret-color:active {
-    stroke: var(--accent-color);
+.about-img_flex {
+    position: relative;
+    width: 2350px;
+    height: 560px;
+    display: flex;
+    gap: 25px;
+    left: 0px;
+    transition: all ease 1s;
 }
 
 .about-pagination_flex {
@@ -301,7 +323,16 @@ body {
 
 .pagination-active {
     background-color: var(--accent-color);
-    border: none;
+}
+
+/* About section end */
+
+
+
+/* Favorites section start */
+
+.favorites {
+    padding: 20px 0px 30px;
 }
 
 .favorites_h3 {
@@ -485,6 +516,16 @@ body {
     top: 510px;
 }
 
+/* Favorites section end */
+
+
+
+/* Cofee Shop section start */
+
+.coffee-shop {
+    padding: 30px 0px;
+}
+
 .coffee-shop_p {
     color: var(--black-color);
     font: var(--inter20);
@@ -576,6 +617,16 @@ body {
     height: 1px;
 }
 
+/* Cofee Shop section end */
+
+
+
+/* Contacts section start */
+
+.contacts {
+    padding: 30px 0px;
+}
+
 .contacts_flex {
     display: flex;
     flex-wrap: wrap;
@@ -639,6 +690,16 @@ body {
 
 .staff {
     margin-bottom: 20px;
+}
+
+/* Contacts section end */
+
+
+
+/* Library Cards section start */
+
+.library-card {
+    padding: 30px 0px 42px;
 }
 
 .library-cards_flex {
@@ -746,6 +807,12 @@ body {
     background-color: var(--white-color);
     cursor: pointer;
 }
+
+/* Library Cards section end */
+
+
+
+/* Footer start */
 
 .footer {
     color: var(--white-color);
@@ -866,30 +933,59 @@ body {
     color: var(--white-color);
 }
 
+
+/* Footer end */
+
+
+
+/* Media start */
+
 @media screen and (max-width: 1439px) {
-    .about-img_flex-item:nth-child(3n) {
-        display: none;
-    }
     .pagination-outer:nth-last-child(2) {
         display: flex;
     }
-    .about {
-        padding: 20px 0px;
+    .slider {
+        width: 925px;
     }
 }
 
 @media screen and (max-width: 1260px) {
-    .favorites_flex {
-        justify-content: center;
+    .carrets-container {
+        display: flex;
     }
-    .about-img_flex-item:nth-child(2n) {
-        display: none;
-    }
-    .carret-left, .carret-right {
+    .about-carret-left {
         display: block;
+        background-color: transparent;
+        border: none;
+        
+    }
+    .about-carret-right {
+        /* display: inline-block; */
+        background-color: transparent;
+        border: none;
+    }
+    .carret-left {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+    .carret-right {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+    .carret-color:hover, .carret-color:active {
+        stroke: var(--accent-color);
+    }
+    .slider {
+        width: 450px;
     }
     .pagination-outer:nth-last-child(1) {
         display: flex;
+    }
+
+    .favorites_flex {
+        justify-content: center;
     }
 }
 
@@ -902,14 +998,16 @@ body {
         height: 570px;
         position: fixed;
         top: 0;
-        right: 0;
+        /* right: 0; */
         background-color: var(--dark-color);
         z-index: 9;
         padding: 100px 10px;
-        transform: translateX(100%);
+        /* transform: translateX(100%); */ /* с этим свойством появляется артефакт - меню на долю секунды выплывает и прячется вмомент перехода на бургер-меню*/
+        right: -100%; /*вместо transform: translate тут и ниже в nav-active*/
     }
     .nav-active {
-        transform: translateX(0);
+        /* transform: translateX(0); */ /* с этим свойством появляется артефакт - меню на долю секунды выплывает и прячется вмомент перехода на бургер-меню*/
+        right: 0; /*анимируем только right вместо transform: translate*/
         transition: .3s all linear;
     }
     .nav-close-transition {
@@ -938,6 +1036,10 @@ body {
     .profile-icon-fixed {
         position: fixed; 
         right: 65px;
+    }
+    .drop-menu {
+        top: 45px;
+        right: 85px;
     }
     .nav-close {
         width: 45px;
@@ -1033,3 +1135,5 @@ body {
         font-size: 15px;
     }
 }
+
+/* Media end */
