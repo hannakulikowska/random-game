@@ -325,6 +325,10 @@ body {
     background-color: var(--accent-color);
 }
 
+.pagination-outer-inactive {
+    pointer-events: none;
+}
+
 /* About section end */
 
 
