@@ -5,6 +5,33 @@
     src: url("assets/fonts/Inter-Regular.ttf");
 }
 
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* @keyframes slide-down {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+} */
+
 * {
     margin: 0;
     padding: 0;
@@ -21,6 +48,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     background-color: var(--white-color);
+}
+a {
+    outline: none;
 }
 
 :root {
@@ -113,39 +143,545 @@ body {
     transition: .3s;
 }
 
+.profile {
+    width: 28px;
+    height: 90px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 .profile-icon {
     width: 28px;
     height: 28px;
+    cursor: pointer;
 }
 
-.drop-menu {
+
+/* ======================
+    Profile Menu start
+====================== */
+
+.profile-menu_login,
+.profile-menu_logout {
     width: 80px;
     height: 115px;
+    border: 0;
     background-color: var(--white-color);
     position: absolute;
-    top: 75px;
-    right: 0px;
-    z-index: 9;
-    /* transform: translateX(100%); */
+    top: 60px;
+    right: 0;
+    line-height: initial;
+    padding: 5px 5px 20px;
+}
+.profile-menu_visible {
+    display: block;
+    animation:  fade-in 0.5s forwards;
+}
+.profile-menu_hidden {
+    display: none;
+    /* animation: fade-out 2s forwards;  НЕ РАБОТАЕТ ТУТ - ИНАЧЕ СДЕЛАТЬ */
 }
 
-.drop-menu_title {
+.profile-menu_title {
+    position: relative;
     color: var(--black-color);
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 700;
     line-height: 20px;
-    padding: 5px 16px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
  }
 
- .drop-menu-active {
-     transform: translateX(0);
-     transition: .3s all linear;
- }
+.profile-menu_title:after {
+    position: absolute;
+    content: '';
+    background-color: var(--accent-color);
+    width: 40px;
+    height: 1px;
+    display: block;
+    top: calc(100% + 5px);
+    right: calc(50% - 20px);
+}
 
- .drop-menu-close {
-     transition: .3s;
- }
+.profile-menu_list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    list-style: none;
+    gap: 10px;
+}
+
+.profile-menu_list-item {
+    text-decoration: none;
+    color: var(--black-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.profile-menu_buttons {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.profile-menu_buttons:hover {
+    color: var(--accent-color);
+}
+
+/* ======================
+    Profile Menu end
+======================= */
+
+
+
+/*================================
+    Modals start 
+================================*/
+
+.closing-animation {
+    animation: fade-out .3s;
+}
+
+/* ======================
+    Modal Log In
+======================= */
+
+.modal-login {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white-color);
+    border: 0;
+    width: 250px;
+    height: 262px;
+    padding: 20px 25px 15px;
+    line-height: 1.15;
+}
+.modal-login_close-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.modal-login_close-button svg {
+    width: 100%;
+    height: 100%;
+}
+.modal-login_title {
+    text-transform: uppercase;
+    color: var(--black-color);
+    text-align: center;
+    font-family: "Forum";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    margin-bottom: 20px;
+}
+.modal-login_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    line-height: initial;
+    margin-bottom: 5px;
+}
+.modal-login_form_label {
+    display: flex;
+    flex-direction: column;
+}
+.modal-login_form_title {
+    color: var(--black-color);
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+}
+.modal-login_form_input {
+    width: 200px;
+    height: 20px;
+    padding: 0 3px;
+    border: 1px solid #BB945F;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    line-height: normal;
+    color: var(--grey-color);
+}
+._password {
+    margin-bottom: 10px;
+}
+.modal-login_login-button {
+    width: 75px;
+    height: 30px;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+    background-color: var(--white-color);
+    color: #0C0C0E;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.modal-login_info {
+    color: var(--black-color);
+    text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+.modal-login_link {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #0C0C0E;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration-line: underline;
+}
+
+/* плавное затемнение экрана под модальным окном */
+.modal-login[open]::backdrop {
+    animation: fade-in 500ms forwards;
+}
+
+.modal-login::backdrop {
+    background: rgb(0 0 0 / .7);
+    opacity: 0.5;
+}
+
+
+/* ======================
+    Modal Register
+======================= */
+
+.modal-register {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white-color);
+    border: 0;
+    width: 250px;
+    height: 382px;
+    padding: 20px 25px 15px;
+    line-height: 1.15;
+}
+
+.modal-register_close-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.modal-register_close-button svg {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-register_title {
+    text-transform: uppercase;
+    color: var(--black-color);
+    text-align: center;
+    font-family: "Forum";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    margin-bottom: 20px;
+}
+
+.modal-register_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    line-height: initial;
+    margin-bottom: 5px;
+}
+
+.modal-register_form_label {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-register_form_title {
+    color: var(--black-color);
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+}
+
+.modal-register_form_input {
+    width: 200px;
+    height: 20px;
+    padding: 0 3px;
+    border: 1px solid #BB945F;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    line-height: normal;
+    color: var(--grey-color);
+    background-color: #fff;
+}
+
+.modal-register_form_input:focus {
+    /* box-shadow: 0 0 5px #BB945F; */
+    border: 3px solid #BB945F;
+}
+.modal-register_form_input._error {
+    /* box-shadow: 0 0 5px red; */
+    border: 1px solid red;
+}
+
+/* .errors {
+    position: absolute;
+    top: 78px;
+    font-family: "Inter", sans-serif;
+    font-size: 9px;
+    line-height: normal;
+    color: red;
+} */
+.modal-register_signup-button {
+    width: 75px;
+    height: 30px;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+    background-color: var(--white-color);
+    color: #0C0C0E;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.modal-register_info {
+    color: var(--black-color);
+    text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.modal-register_link {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #0C0C0E;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration-line: underline;
+}
+
+/* плавное затемнение экрана под модальным окном */
+.modal-register[open]::backdrop {
+    animation: fade-in 500ms forwards;
+}
+
+.modal-register::backdrop {
+    background: rgb(0 0 0 / .7);
+    opacity: 0.5;
+}
+
+
+/*================================
+    Modal My Profile start 
+================================*/
+
+.modal-profile {
+    position: fixed;
+    width: 600px;
+    height: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white-color);
+    border: 0;
+    line-height: 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+}
+
+.modal-profile_wrapper {
+    display: flex;
+}
+
+.modal-profile_close-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.modal-profile_aside {
+    width: 170px;
+    height: 403px;
+    background: #0C0C0E;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.aside_initials {
+    width: 80px;
+    height: 80px;
+    background-color: #FFF;
+    color: #BB945F;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding: 30px 0;
+}
+
+.aside_full-name {
+    width: 120px;
+    min-height: 30px;
+    background-color: #FFF;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.modal-profile_content {
+    padding: 40px 20px;
+}
+
+.modal-profile_title {
+    text-align: left;
+    font-family: "Forum";
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.modal-profile_statistics {
+    list-style: none;
+    display: flex;
+    margin-bottom: 20px;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    display: flex;
+    gap: 20px;
+}
+
+.statistics_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-profile_icon {
+    display: block;
+    width: 20px;
+    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.visits-icon {
+    background-image: url(../assets/svg/visits.svg);
+}
+
+.bonuses-icon {
+    background-image: url(../assets/svg/bonuses.svg);
+}
+
+.books-icon {
+    background-image: url(../assets/svg/books.svg);
+}
+
+.visits_count,
+.bonuses_count,
+.books_count {
+    font-size: 10px;
+    letter-spacing: 0.2px;
+}
+
+.rented-books_title {
+    font-size: 25px;
+    color: #0C0C0E;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.rented-books_list {
+    padding-left: 30px;
+    margin-bottom: 40px;
+}
+
+.rented-books_book {
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.modal-profile_card-number {
+    color: #0C0C0E;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.modal-profile_card-number span {
+    color: #BB945F;
+}
+
+
+/*================================
+    Modals end 
+================================*/
+
+
 
 .header_burger {
     display: none;
@@ -408,8 +944,16 @@ body {
     transition: .2s;
 }
 
+/* Появление соответствующего сезона книг по клику на радио-кнопке */
 .invisible {
     display: none;
+    pointer-events: none;
+}
+.favorites-winter,
+.favorites-spring,
+.favorites-summer,
+.favorites-autumn {
+    animation: fade-in 5s;
 }
 
 .favorites_flex {
@@ -937,7 +1481,6 @@ body {
     color: var(--white-color);
 }
 
-
 /* Footer end */
 
 
@@ -1002,7 +1545,6 @@ body {
         height: 570px;
         position: fixed;
         top: 0;
-        /* right: 0; */
         background-color: var(--dark-color);
         z-index: 9;
         padding: 100px 10px;
@@ -1011,11 +1553,11 @@ body {
     }
     .nav-active {
         /* transform: translateX(0); */ /* с этим свойством появляется артефакт - меню на долю секунды выплывает и прячется вмомент перехода на бургер-меню*/
-        right: 0; /*анимируем только right вместо transform: translate*/
+        right: 0; /*выплытие справа - вместо transform: translate*/
         transition: .3s all linear;
     }
     .nav-close-transition {
-        transition: .3s;
+        transition: .3s linear;
     }
     .nav-item {
         width: 100%;
@@ -1032,18 +1574,6 @@ body {
         padding-left: 0;
         display: block;
         text-align: center;
-    }
-    .profile-icon {
-        z-index: 10;
-        margin-right: 40px;
-    }
-    .profile-icon-fixed {
-        position: fixed; 
-        right: 65px;
-    }
-    .drop-menu {
-        top: 45px;
-        right: 85px;
     }
     .nav-close {
         width: 45px;
@@ -1066,6 +1596,12 @@ body {
     }
     .nav-close-line:last-child {
         transform: translateY(-50%) rotate(-45deg);
+    }
+    .profile-icon {
+        z-index: 10;
+        margin-right: 40px;
+        position: fixed;
+        right: 65px;
     }
     .menu-right_flex {
         margin-left: auto;

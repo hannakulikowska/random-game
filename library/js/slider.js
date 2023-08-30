@@ -26,7 +26,7 @@ function updatePagination() {
       }
   });
   
-// Добавляем проверку для активности кнопок влево и вправо
+  // Добавляем проверку для активности кнопок влево и вправо
   if (position === 0) {
       carretLeft.style.opacity = 0.2;
       carretLeft.style.pointerEvents = 'none';
@@ -47,12 +47,14 @@ function updatePagination() {
 }
 
 
+// Click pagination dots
+
 paginationDots.forEach((dot, index) => {
-    dot.addEventListener('click', function () {
-        position = index * 475;
-        sliderLine.style.left = -position + 'px';
-        updatePagination();
-    });
+  dot.addEventListener('click', function () {
+      position = index * 475;
+      sliderLine.style.left = -position + 'px';
+      updatePagination();
+  });
 });
 
 
