@@ -147,13 +147,31 @@ a {
     width: 28px;
     height: 90px;
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
-.profile-icon {
+.initials-icon {
     width: 28px;
     height: 28px;
+    border-radius: 50%;
+    background-color: var(--white-color);
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    top: 30px;
+    left: 0;
+    padding: 5px 0;
+    text-align: center;
+    color: #BB945F;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+
+.profile-icon {
+    width: 100%;
+    height: 100%;
     cursor: pointer;
 }
 
@@ -174,20 +192,20 @@ a {
     line-height: initial;
     padding: 5px 5px 20px;
 }
-.profile-menu_visible {
+.profile-menu_visible,
+.menu-logout_visible {
     display: block;
     animation:  fade-in 0.5s forwards;
 }
-.profile-menu_hidden {
+.profile-menu_hidden,
+.menu-logout_hidden {
     display: none;
     /* animation: fade-out 2s forwards;  НЕ РАБОТАЕТ ТУТ - ИНАЧЕ СДЕЛАТЬ */
 }
-
 .profile-menu_title {
     position: relative;
     color: var(--black-color);
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
     font-weight: 700;
     line-height: 20px;
     margin: 0 auto;
@@ -195,6 +213,13 @@ a {
     text-align: center;
     margin-bottom: 20px;
  }
+.menu-login_title {
+    font-size: 15px;
+}
+
+.menu-logout_title {
+    font-size: 12px;
+}
 
 .profile-menu_title:after {
     position: absolute;
@@ -542,6 +567,8 @@ a {
 
 .modal-profile_wrapper {
     display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 .modal-profile_close-button {
@@ -557,7 +584,7 @@ a {
 
 .modal-profile_aside {
     width: 170px;
-    height: 403px;
+    height: 100%;
     background: #0C0C0E;
     border: 0;
     display: flex;
@@ -590,6 +617,8 @@ a {
 
 .modal-profile_content {
     padding: 40px 20px;
+    width: 430px;
+    height: 100%;
 }
 
 .modal-profile_title {
@@ -672,10 +701,19 @@ a {
     align-items: center;
 }
 
-.modal-profile_card-number span {
+.card-number {
     color: #BB945F;
 }
 
+/* плавное затемнение экрана под модальным окном */
+.modal-profile[open]::backdrop {
+    animation: fade-in 500ms forwards;
+}
+
+.modal-profile::backdrop {
+    background: rgb(0 0 0 / .7);
+    opacity: 0.5;
+}
 
 /*================================
     Modals end 
@@ -1597,11 +1635,18 @@ a {
     .nav-close-line:last-child {
         transform: translateY(-50%) rotate(-45deg);
     }
-    .profile-icon {
-        z-index: 10;
-        margin-right: 40px;
+    .menu {
+        gap: 40px;
+    }
+    .profile-initials {
+        /* right: 105px; */
+    }
+    .profile-icon_above {
         position: fixed;
-        right: 65px;
+        top: 31px;
+        z-index: 10;
+        width: 28px;
+        height: 28px;
     }
     .menu-right_flex {
         margin-left: auto;

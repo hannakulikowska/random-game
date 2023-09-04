@@ -37,9 +37,10 @@
                             d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z"
                             fill="white" />
                         </svg>
+                        
                         <!-- Menu Profile Log-in -->
                         <div class="profile-menu_login profile-menu_hidden">
-                            <h4 class="profile-menu_title">Profile</h4>                
+                            <h4 class="profile-menu_title menu-login_title">Profile</h4>                
                             <ul class="profile-menu_list">
                                 <li class="profile-menu_list-item">
                                     <button class="login-button profile-menu_buttons">
@@ -55,11 +56,11 @@
                         </div>
                         
                         <!-- Menu Profile Log-out -->
-                        <div class="profile-menu_logout profile-menu_hidden">
-                            <h4 class="profile-menu_title">F1234567</h4>
+                        <div class="profile-menu_logout menu-logout_hidden">
+                            <h4 class="profile-menu_title menu-logout_title">F1234567</h4>
                             <ul class="profile-menu_list">
                                 <li class="profile-menu_list-item">
-                                    <button class="logout-button profile-menu_buttons">
+                                    <button class="myprofile-button profile-menu_buttons">
                                         My profile
                                     </button>
                                 </li>
@@ -580,7 +581,7 @@
             </label>
             <label class="modal-login_form_label">
                 <span class="modal-login_form_title">Password</span>
-                <input type="password" class="modal-login_form_input _password">
+                <input type="password" class="modal-login_form_input input-password _password">
             </label>
             <button class="modal-login_login-button" type="submit">Log In</button>
         </form>
@@ -604,19 +605,19 @@
         <form class="modal-register_form" id="register" name="register" method="dialog" action="#">
             <label class="modal-register_form_label" name="firstname">
                 <span class="modal-register_form_title">First name</span>
-                <input class="modal-register_form_input input-firstname _req" name="firstname" id="txtFirstName" type="text" tabindex="1">
+                <input class="modal-register_form_input input-firstname _req" name="firstname" id="firstname" type="text" tabindex="1">
             </label>
             <label class="modal-register_form_label" name="lastname">
                 <span class="modal-register_form_title">Last name</span>
-                <input class="modal-register_form_input input-lastname _req" name="lastname" id="txtLastName" type="text" tabindex="2">
+                <input class="modal-register_form_input input-lastname _req" name="lastname" id="lastname" type="text" tabindex="2">
             </label>
             <label class="modal-register_form_label" name="email">
                 <span class="modal-register_form_title">E-mail</span>
-                <input class="modal-register_form_input input-text _email _req" name="email" id="txtEmail" type="email" tabindex="3">
+                <input class="modal-register_form_input input-text _email _req" name="email" id="email" type="email" tabindex="3">
             </label>
             <label class="modal-register_form_label" name="password">
                 <span class="modal-register_form_title">Password</span>
-                <input class="modal-register_form_input _password _req" name="password" id="txtPassword" type="password" tabindex="4">
+                <input class="modal-register_form_input _password _req" name="password" id="password" type="password" tabindex="4">
             </label>
             <button class="modal-register_signup-button" id="add_new-user" type="submit" tabindex="5">Sign Up</button>
         </form>
@@ -658,8 +659,8 @@
                     <li class="rented-books_book">Dominicana, Angie Cruz</li>
                 </ul>
                 <span class="modal-profile_card-number">Card number
-                    <span>F00234030</span>
-                    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <span class="card-number">F00234030</span>
+                    <svg class="copy-btn" width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2.46826" y="0.25" width="10.5917" height="9.5" rx="0.75" stroke="black" stroke-width="0.5" />
                         <rect x="0.25" y="2.25" width="10.5917" height="9.5" rx="0.75" fill="white" stroke="black" stroke-width="0.5" />
                     </svg>
