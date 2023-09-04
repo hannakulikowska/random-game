@@ -347,6 +347,9 @@ a {
     line-height: normal;
     color: var(--grey-color);
 }
+/* ._error {
+    border: 1px solid red;
+} */
 ._password {
     margin-bottom: 10px;
 }
@@ -483,19 +486,12 @@ a {
     /* box-shadow: 0 0 5px #BB945F; */
     border: 3px solid #BB945F;
 }
+
 .modal-register_form_input._error {
     /* box-shadow: 0 0 5px red; */
     border: 1px solid red;
 }
 
-/* .errors {
-    position: absolute;
-    top: 78px;
-    font-family: "Inter", sans-serif;
-    font-size: 9px;
-    line-height: normal;
-    color: red;
-} */
 .modal-register_signup-button {
     width: 75px;
     height: 30px;

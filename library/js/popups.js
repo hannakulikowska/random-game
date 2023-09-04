@@ -14,7 +14,7 @@ const menuLinks = document.querySelectorAll('.nav-link');
 const openMenu = () => {
   menu.classList.add('nav-active');
   profileIcon.classList.add('profile-icon_above'); // Иконка незалогиненного юзера поверх открытого бургер-меню, position:fixed
-  document.body.style.overflow = "hidden"; // Блокировка скролла страницы при открытом бургер-меню
+  // document.body.style.overflow = "hidden"; // Блокировка скролла страницы при открытом бургер-меню
 };
 
 // Событие по клику - открытие бургер-меню
@@ -26,7 +26,7 @@ const closeMenu = () => {
   menu.classList.remove('nav-active');
   profileIcon.classList.remove('profile-icon_above'); // Удаление position:fixed для иконки незалогиненного юзера
   menu.classList.add('nav-close-transition');
-  document.body.style.overflow = "auto"; // Отблокировка скролла после закрытия меню
+  // document.body.style.overflow = "auto"; // Отблокировка скролла после закрытия меню - отключает блокировку скролла при открытом модальном окне
 };
 
 // Событие по клику - закрытие бургер-меню
@@ -111,6 +111,7 @@ const modalRegister = document.querySelector(".modal-register");
 const openModalRegister = document.querySelector(".register-button");
 const closeModalRegister = document.querySelector(".modal-register_close-button");
 const openModalRegisterSignup = document.querySelector(".signup_btn");
+const registerLink = document.querySelector(".modal-login_link");
 
 
 // Открытие модального окна Register: клик на иконку юзера -> клик на Register ссылку
@@ -119,10 +120,8 @@ function openRegisterModal() {
   modalRegister.showModal();
   profileMenuLogin.classList.remove('profile-menu_visible');
   profileMenuLogin.classList.add('profile-menu_hidden');
-  // Функция сброса значений инпутов
-  resetModalInputs();
-  // Выключение скролла страницы при открытом модальном окне
-  document.body.style.overflow = "hidden";
+  resetModalInputs(); // Функция сброса значений инпутов
+  document.body.style.overflow = "hidden"; // Выключение скролла страницы при открытом модальном окне
   });
 }
 openRegisterModal();
@@ -133,8 +132,17 @@ openModalRegisterSignup.addEventListener("click", () => {
   modalRegister.showModal();
   profileMenuLogin.classList.remove('profile-menu_visible');
   profileMenuLogin.classList.add('profile-menu_hidden');
-  // Функция сброса значений инпутов
-  resetModalInputs();
+  resetModalInputs(); // Функция сброса значений инпутов
+  document.body.style.overflow = "hidden"; // Выключение скролла страницы при открытом модальном окне
+});
+
+
+// Открытие модального окна Register по клику на линк Register в модалке Login
+registerLink.addEventListener("click", () => {
+  modalLogin.close();
+  modalRegister.showModal();
+  resetModalInputs(); // Функция сброса значений инпутов
+  document.body.style.overflow = "hidden"; // Выключение скролла страницы при открытом модальном окне
 });
 
 
@@ -205,7 +213,7 @@ function formValidate(formRegister) {
     } else {
       if (input.value.trim() === "") {
         formAddError(input);
-        error++
+        error++;
       }
     }
 
@@ -272,12 +280,19 @@ async function formSend(e) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const cardNumber = getRandomCardNumber();
+    let visitCount = localStorage.getItem("visitCount");
 
     // Получение данных из Local Storage (если они есть)
     let usersData = JSON.parse(localStorage.getItem("users")) || [];
 
+    // Если значение не было найдено, устанавливаем его равным 0
+    if (visitCount === null) {
+      visitCount = 1;
+      console.log(visitCount);
+    }
+        
     // Добавление новых данных в массив
-    usersData.push({ firstname, lastname, email, password, cardNumber });
+    usersData.push({ firstname, lastname, email, password, cardNumber, visitCount });
 
     // Сохранение массива данных в Local Storage
     localStorage.setItem("users", JSON.stringify(usersData));
@@ -425,9 +440,11 @@ const modalLogin = document.querySelector(".modal-login");
 const openModalLogin = document.querySelector(".login-button");
 const closeModalLogin = document.querySelector(".modal-login_close-button");
 const openModalLoginLogin = document.querySelector(".login_btn");
+const buyButtons = document.querySelectorAll(".buy_btn");
+const loginLink = document.querySelector(".modal-register_link");
 
 
-// Открытие модального окна по клику на иконку юзера
+// Открытие модального окна Login по клику на иконку юзера
 openModalLogin.addEventListener("click", () => {
   modalLogin.showModal();
   profileMenuLogin.classList.remove('profile-menu_visible');
@@ -436,13 +453,32 @@ openModalLogin.addEventListener("click", () => {
   document.body.style.overflow = "hidden";
 });
 
-// Открытие модального окна по клику на Log In в Library Cards
+
+// Открытие модального окна Login по клику на Log In в Library Cards
 openModalLoginLogin.addEventListener("click", () => {
   modalLogin.showModal();
   profileMenuLogin.classList.remove('profile-menu_visible');
   profileMenuLogin.classList.add('profile-menu_hidden');
   // Отмена скролла страницы при открытом модальном окне
   document.body.style.overflow = "hidden";
+});
+
+
+// Открытие модального окна Login по клику на линк Login в модалке Register
+loginLink.addEventListener("click", () => {
+  modalRegister.close();
+  modalLogin.showModal();
+  resetModalInputs(); // Функция сброса значений инпутов
+  document.body.style.overflow = "hidden"; // Выключение скролла страницы при открытом модальном окне
+});
+
+
+// Открытие модального окна Login по клику на кнопку Buy в Favorites
+buyButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    modalLogin.showModal();
+    document.body.style.overflow = "hidden";
+  });
 });
 
 // Закрытие модального окна Login по клику на кнопку закрытия
@@ -472,6 +508,10 @@ modalLogin.addEventListener("click", (e) => {
 });
 
 
+
+
+
+
 /* ====================
 ЗАЛОГИНИТЬСЯ В СИСТЕМУ
 Номер карты: 0E5D125F4
@@ -483,6 +523,7 @@ function login() {
   const emailOrCardNumber = document.querySelector('.input-login').value;
   const password = document.querySelector('.input-password').value;
   
+  // Аутентификация пользователя - проверка есть ли в Local Storage такие емэил или номер карты
   const user = users.find((u) => {
     if (emailOrCardNumber.includes('@')) {
       return u.email === emailOrCardNumber;
@@ -490,10 +531,23 @@ function login() {
     return u.cardNumber === emailOrCardNumber;
   });
   
+  // Если, введенные в форме Login, логин и пароль совпадают с данными с базы Local Storage, то пользователь будет залогинен в системе
   if (user && user.password === password) {
     console.log('User logged in successfully');
     
     // code to allow the user to access the system here
+    // Получение текущего значения счетчика visits из Local Storage
+    let visitCount = localStorage.getItem("visitCount");
+    // Увеличение счетчика на 1 и сохранение нового значения в Local Storage
+    visitCount++;
+    localStorage.setItem("visitCount", visitCount);
+    console.log(visitCount);
+
+    // Обновление значения span с классом "statistics_visits"
+    const statisticsVisits = document.querySelector(".statistics_visits");
+    statisticsVisits.textContent = visitCount;
+
+    // Закрытие модалки Login и возвращение скролла для body
     modalLogin.close();
     document.body.style.overflow = "auto";
 
@@ -612,10 +666,9 @@ function login() {
         });
     });
     // КОНЕЦ КОДА
-
-    
-
-  } else {
+  }
+  // Если логин и пароль, введенные в форме Login, НЕ совпадают с данными с базы Local Storage, то пользователь залогинен в системе НЕ будет
+  else {
     console.error('Invalid email/readers card or password');
     alert("Invalid \"Email or readers card\" or \"Password\"");
   }
@@ -650,9 +703,23 @@ document.querySelector('.logout-button').addEventListener('click', logout);
 
 
 
+// ДОБАВИТЬ КОД - СЧЕТЧИК VISITS
 
+// // Получение текущего значения счетчика из Local Storage
+// let visitCount = localStorage.getItem("visitCount");
 
+// // Если значение не было найдено, устанавливаем его равным 1
+// if (visitCount === null) {
+//   visitCount = 1;
+// }
 
+// // Увеличение счетчика на 1 и сохранение нового значения в Local Storage
+// visitCount++;
+// localStorage.setItem("visitCount", visitCount);
+
+// // Обновление значения span с классом "statistics_visits"
+// const statisticsVisits = document.querySelector(".statistics_visits");
+// statisticsVisits.textContent = visitCount;
 
     
 
