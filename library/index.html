@@ -650,7 +650,7 @@
                     <li class="statistics_item">
                         <span class="statistics_books">Books</span>
                         <span class="modal-profile_icon books-icon"></span>
-                        <span class="books_count">0</span>
+                        <span class="books_count">2</span>
                     </li>
                 </ul>
                 <span class="rented-books_title">Rented books</span>
@@ -673,6 +673,54 @@
                         </g>
                     </svg>
                 </button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Modal Buy A Library Card -->
+    <dialog class="modal-buycard">
+        <div class="modal-buycard_title">
+            Buy a library card
+            <button class="modal-buycard_close-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                    <path d="M2 16.8507L17 2" stroke="white" stroke-width="3" />
+                    <path d="M2 2.14929L17 17" stroke="white" stroke-width="3" />
+                </svg>
+            </button>
+        </div>
+        <div class="modal-buycard_content">
+            <form action="#" class="modal-buycard_form">
+                <label class="modal-buycard_form_label" for="bankcard">Bank card number</label>
+                <input class="modal-buycard_form_input" id="bankcard" type="text">
+
+                <label class="modal-buycard_form_label exp-code_label">
+                    Expiration code
+                    <div class="modal-buycard_exp-inputs">
+                        <input class="modal-buycard_form_input exp-code" type="text">
+                        <input class="modal-buycard_form_input exp-code" type="text">
+                    </div>
+                </label>
+                
+                <label class="modal-buycard_form_label" for="cvc">CVC</label>
+                <input class="modal-buycard_form_input cvc" id="cvc" type="text">
+
+                <label class="modal-buycard_form_label" for="cardholder">Cardholder name</label>
+                <input class="modal-buycard_form_input" id="cardholder" type="text">
+
+                <label class="modal-buycard_form_label" for="postcode">Postal code</label>
+                <input class="modal-buycard_form_input" id="postcode" type="text">
+
+                <label class="modal-buycard_form_label" for="city">City / Town</label>
+                <input class="modal-buycard_form_input" id="city" type="text">
+
+                <div class="modal-buycard_buy-card">
+                    <button class="modal-buycard_buy-button" id="buy-library-card" type="submit" tabindex="8">Buy</button>
+                    <span class="library-card-price">$ 25.00</span>
+                </div>
+            </form>
+            <div class="modal-buycard_info">
+                If you are live, work, attend school, or pay property taxes in New York State, you can get a $25 digital library card
+                right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.
             </div>
         </div>
     </dialog>

@@ -300,10 +300,7 @@ a {
     right: 15px;
     top: 15px;
 }
-.modal-login_close-button svg {
-    width: 100%;
-    height: 100%;
-}
+
 .modal-login_title {
     text-transform: uppercase;
     color: var(--black-color);
@@ -347,12 +344,15 @@ a {
     line-height: normal;
     color: var(--grey-color);
 }
-/* ._error {
-    border: 1px solid red;
-} */
+
+.modal-login_form_input:focus {
+    border: 2px solid #BB945F;
+}
+
 ._password {
     margin-bottom: 10px;
 }
+
 .modal-login_login-button {
     width: 75px;
     height: 30px;
@@ -368,6 +368,12 @@ a {
     letter-spacing: 1px;
     cursor: pointer;
 }
+
+.modal-login_login-button:hover {
+    background-color: var(--accent-color);
+    border: 1px solid #BB945F;
+}
+
 .modal-login_info {
     color: var(--black-color);
     text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
@@ -387,6 +393,10 @@ a {
     font-weight: 700;
     letter-spacing: 1px;
     text-decoration-line: underline;
+}
+
+.modal-login_link:hover {
+    color: #BB945F;
 }
 
 /* плавное затемнение экрана под модальным окном */
@@ -483,12 +493,10 @@ a {
 }
 
 .modal-register_form_input:focus {
-    /* box-shadow: 0 0 5px #BB945F; */
-    border: 3px solid #BB945F;
+    border: 2px solid #BB945F;
 }
 
 .modal-register_form_input._error {
-    /* box-shadow: 0 0 5px red; */
     border: 1px solid red;
 }
 
@@ -506,6 +514,11 @@ a {
     line-height: normal;
     letter-spacing: 1px;
     cursor: pointer;
+}
+
+.modal-register_signup-button:hover {
+    background-color: var(--accent-color);
+    border: 1px solid #BB945F;
 }
 
 .modal-register_info {
@@ -530,6 +543,9 @@ a {
     text-decoration-line: underline;
 }
 
+.modal-register_link:hover {
+    color: var(--accent-color);
+}
 /* плавное затемнение экрана под модальным окном */
 .modal-register[open]::backdrop {
     animation: fade-in 500ms forwards;
@@ -542,7 +558,7 @@ a {
 
 
 /*================================
-    Modal My Profile start 
+    Modal My Profile
 ================================*/
 
 .modal-profile {
@@ -697,6 +713,10 @@ a {
     align-items: center;
 }
 
+.modal-profile_card-number:hover {
+    color: #BB945F;
+}
+
 .card-number {
     color: #BB945F;
 }
@@ -707,6 +727,169 @@ a {
 }
 
 .modal-profile::backdrop {
+    background: rgb(0 0 0 / .7);
+    opacity: 0.5;
+}
+
+/* ======================
+Modal Buy A Library Card
+======================= */
+
+.modal-buycard {
+    /* display: block; */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white-color);
+    border: 0;
+    width: 640px;
+    height: 540px;
+    line-height: 20px;
+}
+
+.modal-buycard_close-button {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+}
+
+.modal-buycard_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white-color);
+    background-color: #0C0C0E;
+    font-family: "Forum";
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    width: 100%;
+    height: 60px;
+    padding-left: 138px;
+    padding-right: 22px;
+}
+.modal-buycard_content {
+    padding: 32px 35px 40px;
+    display: flex;
+    justify-content: space-between;
+    height: 480px;
+}
+.modal-buycard_form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    line-height: initial;
+    width: 200px;
+}
+
+.modal-buycard_form_label {
+    color: var(--black-color);
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.modal-buycard_form_input {
+    height: 20px;
+    padding: 0 3px;
+    border: 1px solid #BB945F;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    line-height: normal;
+    color: var(--grey-color);
+}
+
+.modal-buycard_form_input:focus {
+    border: 2px solid #BB945F;
+}
+
+.cvc {
+    margin-bottom: 10px;
+}
+
+.exp-code_label {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-buycard_exp-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.cvc, 
+.exp-code {
+    width: 45px;
+    height: 20px;
+}
+
+.modal-buycard_buy-card {
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+    font: 20px "Inter", sans-serif;
+}
+
+.modal-buycard_form_input#city {
+    margin-bottom: 5px;
+}
+
+.modal-buycard_buy-button {
+    width: 75px;
+    height: 30px;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+    background-color: var(--white-color);
+    color: #0C0C0E;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.modal-buycard_buy-button:hover {
+    background-color: var(--accent-color);
+    border: 1px solid #BB945F;
+}
+
+.library-card-price {
+    color: #0C0C0E;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.modal-buycard_info {
+    width: 330px;
+    font-family: "Inter", sans-serif;
+    color: #8E8E8E;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* плавное затемнение экрана под модальным окном */
+.modal-buycard[open]::backdrop {
+    animation: fade-in 500ms forwards;
+}
+
+.modal-buycard::backdrop {
     background: rgb(0 0 0 / .7);
     opacity: 0.5;
 }

@@ -112,6 +112,7 @@ const openModalRegister = document.querySelector(".register-button");
 const closeModalRegister = document.querySelector(".modal-register_close-button");
 const openModalRegisterSignup = document.querySelector(".signup_btn");
 const registerLink = document.querySelector(".modal-login_link");
+const registerInputs = document.querySelectorAll(".modal-register_form_input");
 
 
 // Открытие модального окна Register: клик на иконку юзера -> клик на Register ссылку
@@ -148,6 +149,10 @@ registerLink.addEventListener("click", () => {
 
 // Закрытие модального окна по клику на кнопку закрытия
 closeModalRegister.addEventListener("click", () => {
+  // Удаление красного бордера с инпутов
+  registerInputs.forEach((input) => {
+    input.classList.remove("_error");
+  });
 
   modalRegister.setAttribute("closing", "");
 
@@ -168,6 +173,11 @@ closeModalRegister.addEventListener("click", () => {
 // Закрытие модального окна по клику вне модалки
 modalRegister.addEventListener("click", (e) => {
   if (e.target.nodeName === "DIALOG") {
+    // Удаление красного бордера с инпутов
+    registerInputs.forEach((input) => {
+      input.classList.remove("_error");
+    });
+    
     modalRegister.close();
     document.body.style.overflow = "auto";
   }
@@ -280,29 +290,26 @@ async function formSend(e) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const cardNumber = getRandomCardNumber();
-    let visitCount = localStorage.getItem("visitCount");
+    let visitCount = 1;
+    let bookCount = 0;
 
     // Получение данных из Local Storage (если они есть)
     let usersData = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Если значение не было найдено, устанавливаем его равным 0
-    if (visitCount === null) {
-      visitCount = 1;
-      console.log(visitCount);
-    }
-        
     // Добавление новых данных в массив
-    usersData.push({ firstname, lastname, email, password, cardNumber, visitCount });
+    usersData.push({ firstname, lastname, email, password, cardNumber, visitCount, bookCount });
 
     // Сохранение массива данных в Local Storage
     localStorage.setItem("users", JSON.stringify(usersData));
-
+    
     modalRegister.close();
     document.body.style.overflow = "auto";
+
+    console.log('User registered and logged in successfully');
        
 
     /* ======================
-    Пользователь внесен в базу Local Storage
+    Пользователь уже внесен в базу Local Storage:
     Cтандартная иконка пользователя заменена на иконку с инициалами нового пользователя
     ====================== */
           
@@ -314,7 +321,7 @@ async function formSend(e) {
     profileIcon.style.display = 'none'; // Скрытие стандартной иконки юзера
     initialsContainer.style.title = `${firstname} ${lastname}`;
     profile.appendChild(initialsContainer); // Добавление блока с инициалами в родительский контейнер
-    console.log('User registered and logged in successfully');
+    
 
 
     
@@ -423,6 +430,7 @@ async function formSend(e) {
 
   }
 }
+
 
 // Инициализация функции отправки данных формы для регистрации пользователя в Local Storage по клику на кнопку submit
 const formRegister = document.getElementById("register");
@@ -535,17 +543,21 @@ function login() {
   if (user && user.password === password) {
     console.log('User logged in successfully');
     
-    // code to allow the user to access the system here
-    // Получение текущего значения счетчика visits из Local Storage
-    let visitCount = localStorage.getItem("visitCount");
-    // Увеличение счетчика на 1 и сохранение нового значения в Local Storage
-    visitCount++;
-    localStorage.setItem("visitCount", visitCount);
-    console.log(visitCount);
+    // ПОЛЬЗОВАТЕЛЬ ПОЛУЧИЛ ДОСТУП К СИСТЕМЕ
 
-    // Обновление значения span с классом "statistics_visits"
-    const statisticsVisits = document.querySelector(".statistics_visits");
-    statisticsVisits.textContent = visitCount;
+    // Получение текущего значения счетчика visits из Local Storage
+    // let visitCount = localStorage.getItem("visitCount");
+
+    // Увеличение счетчика на 1 по конкретному пользователю при каждом входе в систему
+    user.visitCount++;
+    console.log(user.visitCount);
+    
+    // Обновление счетчика Visits в модалке My Profile
+    document.querySelector(".visits_count").textContent = user.visitCount;
+
+    // // Обновление счетчика зарезервированных книг
+    // const statisticsBooks = document.querySelector(".books_count");
+    // statisticsBooks.textContent = bookCount;
 
     // Закрытие модалки Login и возвращение скролла для body
     modalLogin.close();
@@ -703,23 +715,6 @@ document.querySelector('.logout-button').addEventListener('click', logout);
 
 
 
-// ДОБАВИТЬ КОД - СЧЕТЧИК VISITS
-
-// // Получение текущего значения счетчика из Local Storage
-// let visitCount = localStorage.getItem("visitCount");
-
-// // Если значение не было найдено, устанавливаем его равным 1
-// if (visitCount === null) {
-//   visitCount = 1;
-// }
-
-// // Увеличение счетчика на 1 и сохранение нового значения в Local Storage
-// visitCount++;
-// localStorage.setItem("visitCount", visitCount);
-
-// // Обновление значения span с классом "statistics_visits"
-// const statisticsVisits = document.querySelector(".statistics_visits");
-// statisticsVisits.textContent = visitCount;
 
     
 
