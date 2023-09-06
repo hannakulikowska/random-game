@@ -605,19 +605,19 @@
         <form class="modal-register_form" id="register" name="register" method="dialog" action="#">
             <label class="modal-register_form_label" name="firstname">
                 <span class="modal-register_form_title">First name</span>
-                <input class="modal-register_form_input input-firstname _req" name="firstname" id="firstname" autocomplete="username" type="text" tabindex="1">
+                <input class="modal-register_form_input input-firstname _req" name="firstname" id="firstname" type="text" tabindex="1">
             </label>
             <label class="modal-register_form_label" name="lastname">
                 <span class="modal-register_form_title">Last name</span>
-                <input class="modal-register_form_input input-lastname _req" name="lastname" id="lastname" autocomplete="username" type="text" tabindex="2">
+                <input class="modal-register_form_input input-lastname _req" name="lastname" id="lastname" type="text" tabindex="2">
             </label>
             <label class="modal-register_form_label" name="email">
                 <span class="modal-register_form_title">E-mail</span>
-                <input class="modal-register_form_input input-text _email _req" name="email" id="email" autocomplete="username" type="email" tabindex="3">
+                <input class="modal-register_form_input input-text _email _req" name="email" id="email" type="email" tabindex="3">
             </label>
             <label class="modal-register_form_label" name="password">
                 <span class="modal-register_form_title">Password</span>
-                <input class="modal-register_form_input _password _req" name="password" id="password" autocomplete="new-password" type="password" tabindex="4">
+                <input class="modal-register_form_input _password _req" name="password" id="password" type="password" tabindex="4">
             </label>
             <button class="modal-register_signup-button" id="add_new-user" type="submit" tabindex="5">Sign Up</button>
         </form>
@@ -691,30 +691,30 @@
         <div class="modal-buycard_content">
             <form action="#" class="modal-buycard_form" id="modal-buycard_form">
                 <label class="modal-buycard_form_label" for="bankcard">Bank card number</label>
-                <input class="modal-buycard_form_input _bankcard _req" id="bankcard" type="text" tabindex="1">
+                <input class="modal-buycard_form_input _bankcard _required" id="bankcard" type="text" tabindex="1">
 
                 <label class="modal-buycard_form_label exp-code_label">
                     Expiration code
                     <div class="modal-buycard_exp-inputs">
-                        <input class="modal-buycard_form_input exp-code _exp1 _req" type="text" tabindex="2">
-                        <input class="modal-buycard_form_input exp-code _exp2 _req" type="text" tabindex="3">
+                        <input class="modal-buycard_form_input exp-code _exp1 _required" type="text" tabindex="2">
+                        <input class="modal-buycard_form_input exp-code _exp2 _required" type="text" tabindex="3">
                     </div>
                 </label>
                 
                 <label class="modal-buycard_form_label" for="cvc">CVC</label>
-                <input class="modal-buycard_form_input _cvc _req" id="cvc" type="text" tabindex="4">
+                <input class="modal-buycard_form_input _cvc _required" id="cvc" type="text" tabindex="4">
 
                 <label class="modal-buycard_form_label" for="cardholder">Cardholder name</label>
-                <input class="modal-buycard_form_input _req" id="cardholder" type="text" tabindex="5">
+                <input class="modal-buycard_form_input _required" id="cardholder" type="text" tabindex="5">
 
                 <label class="modal-buycard_form_label" for="postcode">Postal code</label>
-                <input class="modal-buycard_form_input _req" id="postcode" type="text" tabindex="6">
+                <input class="modal-buycard_form_input _required" id="postcode" type="text" tabindex="6">
 
                 <label class="modal-buycard_form_label" for="city">City / Town</label>
-                <input class="modal-buycard_form_input _req" id="city" type="text" tabindex="7">
+                <input class="modal-buycard_form_input _required" id="city" type="text" tabindex="7">
 
                 <div class="modal-buycard_buy-card">
-                    <button class="modal-buycard_buy-button" id="buy-library-card" type="submit" tabindex="8">Buy</button>
+                    <button class="modal-buycard_buy-button" id="buy-library-card" tabindex="8">Buy</button>
                     <span class="library-card-price">$ 25.00</span>
                 </div>
             </form>

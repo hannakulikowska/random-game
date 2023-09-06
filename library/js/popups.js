@@ -259,6 +259,8 @@ const formRegister = document.getElementById("register");
 // при отправке формы (submit), осуществляется переход к функции formSend
 formRegister.addEventListener("submit", formSend);
 
+let registeredUserEmail; // Объявление переменной для хранения email зарегистрированного пользователя
+
 
 // Функция отправки данных формы регистрации 
 async function formSend(e) {
@@ -277,13 +279,16 @@ async function formSend(e) {
     const cardNumber = getRandomCardNumber();
     let visitCount = 1;
     let bookCount = 0;
-    let libraryCard = false;
+    let libraryCardPurchased = false;
+
+    // Сохранение email зарегистрированного пользователя в переменной
+    registeredUserEmail = email;
 
     // Получение данных из Local Storage (если они есть)
     let user = JSON.parse(localStorage.getItem("users")) || [];
 
     // Добавление новых данных в массив
-    user.push({ firstname, lastname, email, password, cardNumber, visitCount, bookCount, libraryCard });
+    user.push({ firstname, lastname, email, password, cardNumber, visitCount, bookCount, libraryCardPurchased });
 
     // Сохранение/обновление массива данных в Local Storage
     localStorage.setItem("users", JSON.stringify(user));
@@ -377,14 +382,6 @@ async function formSend(e) {
       document.body.style.overflow = "hidden";
     });
 
-    // Открытие модального окна по клику на Sign Up в Library Cards
-    // openModalRegisterSignup.addEventListener("click", () => {
-    //   modalMyProfile.showModal();
-    //   profileMenuLogin.classList.remove('profile-menu_visible');
-    //   profileMenuLogin.classList.add('profile-menu_hidden');
-    //   // Функция сброса значений инпутов
-    //   resetModalInputs();
-    // });
 
     // Закрытие модального окна по клику на кнопку закрытия
     closeModalMyProfile.addEventListener("click", () => {
@@ -423,6 +420,38 @@ async function formSend(e) {
         });
     });
 
+    
+    // "ПОКУПКА" КАРТЫ И ЗАКРЫТИЕ ФОРМЫ BUY A LIBRARY CARD
+  
+    buyCardBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Предотвращение отправки формы
+      let error = validateFormBuyCard(formBuyCard); // Обязательна предварительная валидация формы
+
+      //Если валидация формы прошла успешно
+      if (error === 0) {
+        
+        closeBuyCardModal();
+        console.log('User bought a library card');
+        
+
+        const users = JSON.parse(localStorage.getItem('users'));
+        
+        // Поиск индекса юзера
+        const userIndex = users.findIndex(user => user.email === registeredUserEmail);
+
+        // userIndex содержит индекс зарегистрированного пользователя в массиве users. Если индекс существует, то выполняется код
+        if (userIndex !== -1) {
+          console.log(`Индекс пользователя: ${userIndex}`);
+          // Обновление информации о текущем пользователе в массиве
+          users[userIndex].libraryCardPurchased = true;
+          // Обновление данных в Local Storage
+          localStorage.setItem("users", JSON.stringify(users));
+        } else {
+          console.log('Пользователь не найден');
+        }
+      }
+    });
+    
   }
 }
 
@@ -539,12 +568,10 @@ function login() {
   
   // Если, введенные в форме Login, логин и пароль совпадают с данными с базы Local Storage, то пользователь будет залогинен в системе
   if (user && user.password === password) {
-    console.log('User logged in successfully');
-    
+
     // ПОЛЬЗОВАТЕЛЬ ПОЛУЧИЛ ДОСТУП К СИСТЕМЕ
 
-    // Получение текущего значения счетчика visits из Local Storage
-    // let visitCount = localStorage.getItem("visitCount");
+    console.log('User logged in successfully');
 
     // Увеличение счетчика на 1 по конкретному пользователю при каждом входе в систему
     user.visitCount++;
@@ -683,11 +710,33 @@ function login() {
         });
     });
     // КОНЕЦ КОДА
-  }
-  // Если логин и пароль, введенные в форме Login, НЕ совпадают с данными с базы Local Storage, то пользователь залогинен в системе НЕ будет
-  else {
+
+    /* ====================================================
+    "ПОКУПКА" КАРТЫ И ЗАКРЫТИЕ ФОРМЫ BUY A LIBRARY CARD
+    (ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН)
+    ==================================================== */
+    buyCardBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Предотвращение отправки формы
+      let error = validateFormBuyCard(formBuyCard); // Обязательна предварительная валидация формы
+
+      if (error === 0) {
+        
+        closeBuyCardModal();
+        console.log('User bought a library card');
+        
+        user.libraryCardPurchased = true;
+        // Обновление данных в Local Storage
+        localStorage.setItem("users", JSON.stringify(users));
+        
+        console.log('Purchase data for the card by the user has been entered into Local Storage'); 
+      }
+    });
+
+  } else {
+    // Если логин и пароль, введенные в форме Login, НЕ совпадают с данными с базы Local Storage, то пользователь залогинен в системе НЕ будет
     console.error('Invalid email/readers card or password');
     alert("Invalid \"Email or readers card\" or \"Password\"");
+    document.body.style.overflow = "auto";
   }
 }
 
@@ -716,6 +765,8 @@ document.querySelector('.logout-button').addEventListener('click', logout);
 /* =================================
 ЛОГИКА КНОПКИ BUY В FAVORITES ДЛЯ 
 НЕЗАЛОГИНЕННОГО И ЗАЛОГИНЕННОГО ПОЛЬЗОВАТЕЛЕЙ
+1. `BUY` BTN => `LOGIN` MODAL
+2. `BUY` BTN => `BUY A LIBRARY CARD` MODAL
 ================================= */
 
 // Открытие модального окна Login/Buy Card по клику на кнопку Buy в Favorites
@@ -724,10 +775,19 @@ const modalBuyCard = document.querySelector(".modal-buycard");
 const closeModalBuyCard = document.querySelector(".modal-buycard_close-button");
 const buycardInputs = document.querySelectorAll(".modal-buycard_form_input");
 
+// Если пользователь не авторизован, показать модалку Login
+// Если пользователь авторизован, показать модалку Buy A Library Card
 buyButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (profileIcon.style.display === 'none') {
+      // если карта куплена, то при нажатии на кнопку `Buy`, кнопка меняется на `Own`
+      
+      // здесь добавить код
+
+
+      // если карта не куплена, то появляется модальное окно `Buy A Library Card`
       modalBuyCard.showModal();
+
     } else {
       modalLogin.showModal();
     }
@@ -735,12 +795,16 @@ buyButtons.forEach((button) => {
   });
 });
 
-// Закрытие модального окна Buy Card по клику на крестик
-closeModalBuyCard.addEventListener("click", () => {
-  buycardInputs.forEach((input) => {
-    input.classList.remove("_error");
-  });
 
+
+
+/* =================================
+ЗАКРЫТИЕ `BUY A LIBRARY CARD` MODAL
+(ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН)
+================================= */
+
+// Функция закрытия модального окна `Buy A Library Card` с плавным исчезновением
+function closeBuyCardModal() {
   modalBuyCard.setAttribute("closing", "");
 
   // Добавление анимации на закрытие
@@ -754,6 +818,16 @@ closeModalBuyCard.addEventListener("click", () => {
     // Включение скролла страницы при закрытии модального окна
     document.body.style.overflow = "auto";
   }, { once: true });
+}
+
+
+// Закрытие модального окна Buy Card по клику на крестик
+closeModalBuyCard.addEventListener("click", () => {
+  buycardInputs.forEach((input) => {
+    input.classList.remove("_error");
+  });
+
+  closeBuyCardModal(); // Вызов функции закрытия модалки
 })
 
 
@@ -764,9 +838,8 @@ modalBuyCard.addEventListener("click", (e) => {
     buycardInputs.forEach((input) => {
       input.classList.remove("_error");
     });
-    
-    modalBuyCard.close();
-    document.body.style.overflow = "auto";
+
+    closeBuyCardModal(); // Вызов функции закрытия модалки
   }
 });
 
@@ -774,36 +847,11 @@ modalBuyCard.addEventListener("click", (e) => {
 
 /* =================================
 ВАЛИДАЦИЯ ФОРМЫ BUY A LIBRARY CARD
-ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН
-*** не завершен код ***
+(ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН)
 ================================= */
 
 const formBuyCard = document.getElementById("modal-buycard_form");
-formBuyCard.addEventListener("submit", sendBuyCardForm);
-
-function sendBuyCardForm(e) {
-  e.preventDefault();
-  let error = validateFormBuyCard(formBuyCard);
-  if (error === 0) {
-    
-
-    // пробовола начать писать код.... не закончила: 
-    // const user = users.find((u) => {
-    //   if (cardNumber.includes(`${user.cardNumber}`))
-    //   libraryCard = true;
-    //   console.log(user.libraryCard);
-
-
-    // После покупки карты библиотеки:
-    // кнопки Buy меняются на Own
-    // купленные книги добавляются в список Rented books
-    // включается счетчик bookCount (данные сохраняются в Local Storage и выводятся в модалке My Profile)
-    // модальное окно закрывается при нажатии на кнопку submit: 
-    modalBuyCard.close(); 
-    document.body.style.overflow = "auto";
-    console.log('User bought a library card');
-  }
-}
+const buyCardBtn = document.querySelector(".modal-buycard_buy-button");
 
 
 function cvcTest(input) {
@@ -819,7 +867,7 @@ function expTest(input) {
 
 function validateFormBuyCard(formBuyCard) {
   let error = 0;
-  let formReq = document.querySelectorAll("._req");
+  let formReq = document.querySelectorAll("._required");
 
   for (let index = 0; index < formReq.length; index++) {
     const input = formReq[index];
@@ -848,9 +896,12 @@ function validateFormBuyCard(formBuyCard) {
     }
   }
 
-  // Удаление класса _error при успешной валидации
+  // Если успешная валидация, удаляются классы _error
   if (error === 0) {
-    let inputs = formBuyCard.querySelectorAll("._req");
+    let inputs = formBuyCard.querySelectorAll("._required");
+    // const buyCardBtn = document.querySelector(".modal-buycard_buy-button");
+    
+    // Удаление класса _error
     inputs.forEach((input) => {
       formRemoveError(input);
     });
@@ -860,6 +911,15 @@ function validateFormBuyCard(formBuyCard) {
 }
 
 
+
+
+
+
+
+//  N   // После покупки карты библиотеки:
+//  1   // кнопки Buy меняются на Own при клике если у пользователя libraryCardPurchased = true в Local Storage
+//  2   // купленные книги добавляются в список Rented books
+//  3   // включается счетчик bookCount (данные сохраняются в Local Storage и выводятся в модалке My Profile)
 
 
 
