@@ -198,8 +198,26 @@ function resetModalInputs() {
 
 
 /* ======================
-Валидация формы Register
+ВАЛИДАЦИЯ ФОРМЫ REGISTER
 ====================== */
+
+function formAddError(input) {
+  input.classList.add("_error");
+}
+
+function formRemoveError(input) {
+  input.classList.remove("_error");
+}
+
+function emailTest(input) {
+  return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value.trim());
+}
+
+function passwordTest(input) {
+  return input.value.length < 8;
+}
+
+
 
 function formValidate(formRegister) {
   let error = 0;
@@ -231,51 +249,18 @@ function formValidate(formRegister) {
   return error;
 }
 
-function formAddError(input) {
-  input.classList.add("_error");
-}
 
-function formRemoveError(input) {
-  input.classList.remove("_error");
-}
-
-function emailTest(input) {
-  return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value.trim());
-}
-
-function passwordTest(input) {
-  return input.value.length < 8;
-}
-
-
-
-
-
-/* ======================
-Генерация номера карты 
-пользователя библиотеки - 
-случайное 9-значное 
-16-ричное число (0-9 A-F)
-====================== */
-
-function getRandomCardNumber() {
-  const randomNumber = Math.floor(Math.random() * 0x100000000); // Генерация случайного 32-битного числа
-  const cardNumber = randomNumber.toString(16).toUpperCase(); // Преобразование в 16-ричное число
-  
-  // Дополнение числа нулями слева до 9 символов
-  const paddedCardNumber = cardNumber.padStart(9, '0');
-  
-  return paddedCardNumber;
-}
-
-
-
-
-
-/* ======================
+/* ============================
 РЕГИСТРАЦИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ
-====================== */
+============================ */
 
+// Инициализация функции отправки данных формы для регистрации пользователя в Local Storage по клику на кнопку submit
+const formRegister = document.getElementById("register");
+// при отправке формы (submit), осуществляется переход к функции formSend
+formRegister.addEventListener("submit", formSend);
+
+
+// Функция отправки данных формы регистрации 
 async function formSend(e) {
   e.preventDefault();
 
@@ -292,16 +277,20 @@ async function formSend(e) {
     const cardNumber = getRandomCardNumber();
     let visitCount = 1;
     let bookCount = 0;
+    let libraryCard = false;
 
     // Получение данных из Local Storage (если они есть)
-    let usersData = JSON.parse(localStorage.getItem("users")) || [];
+    let user = JSON.parse(localStorage.getItem("users")) || [];
 
     // Добавление новых данных в массив
-    usersData.push({ firstname, lastname, email, password, cardNumber, visitCount, bookCount });
+    user.push({ firstname, lastname, email, password, cardNumber, visitCount, bookCount, libraryCard });
 
-    // Сохранение массива данных в Local Storage
-    localStorage.setItem("users", JSON.stringify(usersData));
+    // Сохранение/обновление массива данных в Local Storage
+    localStorage.setItem("users", JSON.stringify(user));
     
+    // Обновление счетчика Visits в модалке My Profile
+    document.querySelector(".visits_count").textContent = visitCount;
+
     modalRegister.close();
     document.body.style.overflow = "auto";
 
@@ -310,7 +299,7 @@ async function formSend(e) {
 
     /* ======================
     Пользователь уже внесен в базу Local Storage:
-    Cтандартная иконка пользователя заменена на иконку с инициалами нового пользователя
+    Cтандартная иконка пользователя заменяется на иконку с инициалами пользователя
     ====================== */
           
     const profile = document.querySelector('.profile'); // Родительский контейнер
@@ -324,9 +313,7 @@ async function formSend(e) {
     
 
 
-    
-    // Показ номера карты пользователя в заголовке меню Logout & My profile после первого входа в систему - после регистрации 
-    // Эта часть кода работает
+    // Вставка номера карты пользователя в заголовке меню Logout & My profile после первого входа в систему - после регистрации 
 
     const menuLogoutTitle = document.querySelector(".menu-logout_title");
     menuLogoutTitle.textContent = `${cardNumber}`;
@@ -339,6 +326,7 @@ async function formSend(e) {
       menuLogout.classList.toggle('menu-logout_visible');
     };
 
+
     // Событие по клику по иконке юзера с инициалами:
     const initialsIcon = document.querySelector('.initials-icon'); 
     initialsIcon.addEventListener('click', (event) => {
@@ -346,6 +334,7 @@ async function formSend(e) {
       closeMenu(); // закрытие бургер-меню
       toggleMenuLogout(); // функция открытия/закрытия меню Logout & My profile
     });
+
 
     // Событие по клику - клик вне области меню приводит к закрытию меню
     document.addEventListener('click', (event) => {
@@ -359,13 +348,15 @@ async function formSend(e) {
     
     /* ======================
     ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА "My profile" (ТАМ ГДЕ СОДЕРЖАТСЯ ВСЕ ДАННЫЕ О ПРОФАЙЛЕ ЮЗЕРА)
-    Эта часть кода работает
+    ПЕРВЫЙ ВХОД ПОЛЬЗОВАТЕЛЯ (РЕГИСТРАЦИЯ)
     ====================== */
 
     const modalMyProfile = document.querySelector(".modal-profile");
     const openModalMyProfile = document.querySelector(".myprofile-button");
     const closeModalMyProfile = document.querySelector(".modal-profile_close-button");
     const cardNumberMyProfile = document.querySelector(".card-number");
+    const initialsMyProfile = document.querySelector(".aside_initials");
+    const fullnameMyProfile = document.querySelector(".aside_full-name");
     const copyBtn = document.querySelector('.copy-btn');
     // const openModalRegisterSignup = document.querySelector(".signup_btn");
 
@@ -376,7 +367,11 @@ async function formSend(e) {
       // Закрытие менюшки "My profile - Log Out"
       menuLogout.classList.remove('menu-logout_visible');
       menuLogout.classList.add('menu-logout_hidden');
-      // Показ номера карты пользователя в My Profile
+      // Вставка инициалов юзера в модальное окно My Profile
+      initialsMyProfile.textContent = `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}`;
+      // Вставка полного имени юзера в модальное окно My Profile
+      fullnameMyProfile.textContent = `${firstname} ${lastname}`;
+      // Вставка номера карты пользователя в My Profile
       cardNumberMyProfile.textContent = `${cardNumber}`;
       // Блокировка скролла страницы при открытом модальном окне
       document.body.style.overflow = "hidden";
@@ -432,10 +427,23 @@ async function formSend(e) {
 }
 
 
-// Инициализация функции отправки данных формы для регистрации пользователя в Local Storage по клику на кнопку submit
-const formRegister = document.getElementById("register");
-// при отправке формы (submit), осуществляется переход к функции formSend
-formRegister.addEventListener("submit", formSend);
+
+/* ======================
+Генерация номера карты 
+пользователя библиотеки - 
+случайное 9-значное 
+16-ричное число (0-9 A-F)
+====================== */
+
+function getRandomCardNumber() {
+  const randomNumber = Math.floor(Math.random() * 0x100000000); // Генерация случайного 32-битного числа
+  const cardNumber = randomNumber.toString(16).toUpperCase(); // Преобразование в 16-ричное число
+  
+  // Дополнение числа нулями слева до 9 символов
+  const paddedCardNumber = cardNumber.padStart(9, '0');
+  
+  return paddedCardNumber;
+}
 
 
 
@@ -448,7 +456,6 @@ const modalLogin = document.querySelector(".modal-login");
 const openModalLogin = document.querySelector(".login-button");
 const closeModalLogin = document.querySelector(".modal-login_close-button");
 const openModalLoginLogin = document.querySelector(".login_btn");
-const buyButtons = document.querySelectorAll(".buy_btn");
 const loginLink = document.querySelector(".modal-register_link");
 
 
@@ -480,14 +487,6 @@ loginLink.addEventListener("click", () => {
   document.body.style.overflow = "hidden"; // Выключение скролла страницы при открытом модальном окне
 });
 
-
-// Открытие модального окна Login по клику на кнопку Buy в Favorites
-buyButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    modalLogin.showModal();
-    document.body.style.overflow = "hidden";
-  });
-});
 
 // Закрытие модального окна Login по клику на кнопку закрытия
 closeModalLogin.addEventListener("click", () => {
@@ -522,7 +521,6 @@ modalLogin.addEventListener("click", (e) => {
 
 /* ====================
 ЗАЛОГИНИТЬСЯ В СИСТЕМУ
-Номер карты: 0E5D125F4
 ==================== */
 
 const users = JSON.parse(localStorage.getItem('users'));
@@ -551,7 +549,8 @@ function login() {
     // Увеличение счетчика на 1 по конкретному пользователю при каждом входе в систему
     user.visitCount++;
     console.log(user.visitCount);
-    
+    // Сохранение обновленного массива users в Local Storage
+    localStorage.setItem('users', JSON.stringify(users));
     // Обновление счетчика Visits в модалке My Profile
     document.querySelector(".visits_count").textContent = user.visitCount;
 
@@ -616,7 +615,9 @@ function login() {
     const openModalMyProfile = document.querySelector(".myprofile-button");
     const closeModalMyProfile = document.querySelector(".modal-profile_close-button");
     const cardNumberMyProfile = document.querySelector(".card-number");
-    const copyBtn = document.querySelector('.copy-btn');
+    const initialsMyProfile = document.querySelector(".aside_initials");
+    const fullnameMyProfile = document.querySelector(".aside_full-name");
+    const copyBtn = document.querySelector(".copy-btn");
     // const openModalRegisterSignup = document.querySelector(".signup_btn");
 
 
@@ -626,7 +627,11 @@ function login() {
       // Закрытие менюшки "My profile - Log Out"
       menuLogout.classList.remove('menu-logout_visible');
       menuLogout.classList.add('menu-logout_hidden');
-      // Показ номера карты пользователя в My Profile
+      // Вставка инициалов юзера в модальное окно My Profile
+      initialsMyProfile.textContent = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+      // Вставка полного имени юзера в модальное окно My Profile
+      fullnameMyProfile.textContent = `${user.firstname} ${user.lastname}`;
+      // Вставка номера карты пользователя в My Profile
       cardNumberMyProfile.textContent = `${user.cardNumber}`;
       // Блокировка скролла страницы при открытом модальном окне
       document.body.style.overflow = "hidden";
@@ -707,6 +712,152 @@ document.querySelector('.logout-button').addEventListener('click', logout);
 // КОНЕЦ КОДА
 
 
+
+/* =================================
+ЛОГИКА КНОПКИ BUY В FAVORITES ДЛЯ 
+НЕЗАЛОГИНЕННОГО И ЗАЛОГИНЕННОГО ПОЛЬЗОВАТЕЛЕЙ
+================================= */
+
+// Открытие модального окна Login/Buy Card по клику на кнопку Buy в Favorites
+const buyButtons = document.querySelectorAll(".buy_btn");
+const modalBuyCard = document.querySelector(".modal-buycard");
+const closeModalBuyCard = document.querySelector(".modal-buycard_close-button");
+const buycardInputs = document.querySelectorAll(".modal-buycard_form_input");
+
+buyButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (profileIcon.style.display === 'none') {
+      modalBuyCard.showModal();
+    } else {
+      modalLogin.showModal();
+    }
+    document.body.style.overflow = "hidden";
+  });
+});
+
+// Закрытие модального окна Buy Card по клику на крестик
+closeModalBuyCard.addEventListener("click", () => {
+  buycardInputs.forEach((input) => {
+    input.classList.remove("_error");
+  });
+
+  modalBuyCard.setAttribute("closing", "");
+
+  // Добавление анимации на закрытие
+  modalBuyCard.classList.add("closing-animation");
+
+  modalBuyCard.addEventListener('animationend', () => {
+    modalBuyCard.removeAttribute("closing");
+    modalBuyCard.close();
+    // Удаление класса анимации после закрытия
+    modalBuyCard.classList.remove("closing-animation");
+    // Включение скролла страницы при закрытии модального окна
+    document.body.style.overflow = "auto";
+  }, { once: true });
+})
+
+
+// Закрытие модального окна по клику вне модалки
+modalBuyCard.addEventListener("click", (e) => {
+  if (e.target.nodeName === "DIALOG") {
+    // Удаление красного бордера с инпутов
+    buycardInputs.forEach((input) => {
+      input.classList.remove("_error");
+    });
+    
+    modalBuyCard.close();
+    document.body.style.overflow = "auto";
+  }
+});
+
+
+
+/* =================================
+ВАЛИДАЦИЯ ФОРМЫ BUY A LIBRARY CARD
+ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН
+*** не завершен код ***
+================================= */
+
+const formBuyCard = document.getElementById("modal-buycard_form");
+formBuyCard.addEventListener("submit", sendBuyCardForm);
+
+function sendBuyCardForm(e) {
+  e.preventDefault();
+  let error = validateFormBuyCard(formBuyCard);
+  if (error === 0) {
+    
+
+    // пробовола начать писать код.... не закончила: 
+    // const user = users.find((u) => {
+    //   if (cardNumber.includes(`${user.cardNumber}`))
+    //   libraryCard = true;
+    //   console.log(user.libraryCard);
+
+
+    // После покупки карты библиотеки:
+    // кнопки Buy меняются на Own
+    // купленные книги добавляются в список Rented books
+    // включается счетчик bookCount (данные сохраняются в Local Storage и выводятся в модалке My Profile)
+    // модальное окно закрывается при нажатии на кнопку submit: 
+    modalBuyCard.close(); 
+    document.body.style.overflow = "auto";
+    console.log('User bought a library card');
+  }
+}
+
+
+function cvcTest(input) {
+  return input.value.length === 3;
+}
+function bankcardTest(input) {
+  return input.value.replace(/\s/g, "").length === 16;
+}
+function expTest(input) {
+  return input.value.length === 2;
+}
+
+
+function validateFormBuyCard(formBuyCard) {
+  let error = 0;
+  let formReq = document.querySelectorAll("._req");
+
+  for (let index = 0; index < formReq.length; index++) {
+    const input = formReq[index];
+    formRemoveError(input);
+
+    if (input.classList.contains("_cvc")) {
+      if (!cvcTest(input)) {
+        formAddError(input);
+        error++;
+      }
+    } else if (input.classList.contains("_bankcard")) {
+      if (!bankcardTest(input)) {
+        formAddError(input);
+        error++;
+      }
+    } else if (input.classList.contains("_exp1") || input.classList.contains("_exp2")) {
+      if (!expTest(input)) {
+        formAddError(input);
+        error++;
+      }
+    } else {
+      if (input.value.trim() === "") {
+        formAddError(input);
+        error++;
+      }
+    }
+  }
+
+  // Удаление класса _error при успешной валидации
+  if (error === 0) {
+    let inputs = formBuyCard.querySelectorAll("._req");
+    inputs.forEach((input) => {
+      formRemoveError(input);
+    });
+  }
+
+  return error;
+}
 
 
 

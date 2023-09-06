@@ -714,7 +714,7 @@ a {
 }
 
 .modal-profile_card-number:hover {
-    color: #BB945F;
+    color: #0C0C0E;
 }
 
 .card-number {
@@ -808,11 +808,15 @@ Modal Buy A Library Card
     color: var(--grey-color);
 }
 
+.modal-buycard_form_input._error {
+    border: 1px solid red;
+}
+
 .modal-buycard_form_input:focus {
     border: 2px solid #BB945F;
 }
 
-.cvc {
+._cvc {
     margin-bottom: 10px;
 }
 
@@ -827,7 +831,7 @@ Modal Buy A Library Card
     gap: 10px;
 }
 
-.cvc, 
+._cvc, 
 .exp-code {
     width: 45px;
     height: 20px;
