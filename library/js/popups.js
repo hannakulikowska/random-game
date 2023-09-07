@@ -420,8 +420,49 @@ async function formSend(e) {
         });
     });
 
-    
-    // "ПОКУПКА" КАРТЫ И ЗАКРЫТИЕ ФОРМЫ BUY A LIBRARY CARD
+
+    // ДО ПОКУПКИ LIBRARY CARD - вариант 1
+    // `BUY` => `BUY A LIBRARY CARD` MODAL
+    // buyButtons.forEach((button) => {
+    //   button.addEventListener("click", () => {
+    //     // Получение данных из Local Storage (если они есть)
+    //     const users = JSON.parse(localStorage.getItem("users"));
+    //     const userIndex = users.findIndex(user => user.email === registeredUserEmail);
+
+    //     if (users[userIndex].libraryCardPurchased === false) {
+    //       modalBuyCard.showModal();
+    //       document.body.style.overflow = "hidden";
+    //     }
+    //   });
+    // });
+
+
+    // // ДО ПОКУПКИ LIBRARY CARD - вариант 2
+    // // `BUY` => `BUY A LIBRARY CARD` MODAL
+    buyButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        modalBuyCard.showModal();
+        modalLogin.close();
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+
+    // Вариант 3
+    // const userRegistered = localStorage.getItem("visitCount");
+    // const modalBuyCard = document.querySelector(".modal-buycard");
+    // buyButtons.forEach((button) => {
+    //   button.addEventListener("click", () => {
+    //     // Проверяем, зарегистрирован ли пользователь
+    //     if (userRegistered === 1) {
+    //       modalBuyCard.showModal();
+    //       document.body.style.overflow = "hidden";
+    //     }
+    //   });
+    // });
+
+
+    // "ПОКУПКА" КАРТЫ
   
     buyCardBtn.addEventListener("click", (e) => {
       e.preventDefault(); // Предотвращение отправки формы
@@ -429,11 +470,11 @@ async function formSend(e) {
 
       //Если валидация формы прошла успешно
       if (error === 0) {
-        
+        // Закрытие модального окна `Buy A Library Card`
         closeBuyCardModal();
         console.log('User bought a library card');
         
-
+        // Внесение данных о покупке карты в Local Storage
         const users = JSON.parse(localStorage.getItem('users'));
         
         // Поиск индекса юзера
@@ -446,11 +487,32 @@ async function formSend(e) {
           users[userIndex].libraryCardPurchased = true;
           // Обновление данных в Local Storage
           localStorage.setItem("users", JSON.stringify(users));
+
+          
+          // ЛОГИКА КНОПКИ BUY В FAVORITES: `BUY` => `OWN`
+          buyButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              modalBuyCard.close();
+              document.body.style.overflow = "auto";
+              // Замена кнопки Buy на Own
+              button.textContent = "Own";
+              button.classList.remove("buy_btn");
+              button.classList.add("own_btn");         
+            });
+          });
+
+
         } else {
           console.log('Пользователь не найден');
+
+          
+
+
         }
       }
     });
+
+    
     
   }
 }
@@ -487,6 +549,32 @@ const closeModalLogin = document.querySelector(".modal-login_close-button");
 const openModalLoginLogin = document.querySelector(".login_btn");
 const loginLink = document.querySelector(".modal-register_link");
 
+/* =================================
+ЛОГИКА КНОПКИ BUY В FAVORITES ДЛЯ 
+НЕАВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ
+1. `BUY` => `LOGIN` MODAL
+2. `BUY` => `BUY A LIBRARY CARD` MODAL
+================================= */
+
+const buyButtons = document.querySelectorAll(".buy_btn");
+const modalBuyCard = document.querySelector(".modal-buycard");
+const closeModalBuyCard = document.querySelector(".modal-buycard_close-button");
+const buycardInputs = document.querySelectorAll(".modal-buycard_form_input");
+
+// Открытие модального окна Login по клику на кнопку Buy в Favorites    
+buyButtons.forEach((button) => {
+  if (profileIcon.style.display !== "none") {
+    button.addEventListener("click", () => {
+      modalLogin.showModal();
+      document.body.style.overflow = "hidden";
+    });
+  }
+  // else if (profileIcon.style.display === "none") {
+  //   modalLogin.close();
+  //   modalBuyCard.showModal();
+  //   document.body.style.overflow = "hidden";
+  // }
+});
 
 // Открытие модального окна Login по клику на иконку юзера
 openModalLogin.addEventListener("click", () => {
@@ -732,8 +820,34 @@ function login() {
       }
     });
 
-  } else {
-    // Если логин и пароль, введенные в форме Login, НЕ совпадают с данными с базы Local Storage, то пользователь залогинен в системе НЕ будет
+
+    /* ====================================================
+    ЛОГИКА КНОПКИ `BUY` В FAVORITES (ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН)
+    1. `BUY` => `OWN`
+    2. `BUY` => `BUY A LIBRARY CARD` MODAL
+    ==================================================== */
+    
+    buyButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (user.libraryCardPurchased === true) {
+          modalLogin.close();
+          document.body.style.overflow = "auto";
+          // Замена кнопки Buy на Own
+          button.textContent = "Own";
+          button.classList.remove("buy_btn");
+          button.classList.add("own_btn");
+        }
+        else {
+          modalBuyCard.showModal();
+          modalLogin.close();
+          document.body.style.overflow = "hidden";
+        }
+      });
+    });
+
+  }
+  // Если логин и пароль, введенные в форме Login, НЕ совпадают с данными с базы Local Storage, то пользователь залогинен в системе НЕ будет
+  else {
     console.error('Invalid email/readers card or password');
     alert("Invalid \"Email or readers card\" or \"Password\"");
     document.body.style.overflow = "auto";
@@ -761,39 +875,6 @@ document.querySelector('.logout-button').addEventListener('click', logout);
 // КОНЕЦ КОДА
 
 
-
-/* =================================
-ЛОГИКА КНОПКИ BUY В FAVORITES ДЛЯ 
-НЕЗАЛОГИНЕННОГО И ЗАЛОГИНЕННОГО ПОЛЬЗОВАТЕЛЕЙ
-1. `BUY` BTN => `LOGIN` MODAL
-2. `BUY` BTN => `BUY A LIBRARY CARD` MODAL
-================================= */
-
-// Открытие модального окна Login/Buy Card по клику на кнопку Buy в Favorites
-const buyButtons = document.querySelectorAll(".buy_btn");
-const modalBuyCard = document.querySelector(".modal-buycard");
-const closeModalBuyCard = document.querySelector(".modal-buycard_close-button");
-const buycardInputs = document.querySelectorAll(".modal-buycard_form_input");
-
-// Если пользователь не авторизован, показать модалку Login
-// Если пользователь авторизован, показать модалку Buy A Library Card
-buyButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (profileIcon.style.display === 'none') {
-      // если карта куплена, то при нажатии на кнопку `Buy`, кнопка меняется на `Own`
-      
-      // здесь добавить код
-
-
-      // если карта не куплена, то появляется модальное окно `Buy A Library Card`
-      modalBuyCard.showModal();
-
-    } else {
-      modalLogin.showModal();
-    }
-    document.body.style.overflow = "hidden";
-  });
-});
 
 
 
@@ -846,12 +927,39 @@ modalBuyCard.addEventListener("click", (e) => {
 
 
 /* =================================
-ВАЛИДАЦИЯ ФОРМЫ BUY A LIBRARY CARD
+ВАЛИДАЦИЯ ФОРМЫ `BUY A LIBRARY CARD`
 (ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН)
 ================================= */
 
 const formBuyCard = document.getElementById("modal-buycard_form");
 const buyCardBtn = document.querySelector(".modal-buycard_buy-button");
+
+// Функция для проверки, должна ли кнопка быть активной
+function checkButtonState() {
+  const inputs = formBuyCard.querySelectorAll("._required");
+  let validateFormBuyCard = true;
+
+  inputs.forEach((input) => {
+    if (input.value.trim() === "") {
+      validateFormBuyCard = false;
+    }
+  });
+
+  // Если форма валидна (все поля заполнены), активируется кнопка
+  if (validateFormBuyCard) {
+    buyCardBtn.removeAttribute("disabled");
+  } else {
+    // Если форма не валидна, деактивируется кнопка
+    buyCardBtn.setAttribute("disabled", "");
+  }
+}
+
+// Добавляем обработчик на изменение полей формы
+formBuyCard.addEventListener("input", checkButtonState);
+
+// Инициализация состояния кнопки при загрузке модального окна
+checkButtonState();
+
 
 
 function cvcTest(input) {
