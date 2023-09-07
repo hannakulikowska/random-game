@@ -945,7 +945,7 @@ function checkButtonState() {
     }
   });
 
-  // Если форма валидна (все поля заполнены), активируется кнопка
+  // Если форма валидна, активируется кнопка
   if (validateFormBuyCard) {
     buyCardBtn.removeAttribute("disabled");
   } else {
@@ -954,8 +954,21 @@ function checkButtonState() {
   }
 }
 
-// Добавляем обработчик на изменение полей формы
+// Функция для ограничения ввода только цифрами
+function allowOnlyNumbers(event) {
+  const input = event.target;
+  input.value = input.value.replace(/\D/g, ""); // Удаляется все, что не является цифрами
+}
+
+// Добавление обработчика на изменение полей формы
 formBuyCard.addEventListener("input", checkButtonState);
+
+// Добавление обработчика для ограничения ввода только цифрами
+const numInputs = formBuyCard.querySelectorAll("._num");
+
+numInputs.forEach((input) => {
+  input.addEventListener("input", allowOnlyNumbers);
+});
 
 // Инициализация состояния кнопки при загрузке модального окна
 checkButtonState();
@@ -966,7 +979,7 @@ function cvcTest(input) {
   return input.value.length === 3;
 }
 function bankcardTest(input) {
-  return input.value.replace(/\s/g, "").length === 16;
+  return input.value.replace(/\s/g, "").length === 16; // удаление всех вводимых пробелов
 }
 function expTest(input) {
   return input.value.length === 2;
