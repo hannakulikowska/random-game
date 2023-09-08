@@ -650,7 +650,7 @@ a {
     letter-spacing: 0.4px;
     text-transform: capitalize;
     display: flex;
-    gap: 20px;
+    gap: 40px;
 }
 
 .statistics_item {
@@ -658,6 +658,7 @@ a {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    width: 50px;
 }
 
 .modal-profile_icon {
@@ -696,8 +697,11 @@ a {
 }
 
 .rented-books_list {
+    width: 380px;
+    height: 70px;
     padding-left: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    overflow-y: auto;
 }
 
 .rented-books_book {
@@ -705,20 +709,29 @@ a {
     text-transform: capitalize;
     margin-bottom: 10px;
 }
-
-.modal-profile_card-number {
-    color: #0C0C0E;
+.modal-profile_card-number_wrapper {
     display: flex;
-    gap: 15px;
     align-items: center;
 }
 
-.modal-profile_card-number:hover {
+.modal-profile_card-number {
     color: #0C0C0E;
+    width: 139px;
 }
 
 .card-number {
     color: #BB945F;
+    display: block;
+    width: 128px;
+    
+}
+
+.card-number:hover {
+    color: #0C0C0E;
+}
+
+.copy-btn {
+    cursor: pointer;
 }
 
 /* плавное затемнение экрана под модальным окном */
@@ -1878,6 +1891,12 @@ Modal Buy A Library Card
 @media screen and (max-width: 768px) {
     .bg-img {
         background-image: url(../assets/img/welcome-sm.jpg);
+    }
+    /* Фиксация блока с радио-кнопками */
+    .fixed-radio-buttons {
+        position: fixed;
+        top: 0;
+        width: 100%;
     }
 }
 

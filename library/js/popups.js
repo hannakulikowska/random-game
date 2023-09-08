@@ -421,49 +421,86 @@ async function formSend(e) {
     });
 
 
-    // ДО ПОКУПКИ LIBRARY CARD - вариант 1
-    // `BUY` => `BUY A LIBRARY CARD` MODAL
-    // buyButtons.forEach((button) => {
-    //   button.addEventListener("click", () => {
-    //     // Получение данных из Local Storage (если они есть)
-    //     const users = JSON.parse(localStorage.getItem("users"));
-    //     const userIndex = users.findIndex(user => user.email === registeredUserEmail);
+    /* ====================================
+    ЛОГИКА КНОПКИ `BUY` В FAVORITES - ПЕРВЫЙ ВХОД ПОЛЬЗОВАТЕЛЯ (РЕГИСТРАЦИЯ)
+    1. `BUY` => `OWN` + счетчик bookCount
+    2. `BUY` => `BUY A LIBRARY CARD` MODAL
+    ==================================== */
 
-    //     if (users[userIndex].libraryCardPurchased === false) {
-    //       modalBuyCard.showModal();
-    //       document.body.style.overflow = "hidden";
-    //     }
-    //   });
-    // });
-
-
-    // // ДО ПОКУПКИ LIBRARY CARD - вариант 2
-    // // `BUY` => `BUY A LIBRARY CARD` MODAL
     buyButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        modalBuyCard.showModal();
-        modalLogin.close();
-        document.body.style.overflow = "hidden";
+        const users = JSON.parse(localStorage.getItem('users'));
+        const userIndex = users.findIndex(user => user.email === registeredUserEmail);
+        // Проверка, что Library Card куплена пользователем
+        if (users[userIndex].libraryCardPurchased === true) {
+          // Проверка, что кнопка не имеет атрибута disabled (не была нажата ранее)
+          if (!button.hasAttribute("disabled")) {
+
+            // Получение информации о книге из DOM
+            const bookTitle = button.parentElement.querySelector(".book-title").textContent;
+            const bookAuthor = button.parentElement.querySelector(".book-author").textContent;
+
+            // Создание объекта (выбранная книга)
+            const selectedBook = {
+              title: bookTitle,
+              author: bookAuthor
+            };
+
+            // Добавление выбранной книги в массив книг пользователя
+            users[userIndex].rentedBooks = users[userIndex].rentedBooks || [];
+            users[userIndex].rentedBooks.push(selectedBook);
+                
+            // Добавление +1 в счетчике bookCount
+            users[userIndex].bookCount += 1;
+            // Обновление данных пользователя в Local Storage
+            localStorage.setItem("users", JSON.stringify(users));
+            
+            // Обновление счетчика Books в модалке My Profile
+            document.querySelector(".books_count").textContent = users[userIndex].bookCount;
+
+
+            // Закрытие модалки
+            modalBuyCard.close();
+            modalLogin.close();
+            document.body.style.overflow = "auto";
+            // Замена кнопки Buy на Own
+            button.textContent = "Own";
+            button.classList.remove("buy_btn");
+            button.classList.add("own_btn");
+            button.setAttribute("disabled", "");
+
+
+            // ВСТАВКА RENTED BOOKS LIST В MY PROFILE (РЕГИСТРАЦИЯ)
+
+            // Получение ul, куда надо вставить список выбранных книг
+            const rentedBooksList = document.querySelector(".rented-books_list");
+            // Получение списка выбранных книг пользователя из массива, полученного из Local Storage
+            const rentedBooks = users[userIndex].rentedBooks || [];
+            // Очистка текущего списка книг в html, если он уже существует (список обновляется при каждом клике на кнопку Buy)
+            rentedBooksList.innerHTML = "";
+            // Создание списка на основе данных из Local Storage и вставка их в DOM
+            rentedBooks.forEach(book => {
+              const listItem = document.createElement("li");
+              listItem.classList.add("rented-books_book");
+              listItem.textContent = `${book.title}, ${book.author}`;
+              rentedBooksList.appendChild(listItem);
+            });
+
+          }
+        }
+        // Если Library Card не куплена
+        else {
+          modalBuyCard.showModal();
+          modalLogin.close();
+          document.body.style.overflow = "hidden";
+        }
       });
     });
 
 
-    // Вариант 3
-    // const userRegistered = localStorage.getItem("visitCount");
-    // const modalBuyCard = document.querySelector(".modal-buycard");
-    // buyButtons.forEach((button) => {
-    //   button.addEventListener("click", () => {
-    //     // Проверяем, зарегистрирован ли пользователь
-    //     if (userRegistered === 1) {
-    //       modalBuyCard.showModal();
-    //       document.body.style.overflow = "hidden";
-    //     }
-    //   });
-    // });
-
-
     // "ПОКУПКА" КАРТЫ
-  
+    // ПЕРВЫЙ ВХОД ПОЛЬЗОВАТЕЛЯ (РЕГИСТРАЦИЯ)
+
     buyCardBtn.addEventListener("click", (e) => {
       e.preventDefault(); // Предотвращение отправки формы
       let error = validateFormBuyCard(formBuyCard); // Обязательна предварительная валидация формы
@@ -474,46 +511,26 @@ async function formSend(e) {
         closeBuyCardModal();
         console.log('User bought a library card');
         
-        // Внесение данных о покупке карты в Local Storage
+        // Получение всех данных из Local Storage
         const users = JSON.parse(localStorage.getItem('users'));
         
-        // Поиск индекса юзера
+        // Поиск индекса юзера в полученных данных массива users по емэилу
         const userIndex = users.findIndex(user => user.email === registeredUserEmail);
 
         // userIndex содержит индекс зарегистрированного пользователя в массиве users. Если индекс существует, то выполняется код
         if (userIndex !== -1) {
           console.log(`Индекс пользователя: ${userIndex}`);
-          // Обновление информации о текущем пользователе в массиве
+          // Присвоение нового значения libraryCardPurchased
           users[userIndex].libraryCardPurchased = true;
           // Обновление данных в Local Storage
           localStorage.setItem("users", JSON.stringify(users));
-
-          
-          // ЛОГИКА КНОПКИ BUY В FAVORITES: `BUY` => `OWN`
-          buyButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              modalBuyCard.close();
-              document.body.style.overflow = "auto";
-              // Замена кнопки Buy на Own
-              button.textContent = "Own";
-              button.classList.remove("buy_btn");
-              button.classList.add("own_btn");         
-            });
-          });
-
-
+      
         } else {
           console.log('Пользователь не найден');
-
-          
-
-
         }
       }
     });
 
-    
-    
   }
 }
 
@@ -668,10 +685,43 @@ function login() {
     localStorage.setItem('users', JSON.stringify(users));
     // Обновление счетчика Visits в модалке My Profile
     document.querySelector(".visits_count").textContent = user.visitCount;
+    // Обновление счетчика Books в модалке My Profile
+    document.querySelector(".books_count").textContent = user.bookCount;
 
-    // // Обновление счетчика зарезервированных книг
-    // const statisticsBooks = document.querySelector(".books_count");
-    // statisticsBooks.textContent = bookCount;
+
+    // СОЗДАНИЕ СПИСКА РАНЕЕ ЗАРЕЗЕРВИРОВАННЫХ КНИГ, ХРАНЯЩИХСЯ В LOCAL STORAGE и ЗАМЕНА КНОПКИ НА OWN
+    // Получение ul, куда надо вставить список выбранных книг
+    const rentedBooksList = document.querySelector(".rented-books_list");
+    // Получение списка выбранных книг пользователя из массива, полученного из Local Storage
+    const rentedBooks = user.rentedBooks || [];
+
+    // Перебор книг в HTML и последующая проверка есть ли книга в rentedBooks (зарезервирована ли она ранее)
+    buyButtons.forEach(button => {
+      const bookTitle = button.parentElement.querySelector(".book-title").textContent;
+      const bookAuthor = button.parentElement.querySelector(".book-author").textContent;
+      // Проверка есть ли книга в списке rentedBooks
+      const isBookOwned = rentedBooks.some(book => {
+        return book.title === bookTitle && book.author === bookAuthor;
+      });
+      // Если книга найдена, то кнопка Buy меняется на Оwn
+      if (isBookOwned) {
+        button.textContent = "Own";
+        button.classList.remove("buy_btn");
+        button.classList.add("own_btn");
+        button.setAttribute("disabled", "");
+      }
+    });
+    
+    // Очистка текущего списка книг в html, если он уже существует (список обновляется при каждом клике на кнопку Buy)
+    rentedBooksList.innerHTML = "";
+    // Создание списка на основе данных из Local Storage и вставка их в DOM
+    rentedBooks.forEach(book => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("rented-books_book");
+      listItem.textContent = `${book.title}, ${book.author}`;
+      rentedBooksList.appendChild(listItem);
+    });
+
 
     // Закрытие модалки Login и возвращение скролла для body
     modalLogin.close();
@@ -829,14 +879,58 @@ function login() {
     
     buyButtons.forEach((button) => {
       button.addEventListener("click", () => {
+        // Проверка, что Library Card куплена пользователем
         if (user.libraryCardPurchased === true) {
-          modalLogin.close();
-          document.body.style.overflow = "auto";
-          // Замена кнопки Buy на Own
-          button.textContent = "Own";
-          button.classList.remove("buy_btn");
-          button.classList.add("own_btn");
+          // Проверка, что кнопка не имеет атрибута disabled (не была нажата ранее)
+          if (!button.hasAttribute("disabled")) {
+            
+            // Получение информации о книге из DOM
+            const bookTitle = button.parentElement.querySelector(".book-title").textContent;
+            const bookAuthor = button.parentElement.querySelector(".book-author").textContent;
+
+            // Создание объекта (выбранная книга)
+            const selectedBook = {
+              title: bookTitle,
+              author: bookAuthor
+            };
+
+            // Добавление выбранной книги в массив книг пользователя
+            user.rentedBooks = user.rentedBooks || [];
+            user.rentedBooks.push(selectedBook);
+
+      
+            // Добавление 1 в счетчике bookCount
+            user.bookCount += 1;
+            localStorage.setItem("users", JSON.stringify(users));
+
+            // // Получение обновленных данных из Local Storage
+            // const users = JSON.parse(localStorage.getItem('users'));
+            // Обновление счетчика Books в модалке My Profile
+            document.querySelector(".books_count").textContent = user.bookCount;
+
+            // Закрытие модалки
+            modalLogin.close();
+            document.body.style.overflow = "auto";
+            // Замена кнопки Buy на Own
+            button.textContent = "Own";
+            button.classList.remove("buy_btn");
+            button.classList.add("own_btn");
+            button.setAttribute("disabled", "");
+
+            // Создание списка ранее зарезервированных книг, хранящихся в Local Storage
+            // Очистка текущего списка книг в html, если он уже существует (список обновляется при каждом клике на кнопку Buy)
+            rentedBooksList.innerHTML = "";
+            // Создание списка на основе данных из Local Storage и вставка их в DOM
+            rentedBooks.forEach(book => {
+              const listItem = document.createElement("li");
+              listItem.classList.add("rented-books_book");
+              listItem.textContent = `${book.title}, ${book.author}`;
+              rentedBooksList.appendChild(listItem);
+            });
+
+          }
         }
+        // Если Library Card не куплена
         else {
           modalBuyCard.showModal();
           modalLogin.close();
@@ -869,6 +963,7 @@ function logout() {
   profileIcon.style.display = 'block'; 
   menuLogout.classList.remove('menu-logout_visible');
   menuLogout.classList.add('menu-logout_hidden');
+  window.location.reload(); // Перезагрузка текущей страницы сайта
 }
 
 document.querySelector('.logout-button').addEventListener('click', logout);
@@ -945,11 +1040,11 @@ function checkButtonState() {
     }
   });
 
-  // Если форма валидна, активируется кнопка
+  // Если форма валидна - кнопка активна
   if (validateFormBuyCard) {
     buyCardBtn.removeAttribute("disabled");
   } else {
-    // Если форма не валидна, деактивируется кнопка
+    // Если форма не валидна - кнопка не активна
     buyCardBtn.setAttribute("disabled", "");
   }
 }
@@ -957,7 +1052,7 @@ function checkButtonState() {
 // Функция для ограничения ввода только цифрами
 function allowOnlyNumbers(event) {
   const input = event.target;
-  input.value = input.value.replace(/\D/g, ""); // Удаляется все, что не является цифрами
+  input.value = input.value.replace(/\D/g, ""); // Всё, что не является цифрами, не вводится в поле
 }
 
 // Добавление обработчика на изменение полей формы
@@ -979,7 +1074,7 @@ function cvcTest(input) {
   return input.value.length === 3;
 }
 function bankcardTest(input) {
-  return input.value.replace(/\s/g, "").length === 16; // удаление всех вводимых пробелов
+  return input.value.replace(/\s/g, "").length === 16; // удаление введенных пробелов
 }
 function expTest(input) {
   return input.value.length === 2;
