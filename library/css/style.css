@@ -649,7 +649,6 @@ a {
     margin-bottom: 20px;
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    display: flex;
     gap: 40px;
 }
 
@@ -1130,6 +1129,15 @@ Modal Buy A Library Card
     margin-bottom: 31px;
 }
 
+/* Фиксация блока с радио-кнопками */
+.fixed-radio-buttons {
+    background-color: var(--white-color);
+    position: fixed;
+    z-index: 33;
+    top: 0;
+    width: 100%;
+}
+
 .radio-item {
     flex-basis: 195px;
     text-align: left;
@@ -1508,27 +1516,67 @@ Modal Buy A Library Card
     box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
 }
 
+.white-bg_auth {
+    padding: 20px 20px 16px;
+}
+
 .gold-bg {
     background-color: var(--accent-color);
-    width: 560px;
+    width: 100%;
     height: 272px;
     flex-shrink: 0;
     padding: 20px 20px 25px;
     margin-bottom: 20px;
 }
+.gold-bg_auth {
+    margin-bottom: 0px;
+}
 
-.name_input, .card-number_input {
+.name_input, 
+.card-number_input {
     display: block;
-    font: var(--forum30);
-    color: var(--grey-color);
+    font-family: "Forum";
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: 0.6px;
+    color: var(--accent-color);
     width: 520px;
     height: 66px;
     background-color: var(--white-color);
     border-radius: 10px;
     flex-shrink: 0;
     border: none;
+    outline: none;
     padding: 8px 20px;
     margin-bottom: 25px;
+}
+
+.statistics_center {
+    justify-content: center;
+    gap: 20px;
+}
+
+.statictics_font,
+.visits_num,
+.bonuses_num,
+.books_num {
+    color: #000;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    text-transform: capitalize;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.statistics_gap {
+    gap: 2px;
 }
 
 .library-title {
@@ -1590,6 +1638,14 @@ Modal Buy A Library Card
     cursor: pointer;
 }
 
+.my-profile-btn {
+    color: #0C0C0E;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
 /* Library Cards section end */
 
 
@@ -1892,12 +1948,6 @@ Modal Buy A Library Card
     .bg-img {
         background-image: url(../assets/img/welcome-sm.jpg);
     }
-    /* Фиксация блока с радио-кнопками */
-    .fixed-radio-buttons {
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
 }
 
 @media screen and (max-width: 734px) {
@@ -1915,9 +1965,9 @@ Modal Buy A Library Card
 }
 
 @media screen and (max-width: 654px) {
-    .radio-list_flex {
+    /* .radio-list_flex {
         flex-direction: column;
-    }
+    } */
     .rss_item {
         font-size: 15px;
     }

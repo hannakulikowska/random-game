@@ -677,7 +677,7 @@ function login() {
     // ПОЛЬЗОВАТЕЛЬ ПОЛУЧИЛ ДОСТУП К СИСТЕМЕ
 
     console.log('User logged in successfully');
-
+    
     // Увеличение счетчика на 1 по конкретному пользователю при каждом входе в систему
     user.visitCount++;
     console.log(user.visitCount);
@@ -687,6 +687,9 @@ function login() {
     document.querySelector(".visits_count").textContent = user.visitCount;
     // Обновление счетчика Books в модалке My Profile
     document.querySelector(".books_count").textContent = user.bookCount;
+    // Обновление счетчиков в Digital Library Card
+    document.querySelector(".visits_num").textContent = user.visitCount;
+    document.querySelector(".books_num").textContent = user.bookCount;
 
 
     // СОЗДАНИЕ СПИСКА РАНЕЕ ЗАРЕЗЕРВИРОВАННЫХ КНИГ, ХРАНЯЩИХСЯ В LOCAL STORAGE и ЗАМЕНА КНОПКИ НА OWN
@@ -726,6 +729,57 @@ function login() {
     // Закрытие модалки Login и возвращение скролла для body
     modalLogin.close();
     document.body.style.overflow = "auto";
+
+
+    /* ================================= 
+    Изменение блока Digital Library Card
+    ================================= */
+    const nameInput = document.querySelector(".name_input");
+    const cardNumInput = document.querySelector(".card-number_input");
+    const getCardTitle = document.querySelector(".get-card_title");
+    const getCardText = document.querySelector(".get-card_text");
+    const getFormTitle = document.querySelector(".find-card_title");
+    const whiteBackground = document.querySelector(".white-bg");
+    const cardForm = document.querySelector(".gold-bg");
+    
+    const fullName = user.firstname + ' ' + user.lastname;
+    const cardNumber = user.cardNumber;
+
+    // Изменение значений полей input
+    nameInput.value = fullName;
+    cardNumInput.value = cardNumber;
+
+    // Поля input недоступны для ввода данных
+    nameInput.disabled = true;
+    cardNumInput.disabled = true;
+
+    whiteBackground.classList.add(".white-bg_auth");
+    cardForm.style.marginBottom = "10px";
+    getFormTitle.textContent = "Your Library card";
+    getCardTitle.textContent = "Visit your profile";
+    getCardText.textContent = "With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.";
+
+    // Создание элемента - кнопка "My Profile"
+    const profileButton = document.createElement("button");
+    profileButton.className = "sign-log_btn my-profile-btn";
+    profileButton.textContent = "Profile";
+
+    // Поиск родительского элемента кнопок "Sign Up" и "Log in"
+    const btnWrapper = document.querySelector('.btn_flex');
+
+    // Замена кнопки "Sign Up" и "Log in" на кнопку "My Profile"
+    btnWrapper.innerHTML = '';
+    btnWrapper.appendChild(profileButton);
+
+    // Скрытие кнопки "Check the card"
+    const checkCardBtn = document.querySelector('.check-card_btn');
+    checkCardBtn.style.display = 'none';
+
+    // Показать блок с иконками и счетчиками
+    const statisticsBlock = document.querySelector('.modal-profile_statistics');
+    statisticsBlock.classList.remove('hidden');
+
+    
 
     // Замена стандартной иконки пользователя на иконку с инициалами зарегистрированного ранее пользователя
     const profile = document.querySelector('.profile'); // Родительский контейнер
@@ -783,8 +837,17 @@ function login() {
     const initialsMyProfile = document.querySelector(".aside_initials");
     const fullnameMyProfile = document.querySelector(".aside_full-name");
     const copyBtn = document.querySelector(".copy-btn");
-    // const openModalRegisterSignup = document.querySelector(".signup_btn");
-
+    const myProfileBtn = document.querySelector('.my-profile-btn');
+    
+    
+    function setUserData() {
+      // Вставка инициалов юзера в модальное окно My Profile
+      initialsMyProfile.textContent = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+      // Вставка полного имени юзера в модальное окно My Profile
+      fullnameMyProfile.textContent = `${user.firstname} ${user.lastname}`;
+      // Вставка номера карты пользователя в My Profile
+      cardNumberMyProfile.textContent = `${user.cardNumber}`;
+    }
 
     // Открытие модального окна My Profile по клику на иконку юзера c инициалами и клику на ссылку меню My Profile
     openModalMyProfile.addEventListener("click", () => {
@@ -792,24 +855,17 @@ function login() {
       // Закрытие менюшки "My profile - Log Out"
       menuLogout.classList.remove('menu-logout_visible');
       menuLogout.classList.add('menu-logout_hidden');
-      // Вставка инициалов юзера в модальное окно My Profile
-      initialsMyProfile.textContent = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
-      // Вставка полного имени юзера в модальное окно My Profile
-      fullnameMyProfile.textContent = `${user.firstname} ${user.lastname}`;
-      // Вставка номера карты пользователя в My Profile
-      cardNumberMyProfile.textContent = `${user.cardNumber}`;
+      setUserData();
       // Блокировка скролла страницы при открытом модальном окне
       document.body.style.overflow = "hidden";
     });
 
-    // Открытие модального окна по клику на Sign Up в Library Cards
-    // openModalRegisterSignup.addEventListener("click", () => {
-    //   modalMyProfile.showModal();
-    //   profileMenuLogin.classList.remove('profile-menu_visible');
-    //   profileMenuLogin.classList.add('profile-menu_hidden');
-    //   // Функция сброса значений инпутов
-    //   resetModalInputs();
-    // });
+    // Открытие модального окна по клику на My Profile button в Digital Library Cards
+    myProfileBtn.addEventListener("click", () => {
+      modalMyProfile.showModal();
+      setUserData();
+      document.body.style.overflow = "hidden";
+    });
 
     // Закрытие модального окна по клику на кнопку закрытия
     closeModalMyProfile.addEventListener("click", () => {
@@ -1128,17 +1184,51 @@ function validateFormBuyCard(formBuyCard) {
 
 
 
+/* =================================
+ПРИЛИПАНИЕ РАДИО-КНОПОК
+================================= */
 
+const favorites = document.querySelector(".favorites");
+const radioButtons = document.querySelector(".radio-list_flex");
 
+// Установка высоты, на которой будет происходить первое прилипание
+const threshold = radioButtons.offsetTop;
+// Высота блока radioButtons
+const radioButtonsHeight = radioButtons.clientHeight;
+// Высота блока favorites
+const favoritesHeight = favorites.clientHeight;
+// Высота видимой области окна
+const windowHeight = window.innerHeight;
 
+// Функция для скролла
+function handleScroll() {
+  if (window.innerWidth <= 768) {
+    if (window.scrollY >= threshold) {
+      // Прилипание
+      radioButtons.classList.add("fixed-radio-buttons");
+      // Проверка, достиг ли пользователь конца блока favorites
+      if (window.scrollY + windowHeight >= threshold + favoritesHeight + 600) {
+        // Отмена прилипания в момент достижения конца блока favorites
+        radioButtons.classList.remove("fixed-radio-buttons");
+      }
+    } else {
+      // Отмена прилипания
+      radioButtons.classList.remove("fixed-radio-buttons");
+    }
+  } else {
+    // Если ширина экрана больше 768px, не применять прилипание
+    radioButtons.classList.remove("fixed-radio-buttons");
+  }
+}
 
-//  N   // После покупки карты библиотеки:
-//  1   // кнопки Buy меняются на Own при клике если у пользователя libraryCardPurchased = true в Local Storage
-//  2   // купленные книги добавляются в список Rented books
-//  3   // включается счетчик bookCount (данные сохраняются в Local Storage и выводятся в модалке My Profile)
+// Обработчик события скролла
+window.addEventListener("scroll", handleScroll);
 
+// Обработчик события изменения размера окна браузера
+window.addEventListener("resize", handleScroll);
 
-
+// Вызов функции
+handleScroll();
 
 
 
