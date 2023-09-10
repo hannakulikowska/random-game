@@ -254,6 +254,15 @@ function formValidate(formRegister) {
 РЕГИСТРАЦИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ
 ============================ */
 
+// Функция для проверки, есть ли уже такой email в Local Storage
+function isEmailAlreadyRegistered(email) {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Проверка есть ли email в массиве users
+  return users.some(user => user.email === email);
+}
+
+
 // Инициализация функции отправки данных формы для регистрации пользователя в Local Storage по клику на кнопку submit
 const formRegister = document.getElementById("register");
 // при отправке формы (submit), осуществляется переход к функции formSend
@@ -263,11 +272,10 @@ let registeredUserEmail; // Объявление переменной для х�
 
 
 // Функция отправки данных формы регистрации 
-async function formSend(e) {
+function formSend(e) {
   e.preventDefault();
 
   let error = formValidate(formRegister);
-
 
   // Отправка и сохранение в Local Storage данных регистрируемых пользователей
   if (error === 0) {
@@ -280,6 +288,12 @@ async function formSend(e) {
     let visitCount = 1;
     let bookCount = 0;
     let libraryCardPurchased = false;
+
+    if (isEmailAlreadyRegistered(email)) {
+      // Если email уже зарегистрирован
+      console.log('A user with such email already exists.');
+      return;
+    }
 
     // Сохранение email зарегистрированного пользователя в переменной
     registeredUserEmail = email;
@@ -363,7 +377,6 @@ async function formSend(e) {
     const initialsMyProfile = document.querySelector(".aside_initials");
     const fullnameMyProfile = document.querySelector(".aside_full-name");
     const copyBtn = document.querySelector('.copy-btn');
-    // const openModalRegisterSignup = document.querySelector(".signup_btn");
 
 
     // Открытие модального окна My Profile по клику на иконку юзера c инициалами и клику на ссылку меню My Profile
@@ -459,17 +472,6 @@ async function formSend(e) {
             document.querySelector(".books_count").textContent = users[userIndex].bookCount;
 
 
-            // Закрытие модалки
-            modalBuyCard.close();
-            modalLogin.close();
-            document.body.style.overflow = "auto";
-            // Замена кнопки Buy на Own
-            button.textContent = "Own";
-            button.classList.remove("buy_btn");
-            button.classList.add("own_btn");
-            button.setAttribute("disabled", "");
-
-
             // ВСТАВКА RENTED BOOKS LIST В MY PROFILE (РЕГИСТРАЦИЯ)
 
             // Получение ul, куда надо вставить список выбранных книг
@@ -485,6 +487,17 @@ async function formSend(e) {
               listItem.textContent = `${book.title}, ${book.author}`;
               rentedBooksList.appendChild(listItem);
             });
+
+            
+            // Закрытие модалки
+            modalBuyCard.close();
+            modalLogin.close();
+            document.body.style.overflow = "auto";
+            // Замена кнопки Buy на Own
+            button.textContent = "Own";
+            button.classList.remove("buy_btn");
+            button.classList.add("own_btn");
+            button.setAttribute("disabled", "");
 
           }
         }
@@ -734,14 +747,13 @@ function login() {
     /* ================================= 
     Изменение блока Digital Library Card
     ================================= */
+    const formCheckCard = document.querySelector(".gold-bg");
     const nameInput = document.querySelector(".name_input");
     const cardNumInput = document.querySelector(".card-number_input");
     const getCardTitle = document.querySelector(".get-card_title");
     const getCardText = document.querySelector(".get-card_text");
     const getFormTitle = document.querySelector(".find-card_title");
-    const whiteBackground = document.querySelector(".white-bg");
-    const cardForm = document.querySelector(".gold-bg");
-    
+        
     const fullName = user.firstname + ' ' + user.lastname;
     const cardNumber = user.cardNumber;
 
@@ -753,8 +765,7 @@ function login() {
     nameInput.disabled = true;
     cardNumInput.disabled = true;
 
-    whiteBackground.classList.add(".white-bg_auth");
-    cardForm.style.marginBottom = "10px";
+    formCheckCard.style.marginBottom = "10px";
     getFormTitle.textContent = "Your Library card";
     getCardTitle.textContent = "Visit your profile";
     getCardText.textContent = "With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.";
@@ -955,24 +966,17 @@ function login() {
             user.rentedBooks.push(selectedBook);
 
       
-            // Добавление 1 в счетчике bookCount
+            // Добавление 1 в счетчике bookCount Local Storage
             user.bookCount += 1;
             localStorage.setItem("users", JSON.stringify(users));
 
-            // // Получение обновленных данных из Local Storage
-            // const users = JSON.parse(localStorage.getItem('users'));
+        
             // Обновление счетчика Books в модалке My Profile
             document.querySelector(".books_count").textContent = user.bookCount;
+            // Обновление счетчика Books в Difital Library Card
+            document.querySelector(".books_num").textContent = user.bookCount;
 
-            // Закрытие модалки
-            modalLogin.close();
-            document.body.style.overflow = "auto";
-            // Замена кнопки Buy на Own
-            button.textContent = "Own";
-            button.classList.remove("buy_btn");
-            button.classList.add("own_btn");
-            button.setAttribute("disabled", "");
-
+            
             // Создание списка ранее зарезервированных книг, хранящихся в Local Storage
             // Очистка текущего списка книг в html, если он уже существует (список обновляется при каждом клике на кнопку Buy)
             rentedBooksList.innerHTML = "";
@@ -983,6 +987,16 @@ function login() {
               listItem.textContent = `${book.title}, ${book.author}`;
               rentedBooksList.appendChild(listItem);
             });
+
+
+            // Закрытие модалки
+            modalLogin.close();
+            document.body.style.overflow = "auto";
+            // Замена кнопки Buy на Own
+            button.textContent = "Own";
+            button.classList.remove("buy_btn");
+            button.classList.add("own_btn");
+            button.setAttribute("disabled", "");
 
           }
         }
@@ -1024,7 +1038,6 @@ function logout() {
 
 document.querySelector('.logout-button').addEventListener('click', logout);
 // КОНЕЦ КОДА
-
 
 
 
@@ -1084,103 +1097,133 @@ modalBuyCard.addEventListener("click", (e) => {
 
 const formBuyCard = document.getElementById("modal-buycard_form");
 const buyCardBtn = document.querySelector(".modal-buycard_buy-button");
+const bankcard = document.getElementById("bankcard");
+const cvc = document.getElementById("cvc");
+const monthInput = document.getElementById("monthInput");
+const yearInput = document.getElementById("yearInput");
 
-// Функция для проверки, должна ли кнопка быть активной
-function checkButtonState() {
-  const inputs = formBuyCard.querySelectorAll("._required");
-  let validateFormBuyCard = true;
 
-  inputs.forEach((input) => {
-    if (input.value.trim() === "") {
-      validateFormBuyCard = false;
-    }
-  });
-
-  // Если форма валидна - кнопка активна
-  if (validateFormBuyCard) {
-    buyCardBtn.removeAttribute("disabled");
-  } else {
-    // Если форма не валидна - кнопка не активна
-    buyCardBtn.setAttribute("disabled", "");
+// Проверка введенного номера карты
+function bankcardTest(event) {
+  const input = event.target;
+  input.value = input.value.replace(/[^0-9 ]/g, ""); // Всё, что не является цифрами или пробелами, не вводится в поле
+  if (input.value.replace(/\s/g, "").length === 16) {
+    return true;
+  }
+  else {
+    return false;
   }
 }
+// Добавление обработчика для поля номера карты
+bankcard.addEventListener("input", bankcardTest);
 
-// Функция для ограничения ввода только цифрами
-function allowOnlyNumbers(event) {
+
+// Проверка введенного CVC
+function cvcTest(event) {
   const input = event.target;
   input.value = input.value.replace(/\D/g, ""); // Всё, что не является цифрами, не вводится в поле
+  if (input.value.length === 3) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
+// Добавление обработчика для поля CVC
+cvc.addEventListener("input", cvcTest);
 
-// Добавление обработчика на изменение полей формы
-formBuyCard.addEventListener("input", checkButtonState);
 
-// Добавление обработчика для ограничения ввода только цифрами
-const numInputs = formBuyCard.querySelectorAll("._num");
 
-numInputs.forEach((input) => {
-  input.addEventListener("input", allowOnlyNumbers);
+// Обработчик для поля ввода месяца
+monthInput.addEventListener("input", function() {
+  // Заменяем все символы, кроме цифр, на пустую строку
+  this.value = this.value.replace(/\D/g, "");
 });
 
-// Инициализация состояния кнопки при загрузке модального окна
-checkButtonState();
+// Обработчик для поля ввода года
+yearInput.addEventListener("input", function() {
+  // Заменяем все символы, кроме цифр, на пустую строку
+  this.value = this.value.replace(/\D/g, "");
+});
 
+// Проверка полей ввода срока действия карты
+function expTest(monthInput, yearInput) {
+  const currentYear = new Date().getFullYear() % 100; // Две последние цифры текущего года
+  const month = parseInt(monthInput.value, 10);
+  const year = parseInt(yearInput.value, 10);
 
+  if (isNaN(month) || isNaN(year)) {
+    // Проверка валидности цифр в инпутах
+    return false;
+  }
 
-function cvcTest(input) {
-  return input.value.length === 3;
+  if (year < currentYear || (year === currentYear && month < new Date().getMonth() + 1)) {
+    return false;
+  }
+
+  if (month < 1 || month > 12 || (year === currentYear && month > 12)) {
+    return false;
+  }
+
+  return true;
 }
-function bankcardTest(input) {
-  return input.value.replace(/\s/g, "").length === 16; // удаление введенных пробелов
-}
-function expTest(input) {
-  return input.value.length === 2;
-}
+
 
 
 function validateFormBuyCard(formBuyCard) {
-  let error = 0;
-  let formReq = document.querySelectorAll("._required");
-
-  for (let index = 0; index < formReq.length; index++) {
-    const input = formReq[index];
+  // Сброс ошибок перед новой проверкой
+  formBuyCard.querySelectorAll("._required").forEach(function (input) {
     formRemoveError(input);
+  });
 
-    if (input.classList.contains("_cvc")) {
-      if (!cvcTest(input)) {
-        formAddError(input);
-        error++;
-      }
-    } else if (input.classList.contains("_bankcard")) {
-      if (!bankcardTest(input)) {
-        formAddError(input);
-        error++;
-      }
-    } else if (input.classList.contains("_exp1") || input.classList.contains("_exp2")) {
-      if (!expTest(input)) {
-        formAddError(input);
-        error++;
-      }
-    } else {
-      if (input.value.trim() === "") {
-        formAddError(input);
-        error++;
-      }
+  // Проверка номера карты
+  if (!bankcardTest({ target: bankcard })) {
+    formAddError(bankcard);
+  }
+
+  // Проверка CVC
+  if (!cvcTest({ target: cvc })) {
+    formAddError(cvc);
+  }
+
+  // Проверка срока действия карты
+  if (!expTest(monthInput, yearInput)) {
+    formAddError(monthInput);
+    formAddError(yearInput);
+  }
+
+  // Проверка обязательных полей
+  formBuyCard.querySelectorAll("._required").forEach(function (input) {
+    if (input.value.trim() === "") {
+      formAddError(input);
     }
-  }
+  });
 
-  // Если успешная валидация, удаляются классы _error
-  if (error === 0) {
-    let inputs = formBuyCard.querySelectorAll("._required");
-    // const buyCardBtn = document.querySelector(".modal-buycard_buy-button");
-    
-    // Удаление класса _error
-    inputs.forEach((input) => {
-      formRemoveError(input);
-    });
-  }
-
-  return error;
+  // Подсчет общего числа ошибок
+  const errorInputs = formBuyCard.querySelectorAll("._error");
+  return errorInputs.length;
 }
+
+
+
+formBuyCard.addEventListener("submit", function (e) {
+  // Проверка всех обязательных полей на пустоту
+  const requiredInputs = formBuyCard.querySelectorAll("._required");
+  let hasEmptyFields = false;
+
+  requiredInputs.forEach(function (input) {
+    if (input.value.trim() === "") {
+      formAddError(input);
+      hasEmptyFields = true;
+    }
+  });
+
+  // Если есть пустые поля, отменяется отправка формы и из функции выходим
+  if (hasEmptyFields) {
+    e.preventDefault(); // Отмена отправки формы
+    return;
+  }
+});
 
 
 
@@ -1229,6 +1272,60 @@ window.addEventListener("resize", handleScroll);
 
 // Вызов функции
 handleScroll();
+
+
+
+
+/* ================================================================
+ПОКАЗ ДАННЫХ КАРТЫ ДЛЯ ЗАРЕГИСТРИРОВАННОГО НО НЕЗАЛОГИНЕННОГО ЮЗЕРА
+================================================================ */
+
+// Слушатель события на кнопке Check the card
+document.querySelector(".check-card_btn").addEventListener("click", function() {
+  // Получение элементов формы и контейнера с формой
+  const formCheckCard = document.querySelector(".gold-bg");
+  const nameInput = document.querySelector(".name_input");
+  const cardNumInput = document.querySelector(".card-number_input");
+
+  const users = JSON.parse(localStorage.getItem('users'));
+
+  const user = users.find((u) => {
+    return u.cardNumber === cardNumInput.value;
+  });
+
+  const fullName = user.firstname + ' ' + user.lastname;
+
+  if (user && nameInput.value === fullName) {
+    // Форма становится недоступна для редактирования
+    formCheckCard.querySelectorAll("input").forEach(function(input) {
+        input.setAttribute("disabled", "true");
+    });
+
+    // Скрытие кнопки (this) - на ней стоит слушатель события
+    this.style.display = "none";
+
+    // Показать блок с иконками и счетчиками
+    const statisticsBlock = document.querySelector('.modal-profile_statistics');
+    statisticsBlock.classList.remove('hidden');
+
+    document.querySelector(".visits_num").textContent = user.visitCount;
+    document.querySelector(".books_num").textContent = user.bookCount;
+
+    // Функция срабатывает с задержкой на 10 секунд (10000 миллисекунд) после клика на кнопке Check the card
+    setTimeout(function() {
+      // Возвращение формы в прежнее состояние
+      formCheckCard.querySelectorAll("input").forEach(function(input) {
+        
+        input.value = '';
+        input.removeAttribute("disabled");
+        
+      });
+      statisticsBlock.classList.add('hidden');
+      document.querySelector(".check-card_btn").style.display = "block";
+    }, 10000); // 10 секунд
+  }
+});
+
 
 
 
