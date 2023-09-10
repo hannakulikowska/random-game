@@ -1291,7 +1291,7 @@ const windowHeight = window.innerHeight;
 
 // Функция для скролла
 function handleScroll() {
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 1260) {
     if (window.scrollY >= threshold) {
       // Прилипание
       radioButtons.classList.add("fixed-radio-buttons");

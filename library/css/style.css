@@ -1186,23 +1186,43 @@ Modal Buy A Library Card
     transition: .2s;
 }
 
-/* Появление соответствующего сезона книг по клику на радио-кнопке */
-.invisible {
-    display: none;
-    pointer-events: none;
+.favorites_books-container {
+    position: relative;
+    max-width: 1400px;
+    height: 1150px;
 }
-.favorites-winter,
-.favorites-spring,
-.favorites-summer,
-.favorites-autumn {
-    animation: fade-in 5s;
+.books-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.books-wrapper.visible-books {
+    opacity: 1;
+    z-index: 31;
 }
 
-.favorites_flex {
+
+/* плавная анимация появления и исчезновения блоков */
+
+/* Добавляем класс для видимых блоков */
+.visible-books {
+    opacity: 1;
+    /* Полностью видимый */
+    pointer-events: auto;
+    /* Реагирует на мышь */
+}
+
+
+.books-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 40px;
+    list-style: none;
 }
 
 .favorites_article-wrapper {
@@ -1794,7 +1814,6 @@ Modal Buy A Library Card
         
     }
     .about-carret-right {
-        /* display: inline-block; */
         background-color: transparent;
         border: none;
     }
@@ -1818,8 +1837,11 @@ Modal Buy A Library Card
         display: flex;
     }
 
-    .favorites_flex {
+    .books-list {
         justify-content: center;
+    }
+    .favorites_books-container {
+        height: 2340px;
     }
 }
 
@@ -1886,9 +1908,6 @@ Modal Buy A Library Card
     }
     .menu {
         gap: 40px;
-    }
-    .profile-initials {
-        /* right: 105px; */
     }
     .profile-icon_above {
         position: fixed;
