@@ -1403,9 +1403,7 @@ window.addEventListener('keydown', (e) => {
 
 // })();
 
-// Greeting
+// My opinion
 
-// console.log(`Library Часть 3:
-// Done!
-// `);
+console.log(`Library Part 3: Done!`);
 
