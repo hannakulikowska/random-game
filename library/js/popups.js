@@ -318,8 +318,9 @@ function formSend(e) {
 
     /* ======================
     Пользователь уже внесен в базу Local Storage:
-    Cтандартная иконка пользователя заменяется на иконку с инициалами пользователя
     ====================== */
+
+    // Cтандартная иконка пользователя заменяется на иконку с инициалами пользователя
           
     const profile = document.querySelector('.profile'); // Родительский контейнер
     // const profileIcon = document.querySelector('.profile-icon'); // Стандартная иконка юзера
@@ -329,7 +330,6 @@ function formSend(e) {
     profileIcon.style.display = 'none'; // Скрытие стандартной иконки юзера
     initialsContainer.style.title = `${firstname} ${lastname}`;
     profile.appendChild(initialsContainer); // Добавление блока с инициалами в родительский контейнер
-    
 
 
     // Вставка номера карты пользователя в заголовке меню Logout & My profile после первого входа в систему - после регистрации 
@@ -365,6 +365,52 @@ function formSend(e) {
     });
     
     
+    /* ================================= 
+    Изменение блока Digital Library Card
+    ================================= */
+    const formCheckCard = document.querySelector(".gold-bg");
+    const nameInput = document.querySelector(".name_input");
+    const cardNumInput = document.querySelector(".card-number_input");
+    const getCardTitle = document.querySelector(".get-card_title");
+    const getCardText = document.querySelector(".get-card_text");
+    const getFormTitle = document.querySelector(".find-card_title");
+        
+    const fullName = firstname + ' ' + lastname;
+
+    // Изменение значений полей input
+    nameInput.value = fullName;
+    cardNumInput.value = cardNumber;
+
+    // Поля input недоступны для ввода данных
+    nameInput.disabled = true;
+    cardNumInput.disabled = true;
+
+    formCheckCard.style.marginBottom = "10px";
+    getFormTitle.textContent = "Your Library card";
+    getCardTitle.textContent = "Visit your profile";
+    getCardText.textContent = "With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.";
+
+    // Создание элемента - кнопка "Profile"
+    const profileButton = document.createElement("button");
+    profileButton.className = "sign-log_btn my-profile-btn";
+    profileButton.textContent = "Profile";
+
+    // Поиск родительского элемента кнопок "Sign Up" и "Log in"
+    const btnWrapper = document.querySelector('.btn_flex');
+
+    // Замена кнопки "Sign Up" и "Log in" на кнопку "My Profile"
+    btnWrapper.innerHTML = '';
+    btnWrapper.appendChild(profileButton);
+
+    // Скрытие кнопки "Check the card"
+    const checkCardBtn = document.querySelector('.check-card_btn');
+    checkCardBtn.style.display = 'none';
+
+    // Показать блок с иконками и счетчиками
+    const statisticsBlock = document.querySelector('.modal-profile_statistics');
+    statisticsBlock.classList.remove('hidden');
+
+
     /* ======================
     ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА "My profile" (ТАМ ГДЕ СОДЕРЖАТСЯ ВСЕ ДАННЫЕ О ПРОФАЙЛЕ ЮЗЕРА)
     ПЕРВЫЙ ВХОД ПОЛЬЗОВАТЕЛЯ (РЕГИСТРАЦИЯ)
@@ -770,7 +816,7 @@ function login() {
     getCardTitle.textContent = "Visit your profile";
     getCardText.textContent = "With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.";
 
-    // Создание элемента - кнопка "My Profile"
+    // Создание элемента - кнопка "Profile"
     const profileButton = document.createElement("button");
     profileButton.className = "sign-log_btn my-profile-btn";
     profileButton.textContent = "Profile";
@@ -1323,6 +1369,15 @@ document.querySelector(".check-card_btn").addEventListener("click", function() {
       statisticsBlock.classList.add('hidden');
       document.querySelector(".check-card_btn").style.display = "block";
     }, 10000); // 10 секунд
+  }
+});
+
+
+
+// Обработчик события keydown для отслеживания нажатия клавиши Esc
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.body.style.overflow = "auto";
   }
 });
 
