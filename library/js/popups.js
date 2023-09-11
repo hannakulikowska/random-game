@@ -411,6 +411,8 @@ function formSend(e) {
     statisticsBlock.classList.remove('hidden');
 
 
+     
+
     /* ======================
     ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА "My profile" (ТАМ ГДЕ СОДЕРЖАТСЯ ВСЕ ДАННЫЕ О ПРОФАЙЛЕ ЮЗЕРА)
     ПЕРВЫЙ ВХОД ПОЛЬЗОВАТЕЛЯ (РЕГИСТРАЦИЯ)
@@ -516,6 +518,7 @@ function formSend(e) {
             
             // Обновление счетчика Books в модалке My Profile
             document.querySelector(".books_count").textContent = users[userIndex].bookCount;
+            document.querySelector(".books_num").textContent = users[userIndex].bookCount;
 
 
             // ВСТАВКА RENTED BOOKS LIST В MY PROFILE (РЕГИСТРАЦИЯ)
