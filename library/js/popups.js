@@ -328,7 +328,7 @@ function formSend(e) {
     initialsContainer.classList.add('initials-icon'); // Добавление класса созданному блоку
     initialsContainer.textContent = `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}`; // Вставка инициалов в блок
     profileIcon.style.display = 'none'; // Скрытие стандартной иконки юзера
-    initialsContainer.style.title = `${firstname} ${lastname}`;
+    initialsContainer.setAttribute('title', `${firstname} ${lastname}`);
     profile.appendChild(initialsContainer); // Добавление блока с инициалами в родительский контейнер
 
 
@@ -849,7 +849,7 @@ function login() {
     initialsContainer.classList.add('initials-icon'); // Добавление класса созданному блоку
     initialsContainer.textContent = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`; // Вставка инициалов в блок
     profileIcon.style.display = 'none'; // Скрытие стандартной иконки юзера
-    initialsContainer.style.title = `${user.firstname} ${user.lastname}`;
+    initialsContainer.setAttribute('title', `${user.firstname} ${user.lastname}`);
     profile.appendChild(initialsContainer); // Добавление блока с инициалами в родительский контейнер
 
 

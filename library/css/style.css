@@ -168,6 +168,24 @@ a {
     line-height: 20px;
 }
 
+/* Стили для всплывающей подсказки title */
+/* .initials-icon::before {
+    content: attr(title);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+} */
+
+/* Cтили для отображения подсказки при наведении */
+.initials-icon:hover::before {
+    display: block;
+    /* Расположение подсказки */
+    top: -30px;
+    left: 0;
+}
 
 .profile-icon {
     width: 100%;
