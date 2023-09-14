@@ -1937,6 +1937,12 @@ Modal Buy A Library Card
     .menu-right_flex {
         margin-left: auto;
     }
+    .radio-list_flex {
+        position: sticky;
+        top: 0;
+        z-index: 99;
+        background-color: white;
+    }
     .library-card {
         padding: 30px 0px 40px;
     }
@@ -1999,9 +2005,6 @@ Modal Buy A Library Card
 }
 
 @media screen and (max-width: 654px) {
-    /* .radio-list_flex {
-        flex-direction: column;
-    } */
     .rss_item {
         font-size: 15px;
     }
