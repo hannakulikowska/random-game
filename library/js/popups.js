@@ -699,6 +699,9 @@ closeModalLogin.addEventListener("click", () => {
     modalLogin.classList.remove("closing-animation");
     // Включение скролла страницы при закрытии модального окна
     document.body.style.overflow = "auto";
+    modalLogin.querySelectorAll("input").forEach((input) => {
+      input.value = '';
+    });
   }, { once: true });
 });
 
@@ -707,9 +710,17 @@ modalLogin.addEventListener("click", (e) => {
     modalLogin.close();
     // Включение скролла страницы при закрытии модального окна
     document.body.style.overflow = "auto";
+    modalLogin.querySelectorAll("input").forEach((input) => {
+      input.value = '';
+    });
   }
 });
 
+
+// Reset - сброс заполненных полей модального окна Login
+function resetModalInputs() {
+  
+}
 
 
 
@@ -791,6 +802,9 @@ function login() {
     // Закрытие модалки Login и возвращение скролла для body
     modalLogin.close();
     document.body.style.overflow = "auto";
+    modalLogin.querySelectorAll("input").forEach((input) => {
+      input.value = '';
+    });
 
 
     /* ================================= 
@@ -1041,6 +1055,9 @@ function login() {
             // Закрытие модалки
             modalLogin.close();
             document.body.style.overflow = "auto";
+            modalLogin.querySelectorAll("input").forEach((input) => {
+              input.value = '';
+            });
             // Замена кнопки Buy на Own
             button.textContent = "Own";
             button.classList.remove("buy_btn");
