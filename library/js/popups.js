@@ -1275,56 +1275,6 @@ formBuyCard.addEventListener("submit", function (e) {
 });
 
 
-
-/* =================================
-ПРИЛИПАНИЕ РАДИО-КНОПОК
-================================= */
-
-const favorites = document.querySelector(".favorites");
-const radioButtons = document.querySelector(".radio-list_flex");
-
-// Установка высоты, на которой будет происходить первое прилипание
-const threshold = radioButtons.offsetTop;
-// Высота блока radioButtons
-const radioButtonsHeight = radioButtons.clientHeight;
-// Высота блока favorites
-const favoritesHeight = favorites.clientHeight;
-// Высота видимой области окна
-const windowHeight = window.innerHeight;
-
-// Функция для скролла
-function handleScroll() {
-  if (window.innerWidth <= 1260) {
-    if (window.scrollY >= threshold) {
-      // Прилипание
-      radioButtons.classList.add("fixed-radio-buttons");
-      // Проверка, достиг ли пользователь конца блока favorites
-      if (window.scrollY + windowHeight >= threshold + favoritesHeight + 600) {
-        // Отмена прилипания в момент достижения конца блока favorites
-        radioButtons.classList.remove("fixed-radio-buttons");
-      }
-    } else {
-      // Отмена прилипания
-      radioButtons.classList.remove("fixed-radio-buttons");
-    }
-  } else {
-    // Если ширина экрана больше 768px, не применять прилипание
-    radioButtons.classList.remove("fixed-radio-buttons");
-  }
-}
-
-// Обработчик события скролла
-window.addEventListener("scroll", handleScroll);
-
-// Обработчик события изменения размера окна браузера
-window.addEventListener("resize", handleScroll);
-
-// Вызов функции
-handleScroll();
-
-
-
-
 /* ================================================================
 ПОКАЗ ДАННЫХ КАРТЫ ДЛЯ ЗАРЕГИСТРИРОВАННОГО НО НЕЗАЛОГИНЕННОГО ЮЗЕРА
 ================================================================ */
