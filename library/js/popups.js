@@ -499,7 +499,7 @@ function formSend(e) {
 
             // Получение информации о книге из DOM
             const bookTitle = button.parentElement.querySelector(".book-title").textContent;
-            const bookAuthor = button.parentElement.querySelector(".book-author").textContent;
+            const bookAuthor = button.parentElement.querySelector(".book-author").textContent.replace('By ', '');
 
             // Создание объекта (выбранная книга)
             const selectedBook = {
@@ -705,6 +705,7 @@ closeModalLogin.addEventListener("click", () => {
   }, { once: true });
 });
 
+
 modalLogin.addEventListener("click", (e) => {
   if (e.target.nodeName === "DIALOG") {
     modalLogin.close();
@@ -774,7 +775,7 @@ function login() {
     // Перебор книг в HTML и последующая проверка есть ли книга в rentedBooks (зарезервирована ли она ранее)
     buyButtons.forEach(button => {
       const bookTitle = button.parentElement.querySelector(".book-title").textContent;
-      const bookAuthor = button.parentElement.querySelector(".book-author").textContent;
+      const bookAuthor = button.parentElement.querySelector(".book-author").textContent.replace('By ', '');
       // Проверка есть ли книга в списке rentedBooks
       const isBookOwned = rentedBooks.some(book => {
         return book.title === bookTitle && book.author === bookAuthor;
@@ -959,6 +960,7 @@ function login() {
       }, { once: true });
     });
 
+
     modalMyProfile.addEventListener("click", (e) => {
       if (e.target.nodeName === "DIALOG") {
         modalMyProfile.close();
@@ -1016,7 +1018,7 @@ function login() {
             
             // Получение информации о книге из DOM
             const bookTitle = button.parentElement.querySelector(".book-title").textContent;
-            const bookAuthor = button.parentElement.querySelector(".book-author").textContent;
+            const bookAuthor = button.parentElement.querySelector(".book-author").textContent.replace('By ', '');
 
             // Создание объекта (выбранная книга)
             const selectedBook = {
