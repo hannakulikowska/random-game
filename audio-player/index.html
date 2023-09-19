@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Audio Player Project">
+  <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/ico/favicon.ico">
+  <title>Audio Player</title>
+  <script src="https://kit.fontawesome.com/af4c804702.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <main>
+    <section class="wrapper">
+      <div class="music-player">
+        <img class="song-img" src="assets/img/this-is-it.jpg" alt="poster">
+        <h1 class="song-name">This is it</h1>
+        <p class="singer">Michael Jackson</p>
+        <!-- <audio controls>
+          <source src="assets/audio/michael-jackson_-_this-is-it.mp3" type="audio/mpeg">
+        </audio> -->
+        <input type="range" value="0" id="progress">
+
+        <div class="controls__wrapper">
+          
+            <svg width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+              <g id="SVGRepo_iconCarrier">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="add" fill="#ffffff" transform="translate(128.000000, 128.000000)">
+                    <polygon id="Path"
+                      points="0 0 0 256 42.6666667 256 42.6666667 128.00512 256 256 256 0 42.6666667 127.989547 42.6666667 0">
+                    </polygon>
+                  </g>
+                </g>
+              </g>
+            </svg>
+
+          <div class="play-wrapper">
+            <svg class="play" width="30px" height="30px" viewBox="-0.5 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Dribbble-Light-Preview" transform="translate(-427.000000, -3765.000000)" fill="#000000">
+                  <g id="icons" transform="translate(56.000000, 160.000000)">
+                    <polygon class="play-fill" id="play-[#1001]" points="371 3605 371 3613 378 3609">
+                    </polygon>
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <!-- <svg class="pause" width="30px" height="30px" viewBox="-1 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+              <g id="SVGRepo_iconCarrier">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Dribbble-Light-Preview" transform="translate(-67.000000, -3765.000000)" fill="#ffffff">
+                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                      <path d="M11,3613 L13,3613 L13,3605 L11,3605 L11,3613 Z M15,3613 L17,3613 L17,3605 L15,3605 L15,3613 Z"
+                        id="pause-[#ffffff]"> </path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg> -->
+          </div>
+
+          <svg width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" transform="rotate(180)" stroke="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+            <g id="SVGRepo_iconCarrier">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="add" fill="#ffffff" transform="translate(128.000000, 128.000000)">
+                  <polygon id="Path"
+                    points="0 0 0 256 42.6666667 256 42.6666667 128.00512 256 256 256 0 42.6666667 127.989547 42.6666667 0">
+                  </polygon>
+                </g>
+              </g>
+            </g>
+          </svg>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- <script>
+    var button = document.getElementById("myButton");
+
+    button.addEventListener("click", function () {
+      button.classList.toggle("play");
+    });
+  </script> -->
+</body>
+</html>
