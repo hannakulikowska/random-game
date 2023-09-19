@@ -18,19 +18,20 @@
 
 <body>
   <main>
-    <section class="wrapper">
+    <section class="section">
       <div class="music-player">
         <img class="song-img" src="assets/img/this-is-it.jpg" alt="poster">
         <h1 class="song-name">This is it</h1>
         <p class="singer">Michael Jackson</p>
-        <!-- <audio controls>
+        <audio id="song">
           <source src="assets/audio/michael-jackson_-_this-is-it.mp3" type="audio/mpeg">
-        </audio> -->
+        </audio>
         <input type="range" value="0" id="progress">
 
-        <div class="controls__wrapper">
-          
-            <svg width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        <div class="controls">
+
+          <div class="control">
+            <svg class="skip-back" width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
               <g id="SVGRepo_bgCarrier" stroke-width="0" />
               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
@@ -44,9 +45,10 @@
                 </g>
               </g>
             </svg>
+          </div>
 
-          <div class="play-wrapper">
-            <svg class="play" width="30px" height="30px" viewBox="-0.5 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          <div class="control" onclick="playPause()">
+            <svg class="play" id="play" width="30px" height="30px" viewBox="-0.5 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="Dribbble-Light-Preview" transform="translate(-427.000000, -3765.000000)" fill="#000000">
@@ -57,7 +59,7 @@
                 </g>
               </g>
             </svg>
-            <!-- <svg class="pause" width="30px" height="30px" viewBox="-1 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            <svg class="pause hidden" id="pause" width="30px" height="30px" viewBox="-1 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
               <g id="SVGRepo_bgCarrier" stroke-width="0" />
               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
@@ -71,35 +73,29 @@
                   </g>
                 </g>
               </g>
-            </svg> -->
+            </svg>
           </div>
 
-          <svg width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" transform="rotate(180)" stroke="#000000">
-            <g id="SVGRepo_bgCarrier" stroke-width="0" />
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-            <g id="SVGRepo_iconCarrier">
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="add" fill="#ffffff" transform="translate(128.000000, 128.000000)">
-                  <polygon id="Path"
-                    points="0 0 0 256 42.6666667 256 42.6666667 128.00512 256 256 256 0 42.6666667 127.989547 42.6666667 0">
-                  </polygon>
+          <div class="control">
+            <svg class="skip-forward" width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" transform="rotate(180)" stroke="#000000">
+              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+              <g id="SVGRepo_iconCarrier">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="add" fill="#ffffff" transform="translate(128.000000, 128.000000)">
+                    <polygon id="Path"
+                      points="0 0 0 256 42.6666667 256 42.6666667 128.00512 256 256 256 0 42.6666667 127.989547 42.6666667 0">
+                    </polygon>
+                  </g>
                 </g>
               </g>
-            </g>
-          </svg>
-          
+            </svg>
+          </div>
         </div>
       </div>
     </section>
   </main>
-  
-  <!-- <script>
-    var button = document.getElementById("myButton");
-
-    button.addEventListener("click", function () {
-      button.classList.toggle("play");
-    });
-  </script> -->
+  <script src="script.js"></script>
 </body>
 </html>
