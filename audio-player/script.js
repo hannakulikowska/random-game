@@ -1,35 +1,149 @@
 let progress = document.getElementById("progress");
-let song = document.getElementById("song");
-let play = document.getElementById("play");
-let pause = document.getElementById("pause");
+const song = document.getElementById("song-audio");
+const songImg = document.querySelector(".song-img");
+const songName = document.querySelector(".song-name");
+const singer = document.querySelector(".singer");
+let playButton = document.getElementById("play");
+let pauseButton = document.getElementById("pause");
+let prevButton = document.getElementById("prev");
+let nextButton = document.getElementById("next");
+let currentTimeDisplay = document.getElementById("current-time");
+let totalTimeDisplay = document.getElementById("total-time");
+
+let currentTrackIndex = 0;
+const audioFiles = [
+  {
+    audioSrc: "assets/audio/michael-jackson_-_this-is-it.mp3",
+    imgSrc: "assets/img/this-is-it.jpg",
+    songName: "This Is It",
+    singer: "Michael Jackson"
+  },
+  {
+    audioSrc: "assets/audio/michael-jackson_-_beat-it.mp3",
+    imgSrc: "assets/img/beat-it.jpg",
+    songName: "Beat It",
+    singer: "Michael Jackson"
+  },
+  {
+    audioSrc: "assets/audio/michael-jackson_-_give-in-to-me.mp3",
+    imgSrc: "assets/img/give-in-to-me.jpg",
+    songName: "Give In To Me",
+    singer: "Michael Jackson"
+  }
+];
+
+function updateTrack() {
+  const track = audioFiles[currentTrackIndex];
+  songImg.src = track.imgSrc;
+  songImg.alt = track.songName;
+  songName.textContent = track.songName;
+  singer.textContent = track.singer;
+  song.src = track.audioSrc;
+}
 
 song.onloadedmetadata = function () {
   progress.max = song.duration;
-  progress.value = song.currentTime;
+  progress.value = 0; // Initial progress value
+  updateTimeDisplay(0, song.duration); // Updating time display
+}
+
+function updateTimeDisplay(currentTime, totalTime) {
+  currentTimeDisplay.textContent = formatTime(currentTime);
+  totalTimeDisplay.textContent = formatTime(totalTime);
+}
+
+function formatTime(timeInSeconds) {
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function hiddenPlayButton() {
+  playButton.classList.add("hidden");
+  pauseButton.classList.remove("hidden");
+}
+
+function hiddenPauseButton() {
+  playButton.classList.remove("hidden");
+  pauseButton.classList.add("hidden");
+}
+
+function togglePlayPauseButtons() {
+  playButton.classList.toggle("hidden");
+  pauseButton.classList.toggle("hidden");
 }
 
 function playPause() {
-  if (pause.classList.contains("hidden")) {
+  if (pauseButton.classList.contains("hidden")) {
     song.play();
-    play.classList.toggle("hidden");
-    pause.classList.toggle("hidden");
+    togglePlayPauseButtons();
   }
   else {
     song.pause();
-    play.classList.toggle("hidden");
-    pause.classList.toggle("hidden");
+    togglePlayPauseButtons();
   }
 }
 
-if (song.play()) {
-  setInterval(() => {
-    progress.value = song.currentTime;
-  },500);
-}
+setInterval(() => {
+  progress.value = song.currentTime;
+  updateTimeDisplay(song.currentTime, song.duration); // Updating time display during playback
+}, 500);
 
-progress.onchange = function() {
+progress.onclick = function() {
   song.play();
   song.currentTime = progress.value;
-  play.classList.add("hidden");
-  pause.classList.remove("hidden");
+  hiddenPlayButton();
+}
+
+// Go forward
+song.onended = function () {
+  // Checking if there is a next track in the array
+  if (currentTrackIndex < audioFiles.length - 1) {
+    currentTrackIndex++;
+  } else {
+    // If this is the last track, stop playback
+    song.pause();
+    hiddenPauseButton();
+  }
+};
+
+// Go back onclick
+prevButton.onclick = function () {
+  if (currentTrackIndex > 0) {
+    currentTrackIndex--;
+    updateTrack();
+    updateButtonsStyles();
+    hiddenPauseButton();
+    playPause();
+  } 
+}
+
+// Go forward onclick
+nextButton.onclick = function () {
+  if (currentTrackIndex < audioFiles.length - 1) {
+    currentTrackIndex++;
+    updateTrack();
+    updateButtonsStyles();
+    hiddenPauseButton();
+    playPause();
+  }
+}
+
+function updateButtonsStyles() {
+  if (currentTrackIndex === 0) {
+    prev.disabled = true;
+    prev.style.opacity = 0.5;
+    next.disabled = false;
+    next.style.opacity = 1;
+  } else if (currentTrackIndex === audioFiles.length - 1) {
+    prev.disabled = false;
+    prev.style.opacity = 1;
+    next.disabled = true;
+    next.style.opacity = 0.5;
+  } else {
+    prev.disabled = false;
+    prev.style.opacity = 1;
+    next.disabled = false;
+    next.style.opacity = 1;
+  }
 }

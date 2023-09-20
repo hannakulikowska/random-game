@@ -21,16 +21,22 @@
     <section class="section">
       <div class="music-player">
         <img class="song-img" src="assets/img/this-is-it.jpg" alt="poster">
-        <h1 class="song-name">This is it</h1>
-        <p class="singer">Michael Jackson</p>
-        <audio id="song">
+        <h1 class="song-name" id="song-name">This is it</h1>
+        <p class="singer" id="singer">Michael Jackson</p>
+        <audio id="song-audio">
           <source src="assets/audio/michael-jackson_-_this-is-it.mp3" type="audio/mpeg">
         </audio>
-        <input type="range" value="0" id="progress">
+        <input type="range" value="0" max="1" id="progress">
+        <!-- <progress id="progress" value="0" max="1"></progress> -->
+        <div class="timers" id="timers">
+          <span id="current-time">0:00</span>
+          <span id="total-time">0:00</span>
+        </div>
+
 
         <div class="controls">
 
-          <div class="control">
+          <div class="control" id="prev">
             <svg class="skip-back" width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
               <g id="SVGRepo_bgCarrier" stroke-width="0" />
@@ -76,7 +82,7 @@
             </svg>
           </div>
 
-          <div class="control">
+          <div class="control" id="next">
             <svg class="skip-forward" width="30px" height="30px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" transform="rotate(180)" stroke="#000000">
               <g id="SVGRepo_bgCarrier" stroke-width="0" />
