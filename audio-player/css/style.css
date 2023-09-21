@@ -25,7 +25,8 @@ body {
 }
 
 .music-player {
-  max-width: 700px;
+  width: 25vw;
+  height: 85vh;
   padding: 20px 20px 40px;
   display: flex;
   flex-direction: column;
@@ -136,6 +137,7 @@ body {
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 2vh;
 }
 
 .timers span {
@@ -144,7 +146,6 @@ body {
   font-weight: 300;
   font-size: 1.5vh;
   letter-spacing: 0.1rem;
-  margin-bottom: 5vh;
 }
 
 .footer {
@@ -153,7 +154,7 @@ body {
 }
 
 .footer__wrapper {
-  max-width: 590px;
+  width: 25vw;
   height: 100%;
   margin: 0 auto;
   display: flex;
