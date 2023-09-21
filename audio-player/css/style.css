@@ -6,19 +6,24 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
+body {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
 
 .section {
   width: 100%;
-  height: 100svh;
+  min-height: calc(100vh - 7vh);
   background-color: #272727;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: -1px;
 }
 
 .music-player {
   max-width: 400px;
-  /* min-height: 80vh; */
   margin: 0 auto;
   padding: 20px 20px 40px;
   display: flex;
@@ -27,7 +32,6 @@
   gap: 1vh;
   background-color: #121212;
   box-shadow: 0 0 10px #121212;
-  /* border-radius: 10px; */
 }
 
 .song-img {
@@ -58,7 +62,6 @@
   -webkit-appearance: none;
   width: 100%;
   height: 3px;
-  /* margin: 5vh auto; */
   border-radius: 4px;
   cursor: pointer;
   background: rgb(156, 156, 156);
@@ -133,6 +136,39 @@
   margin-bottom: 5vh;
 }
 
+.footer {
+  height: 7vh;
+  background-color: #272727;
+}
 
+.footer__wrapper {
+  max-width: 400px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.footer svg {
+  height: 5vh;
+  width: auto;
+  opacity: 0.3;
+}
 
+.footer svg:hover {
+  opacity: 1;
+}
+
+.github {
+  font-weight: 300;
+  color: #000;
+  opacity: 0.9;
+  cursor: pointer;
+  transition: .5s;
+  text-decoration: none;
+}
+
+.github:hover {
+  color:#ffffff;
+}

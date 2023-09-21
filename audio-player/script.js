@@ -27,8 +27,20 @@ const audioFiles = [
   {
     audioSrc: "assets/audio/michael-jackson_-_give-in-to-me.mp3",
     imgSrc: "assets/img/give-in-to-me.jpg",
-    songName: "Give In To Me",
+    songName: "Give In to Me",
     singer: "Michael Jackson"
+  },
+  {
+    audioSrc: "assets/audio/freddie-mercury_-_who-wants-to-live-forever.mp3",
+    imgSrc: "assets/img/who-wants-to-live-forever.jpg",
+    songName: "Who Wants to Live Forever",
+    singer: "Queen"
+  },
+  {
+    audioSrc: "assets/audio/queen_-_living-on-my-own.mp3",
+    imgSrc: "assets/img/living-on-my-own.jpg",
+    songName: "Living on My Own",
+    singer: "Freddie Mercury"
   }
 ];
 
@@ -41,12 +53,6 @@ function updateTrack() {
   song.src = track.audioSrc;
 }
 
-song.onloadedmetadata = function () {
-  progress.max = song.duration;
-  progress.value = 0; // Initial progress value
-  updateTimeDisplay(0, song.duration); // Updating time display
-}
-
 function updateTimeDisplay(currentTime, totalTime) {
   currentTimeDisplay.textContent = formatTime(currentTime);
   totalTimeDisplay.textContent = formatTime(totalTime);
@@ -56,6 +62,12 @@ function formatTime(timeInSeconds) {
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = Math.floor(timeInSeconds % 60);
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+song.onloadedmetadata = function () {
+  progress.max = song.duration;
+  progress.value = 0; // Initial progress value
+  updateTimeDisplay(0, song.duration); // Updating time display
 }
 
 function hiddenPlayButton() {
@@ -111,39 +123,45 @@ song.onended = function () {
 prevButton.onclick = function () {
   if (currentTrackIndex > 0) {
     currentTrackIndex--;
-    updateTrack();
-    updateButtonsStyles();
-    hiddenPauseButton();
-    playPause();
-  } 
+  } else {
+    // If this is the first track, go to the last track
+    currentTrackIndex = audioFiles.length - 1;
+  }
+  updateTrack();
+  // updateButtonsStyles();
+  hiddenPauseButton();
+  playPause();
 }
 
 // Go forward onclick
 nextButton.onclick = function () {
   if (currentTrackIndex < audioFiles.length - 1) {
     currentTrackIndex++;
-    updateTrack();
-    updateButtonsStyles();
-    hiddenPauseButton();
-    playPause();
+  } else {
+    // If this is the last track, go to the first track
+    currentTrackIndex = 0;
   }
+  updateTrack();
+  // updateButtonsStyles();
+  hiddenPauseButton();
+  playPause();
 }
 
-function updateButtonsStyles() {
-  if (currentTrackIndex === 0) {
-    prev.disabled = true;
-    prev.style.opacity = 0.5;
-    next.disabled = false;
-    next.style.opacity = 1;
-  } else if (currentTrackIndex === audioFiles.length - 1) {
-    prev.disabled = false;
-    prev.style.opacity = 1;
-    next.disabled = true;
-    next.style.opacity = 0.5;
-  } else {
-    prev.disabled = false;
-    prev.style.opacity = 1;
-    next.disabled = false;
-    next.style.opacity = 1;
-  }
-}
+// function updateButtonsStyles() {
+//   if (currentTrackIndex === 0) {
+//     prev.disabled = true;
+//     prev.style.opacity = 0.5;
+//     next.disabled = false;
+//     next.style.opacity = 1;
+//   } else if (currentTrackIndex === audioFiles.length - 1) {
+//     prev.disabled = false;
+//     prev.style.opacity = 1;
+//     next.disabled = true;
+//     next.style.opacity = 0.5;
+//   } else {
+//     prev.disabled = false;
+//     prev.style.opacity = 1;
+//     next.disabled = false;
+//     next.style.opacity = 1;
+//   }
+// }
