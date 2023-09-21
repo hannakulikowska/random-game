@@ -23,7 +23,7 @@ body {
 }
 
 .music-player {
-  max-width: 400px;
+  max-width: 450px;
   margin: 0 auto;
   padding: 20px 20px 40px;
   display: flex;
@@ -152,7 +152,7 @@ body {
 }
 
 .footer__wrapper {
-  max-width: 400px;
+  max-width: 450px;
   height: 100%;
   margin: 0 auto;
   display: flex;
