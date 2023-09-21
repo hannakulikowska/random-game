@@ -16,6 +16,8 @@ body {
   width: 100%;
   min-height: calc(100vh - 7vh);
   background-color: #272727;
+
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,8 +25,7 @@ body {
 }
 
 .music-player {
-  max-width: 450px;
-  margin: 0 auto;
+  max-width: 700px;
   padding: 20px 20px 40px;
   display: flex;
   flex-direction: column;
@@ -44,7 +45,7 @@ body {
 .song-name {
   color: #ffffff;
   font-weight: 500;
-  font-size: 3vh;
+  font-size: 2rem;
   line-height: 3.5vh;
   margin: 0;
 }
@@ -152,7 +153,7 @@ body {
 }
 
 .footer__wrapper {
-  max-width: 450px;
+  max-width: 590px;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -172,8 +173,9 @@ body {
 
 .github {
   font-weight: 300;
+  font-size: 1.5rem;
   color: #000;
-  opacity: 0.9;
+  opacity: 0.95;
   cursor: pointer;
   transition: .5s;
   text-decoration: none;
@@ -181,4 +183,5 @@ body {
 
 .github:hover {
   color:#ffffff;
+  opacity: 0.8;
 }
