@@ -87,6 +87,7 @@ body {
   height: 70px;
   padding: 20px;
   cursor: pointer;
+  transition: .5s;
 }
 
 .controls div:nth-child(2) {
@@ -96,10 +97,19 @@ body {
   position: relative;
 }
 
+.controls div:nth-child(2):hover {
+  transform: scale(1.3);
+}
+
 .controls div:nth-child(2) svg {
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+#prev:hover #add,
+#next:hover #add {
+  fill: #09a7cf;
 }
 
 .play {
