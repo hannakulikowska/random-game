@@ -72,6 +72,8 @@ function updateDuration() {
   }
 }
 
+updateDuration();
+
 function hiddenPlayButton() {
   playButton.classList.add("hidden");
   pauseButton.classList.remove("hidden");
