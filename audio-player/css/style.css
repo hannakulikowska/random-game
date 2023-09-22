@@ -6,37 +6,38 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
+
 body {
+  width: 100vw;
   height: 100vh;
   margin: 0;
   overflow: hidden;
 }
 
 .section {
-  width: 100%;
+  width: 100vw;
   min-height: calc(100vh - 7vh);
   background-color: #272727;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: -1px;
 }
 
 .music-player {
-  max-width: 450px;
-  margin: 0 auto;
+  width: 60vw;
+  max-width: 500px;
   padding: 20px 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 1vh;
-  background-color: #121212;
-  box-shadow: 0 0 10px #121212;
+  background: linear-gradient(180deg, #e1e8ef 0%, #001f38 100%);
+  box-shadow: 0 0 20px #121212;
+  border-radius: 15px;
 }
 
 .song-img {
-  width: 100%;
-  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
   margin-bottom: 3vh;
 }
@@ -44,7 +45,7 @@ body {
 .song-name {
   color: #ffffff;
   font-weight: 500;
-  font-size: 3vh;
+  font-size: 2rem;
   line-height: 3.5vh;
   margin: 0;
 }
@@ -53,14 +54,13 @@ body {
   color: #ffffff;
   opacity: 0.8;
   font-weight: 300;
-  font-size: 2vh;
+  font-size: 1rem;
   letter-spacing: 0.1rem;
   margin-bottom: 5vh;
 }
 
 #progress {
   -webkit-appearance: none;
-  width: 100%;
   height: 3px;
   border-radius: 4px;
   cursor: pointer;
@@ -83,8 +83,8 @@ body {
 }
 
 .controls div {
-  width: 70px;
-  height: 70px;
+  min-width: 70px;
+  min-height: 70px;
   padding: 20px;
   cursor: pointer;
   transition: .5s;
@@ -109,7 +109,7 @@ body {
 
 #prev:hover #add,
 #next:hover #add {
-  fill: #09a7cf;
+  fill: #cf094b;
 }
 
 .play {
@@ -135,6 +135,7 @@ body {
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 2vh;
 }
 
 .timers span {
@@ -143,7 +144,6 @@ body {
   font-weight: 300;
   font-size: 1.5vh;
   letter-spacing: 0.1rem;
-  margin-bottom: 5vh;
 }
 
 .footer {
@@ -152,7 +152,8 @@ body {
 }
 
 .footer__wrapper {
-  max-width: 450px;
+  width: 60vw;
+  max-width: 500px;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -172,13 +173,22 @@ body {
 
 .github {
   font-weight: 300;
+  font-size: 1.5rem;
   color: #000;
-  opacity: 0.9;
+  opacity: 0.95;
   cursor: pointer;
   transition: .5s;
   text-decoration: none;
+  text-align: right;
 }
 
 .github:hover {
   color:#ffffff;
+  opacity: 0.8;
+}
+
+@media (max-width: 700px) {
+  .song-name {
+    font-size: 1.2rem;
+  }
 }

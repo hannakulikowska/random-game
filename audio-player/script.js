@@ -64,11 +64,15 @@ function formatTime(timeInSeconds) {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-song.onloadedmetadata = function () {
-  progress.max = song.duration;
-  progress.value = 0; // Initial progress value
-  updateTimeDisplay(0, song.duration); // Updating time display
+function updateDuration() {
+  song.onloadedmetadata = function () {
+    progress.max = song.duration;
+    progress.value = 0; // Initial progress value
+    updateTimeDisplay(0, song.duration); // Updating time display
+  }
 }
+
+updateDuration();
 
 function hiddenPlayButton() {
   playButton.classList.add("hidden");
@@ -130,6 +134,7 @@ prevButton.onclick = function () {
   updateTrack();
   // updateButtonsStyles();
   hiddenPauseButton();
+  updateDuration();
   playPause();
 }
 
@@ -144,6 +149,7 @@ nextButton.onclick = function () {
   updateTrack();
   // updateButtonsStyles();
   hiddenPauseButton();
+  updateDuration();
   playPause();
 }
 
