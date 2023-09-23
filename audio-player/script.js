@@ -65,11 +65,11 @@ function formatTime(timeInSeconds) {
 }
 
 function updateDuration() {
-  song.onloadedmetadata = function () {
+  song.addEventListener("loadedmetadata", function () {
     progress.max = song.duration;
     progress.value = 0; // Initial progress value
     updateTimeDisplay(0, song.duration); // Updating time display
-  }
+  });
 }
 
 updateDuration();
@@ -134,8 +134,9 @@ prevButton.onclick = function () {
   updateTrack();
   // updateButtonsStyles();
   hiddenPauseButton();
-  updateDuration();
+  
   playPause();
+  updateDuration();
 }
 
 // Go forward onclick
@@ -149,8 +150,9 @@ nextButton.onclick = function () {
   updateTrack();
   // updateButtonsStyles();
   hiddenPauseButton();
-  updateDuration();
+  
   playPause();
+  updateDuration();
 }
 
 // function updateButtonsStyles() {
