@@ -107,8 +107,8 @@ body {
   left: 50%;
 }
 
-#prev:hover #add,
-#next:hover #add {
+.skip-back:hover,
+.skip-forward:hover{
   fill: #cf094b;
 }
 
