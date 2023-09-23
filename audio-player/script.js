@@ -64,15 +64,17 @@ function formatTime(timeInSeconds) {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-function updateDuration() {
-  song.addEventListener("loadedmetadata", function () {
+song.addEventListener("loadedmetadata", function () {
+  if (isNaN(song.duration)) {
+    progress.max = 0;
+    progress.value = 0;
+    updateTimeDisplay(0, 0);
+  } else {
     progress.max = song.duration;
     progress.value = 0; // Initial progress value
     updateTimeDisplay(0, song.duration); // Updating time display
-  });
-}
-
-updateDuration();
+  }
+});
 
 function hiddenPlayButton() {
   playButton.classList.add("hidden");
@@ -134,9 +136,7 @@ prevButton.onclick = function () {
   updateTrack();
   // updateButtonsStyles();
   hiddenPauseButton();
-  
   playPause();
-  updateDuration();
 }
 
 // Go forward onclick
@@ -150,9 +150,7 @@ nextButton.onclick = function () {
   updateTrack();
   // updateButtonsStyles();
   hiddenPauseButton();
-  
   playPause();
-  updateDuration();
 }
 
 // function updateButtonsStyles() {
