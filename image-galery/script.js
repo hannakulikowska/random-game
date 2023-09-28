@@ -1,10 +1,16 @@
-// CONSTANTS FOR URL AND SELECTORS
+// CONSTANTS FOR SELECTORS
 
 const imagesWrapper = document.querySelector(".images");
 const loadMoreBtn = document.querySelector(".load-more");
+const searchInput = document.querySelector(".search-box input")
+
+
+// API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
+
 const apiKey = "BPMzMqljebkGhOZlvLsfHAuJLyyjbDnrsXaO8tiUaPJgTQY0VYUMX0QV";
 const perPage = 15;
 let currentPage = 1;
+let searchWords = null;
 
 
 // FUNCTION FOR GENERATING IMAGES
@@ -75,7 +81,8 @@ const getImages = (apiURL) => {
 
 const loadMoreImages = () => {
   currentPage++; // Increase currentPage by 1 before each request
-  const apiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
+  let apiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
+  apiUrl = searchWords ? `https://api.pexels.com/v1/search?query=${searchWords}&page=${currentPage}&per_page=${perPage}` : apiUrl;
   getImages(apiUrl);
 };
 
@@ -101,3 +108,17 @@ function setLoadMoreState() {
   loadMoreBtn.innerText = "Load More";
   loadMoreBtn.classList.remove("disabled");
 }
+
+
+// FUNCTION FOR SEARCHING IMAGES
+
+const loadSearchImages = (e) => {
+  // if pressed `Enter`, update the current page, search words and call the getImages func
+  if (e.key === "Enter") {
+    currentPage = 1;
+    searchWords = e.target.value;
+    imagesWrapper.innerHTML = "";
+    getImages(`https://api.pexels.com/v1/search?query=${searchWords}&page=${currentPage}&per_page=${perPage}`);
+  }
+}
+searchInput.addEventListener("keyup", loadSearchImages);
