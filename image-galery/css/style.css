@@ -162,7 +162,7 @@ An adaptive gallery is created even without flex/grid */
 }
 
 .card .details button {
-  padding: 5px 8px;
+  padding: 5px 10px;
   font-size: 1rem;
   cursor: pointer;
 }

@@ -2,7 +2,7 @@
 
 const imagesWrapper = document.querySelector(".images");
 const loadMoreBtn = document.querySelector(".load-more");
-const searchInput = document.querySelector(".search-box input")
+const searchInput = document.querySelector(".search-box input");
 
 
 // API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
@@ -24,8 +24,8 @@ const generateHTML = (images) => {
             <i class="fa-solid fa-camera"></i>
             <span>${img.photographer}</span>
           </div>
-          <button>
-            <i class="fa-solid fa-file-arrow-up"></i>
+          <button onclick="downloadImage('${img.src.large2x}')">
+            <i class="fa-solid fa-download"></i>
           </button>
         </div>
       </li>`
@@ -66,9 +66,6 @@ const getImages = (apiURL) => {
     });
 };
 
-
-// Пример: автоматическая перезагрузка страницы через 5 секунд
-// 5 секунд
 
 // The second option:
 // const getImages = async (apiURL) => {
@@ -130,6 +127,7 @@ const loadSearchImages = (e) => {
   // if the search input is empty, set the search words to null and return from here
   if (e.target.value.trim() === "") return searchWords = null;
 }
+
 searchInput.addEventListener("keyup", loadSearchImages);
 
 
@@ -139,4 +137,19 @@ function autoReloadPage() {
   setTimeout(function() {
     location.reload();
   }, 100);
+};
+
+
+// FUNCTION FOR DOWNLOADING IMAGES
+
+const downloadImage = (imgUrl) => {
+  console.log(imgUrl);
+
+  // converte img to blob, create download link, and download the image
+  fetch(imgUrl).then(result => result.blob()).then(file => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(file);
+    a.download = new Date().getTime();
+    a.click();
+  }).catch(() => console.log("Failed to download image!"));
 }
