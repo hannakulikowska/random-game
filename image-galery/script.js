@@ -4,7 +4,6 @@ const imagesWrapper = document.querySelector(".images");
 const loadMoreBtn = document.querySelector(".load-more");
 const searchInput = document.querySelector(".search-box input");
 
-
 // API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
 
 const apiKey = "BPMzMqljebkGhOZlvLsfHAuJLyyjbDnrsXaO8tiUaPJgTQY0VYUMX0QV";
@@ -61,8 +60,9 @@ const getImages = (apiURL) => {
       // Change the button state back to normal
     })
     .catch(() => {
-      alert("Failed to load images. Enter a search query.");
-      autoReloadPage(); 
+      // alert("Failed to load images. Enter a search query.");
+      // autoReloadPage(3); 
+      setErrorState();
     });
 };
 
@@ -111,7 +111,22 @@ function setLoadingState() {
 function setLoadMoreState() {
   loadMoreBtn.innerText = "Load More";
   loadMoreBtn.classList.remove("disabled");
-}
+};
+
+// Change the button state to `error`
+function setErrorState() {
+  loadMoreBtn.innerText = "Failed to load images";
+  loadMoreBtn.classList.remove("disabled");
+};
+
+
+// FUNCTION FOR RELOADING THE PAGE
+
+function autoReloadPage(timeInSeconds) {
+  setTimeout(function() {
+    location.reload();
+  }, timeInSeconds * 1000);
+};
 
 
 // FUNCTION FOR SEARCHING IMAGES
@@ -126,18 +141,9 @@ const loadSearchImages = (e) => {
   }
   // if the search input is empty, set the search words to null and return from here
   if (e.target.value.trim() === "") return searchWords = null;
-}
+};
 
 searchInput.addEventListener("keyup", loadSearchImages);
-
-
-// FUNCTION FOR RELOADING THE PAGE
-
-function autoReloadPage() {
-  setTimeout(function() {
-    location.reload();
-  }, 100);
-};
 
 
 // FUNCTION FOR DOWNLOADING IMAGES
@@ -155,3 +161,7 @@ const downloadImage = (imgUrl) => {
     console.log("The file was downloaded");
   }).catch(() => console.log("Failed to download image!"));
 }
+
+
+
+
