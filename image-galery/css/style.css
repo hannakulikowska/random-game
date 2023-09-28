@@ -176,6 +176,11 @@ An adaptive gallery is created even without flex/grid */
   cursor: pointer;
 }
 
+.gallery .load-more.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .lightbox {
   display: none;
   position: fixed;

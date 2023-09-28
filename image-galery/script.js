@@ -1,4 +1,4 @@
-// Constants for URLs and selectors
+// CONSTANTS FOR URL AND SELECTORS
 
 const imagesWrapper = document.querySelector(".images");
 const loadMoreBtn = document.querySelector(".load-more");
@@ -7,7 +7,7 @@ const perPage = 15;
 let currentPage = 1;
 
 
-// Function for generating images
+// FUNCTION FOR GENERATING IMAGES
 
 const generateHTML = (images) => {
   imagesWrapper.innerHTML += images.map((img) =>
@@ -27,11 +27,14 @@ const generateHTML = (images) => {
 };
 
 
-// Function for fetching images from the server
+// FUNCTION FOR FETCHING IMAGES FROM THE SERVER
 
 // The first option:
 const getImages = (apiURL) => {
   // Declares the getImages function, which takes apiURL argument.
+
+  setLoadingState();
+  // Set the loading state on the button
 
   fetch(apiURL, { headers: { Authorization: apiKey } })
     // An HTTP request is made to the specified URL (apiURL) using the fetch function. In this request, an Authorization header is also sent with the apiKey value to access protected data.
@@ -47,6 +50,9 @@ const getImages = (apiURL) => {
 
       generateHTML(data.photos);
       // The generateHTML function is called with data.photos as an argument. In this function, HTML code for images is generated based on data.photos and added to the specified element on the web page. This way, the images will be displayed on the page.
+
+      setLoadMoreState();
+      // Change the button state back to normal
     });
 };
 
@@ -65,6 +71,8 @@ const getImages = (apiURL) => {
 // };
 
 
+// FUNCTION FOR LOADING MORE IMAGES
+
 const loadMoreImages = () => {
   currentPage++; // Increase currentPage by 1 before each request
   const apiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
@@ -77,5 +85,19 @@ const initialApiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per
 getImages(initialApiUrl);
 
 
-
 loadMoreBtn.addEventListener("click", loadMoreImages);
+
+
+// FUNCTION FOR CHANGING BUTTON STATE TO LOADING WHILE THE IMAGES ARE FETCHING
+
+// Change the button state to loading
+function setLoadingState() {
+  loadMoreBtn.innerText = "Loading...";
+  loadMoreBtn.classList.add("disabled");
+}
+
+// Change the button state back to normal
+function setLoadMoreState() {
+  loadMoreBtn.innerText = "Load More";
+  loadMoreBtn.classList.remove("disabled");
+}
