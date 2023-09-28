@@ -167,7 +167,8 @@ An adaptive gallery is created even without flex/grid */
   cursor: pointer;
 }
 
-.gallery .load-more {
+.gallery .load-more,
+.gallery .reload-btn {
   margin: 50px 0;
   color:#fff;
   font-size: 1.2rem;
@@ -179,6 +180,15 @@ An adaptive gallery is created even without flex/grid */
 .gallery .load-more.disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.no-images-message,
+.error-message {
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin-top: 50px;
+  color: #246d74;
+  text-align: center;
 }
 
 .lightbox {

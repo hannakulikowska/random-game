@@ -3,6 +3,7 @@
 const imagesWrapper = document.querySelector(".images");
 const loadMoreBtn = document.querySelector(".load-more");
 const searchInput = document.querySelector(".search-box input");
+const galleryArea = document.querySelector(".gallery");
 
 // API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
 
@@ -15,8 +16,14 @@ let searchWords = null;
 // FUNCTION FOR GENERATING IMAGES
 
 const generateHTML = (images) => {
-  imagesWrapper.innerHTML += images.map((img) =>
-    `<li class="card">
+  // Check if the images array is empty 
+  if (images.length === 0) {
+    // Display a message on the page 
+    setNoImgMessage();
+  } else {
+    // Append the images to the page
+    imagesWrapper.innerHTML += images.map((img) =>
+      `<li class="card">
         <img src="${img.src.large2x}" alt="photo">
         <div class="details">
           <div class="photographer">
@@ -28,9 +35,9 @@ const generateHTML = (images) => {
           </button>
         </div>
       </li>`
-  ).join("");
+    ).join("");
+  }
 };
-
 
 // FUNCTION FOR FETCHING IMAGES FROM THE SERVER
 
@@ -62,7 +69,7 @@ const getImages = (apiURL) => {
     .catch(() => {
       // alert("Failed to load images. Enter a search query.");
       // autoReloadPage(3); 
-      setErrorState();
+      setErrorMessage();
     });
 };
 
@@ -105,7 +112,7 @@ loadMoreBtn.addEventListener("click", loadMoreImages);
 function setLoadingState() {
   loadMoreBtn.innerText = "Loading...";
   loadMoreBtn.classList.add("disabled");
-}
+};
 
 // Change the button state back to normal
 function setLoadMoreState() {
@@ -113,10 +120,18 @@ function setLoadMoreState() {
   loadMoreBtn.classList.remove("disabled");
 };
 
-// Change the button state to `error`
-function setErrorState() {
-  loadMoreBtn.innerText = "Failed to load images";
-  loadMoreBtn.classList.remove("disabled");
+// Add html code for a message that there is no keywords in the search field
+function setErrorMessage() {
+  galleryArea.innerHTML =
+    `     <p class="error-message">Failed to load images. Enter keywords in the search field.</p>
+          <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
+};
+
+// Add html code for a message that images were not found
+function setNoImgMessage() {
+  galleryArea.innerHTML =
+    `     <p class="no-images-message">Sorry, no images were found for this search.</p>
+          <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
 };
 
 
