@@ -147,9 +147,11 @@ const downloadImage = (imgUrl) => {
 
   // converte img to blob, create download link, and download the image
   fetch(imgUrl).then(result => result.blob()).then(file => {
+    console.log(file);
     const a = document.createElement("a");
     a.href = URL.createObjectURL(file);
     a.download = new Date().getTime();
     a.click();
+    console.log("The file was downloaded");
   }).catch(() => console.log("Failed to download image!"));
 }
