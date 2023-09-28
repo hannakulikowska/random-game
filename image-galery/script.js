@@ -59,9 +59,16 @@ const getImages = (apiURL) => {
 
       setLoadMoreState();
       // Change the button state back to normal
+    })
+    .catch(() => {
+      alert("Failed to load images. Enter a search query.");
+      autoReloadPage(); 
     });
 };
 
+
+// Пример: автоматическая перезагрузка страницы через 5 секунд
+// 5 секунд
 
 // The second option:
 // const getImages = async (apiURL) => {
@@ -120,5 +127,16 @@ const loadSearchImages = (e) => {
     imagesWrapper.innerHTML = "";
     getImages(`https://api.pexels.com/v1/search?query=${searchWords}&page=${currentPage}&per_page=${perPage}`);
   }
+  // if the search input is empty, set the search words to null and return from here
+  if (e.target.value.trim() === "") return searchWords = null;
 }
 searchInput.addEventListener("keyup", loadSearchImages);
+
+
+// FUNCTION FOR RELOADING THE PAGE
+
+function autoReloadPage() {
+  setTimeout(function() {
+    location.reload();
+  }, 100);
+}
