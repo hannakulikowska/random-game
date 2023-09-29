@@ -126,6 +126,9 @@ function setLoadMoreState() {
 
 // Add html code for a message that there is no keywords in the search field
 function setErrorMessage() {
+  searchInput.blur();
+  searchInput.style.pointerEvents = "none";
+  searchInput.removeAttribute("autofocus");
   galleryArea.innerHTML =
     `     <p class="error-message">Failed to load images. Enter keywords in the search field.</p>
           <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
@@ -133,6 +136,9 @@ function setErrorMessage() {
 
 // Add html code for a message that images were not found
 function setNoImgMessage() {
+  searchInput.blur();
+  searchInput.style.pointerEvents = "none";
+  searchInput.removeAttribute("autofocus");
   galleryArea.innerHTML =
     `     <p class="no-images-message">Sorry, no images were found for this search.</p>
           <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
@@ -171,14 +177,17 @@ const downloadImage = (imgUrl) => {
   console.log(imgUrl);
 
   // converte img to blob, create download link, and download the image
-  fetch(imgUrl).then(result => result.blob()).then(file => {
-    console.log(file);
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(file);
-    a.download = new Date().getTime();
-    a.click();
-    console.log("The file was downloaded");
-  }).catch(() => console.log("Failed to download image!"));
+  fetch(imgUrl)
+    .then(result => result.blob())
+    .then(file => {
+      console.log(file);
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(file);
+      a.download = new Date().getTime();
+      a.click();
+      console.log("The file was downloaded");
+    })
+    .catch(() => console.log("Failed to download image!"));
 };
 
 
@@ -213,178 +222,3 @@ closeBtn.addEventListener("click", closeEnlargedImage);
 
 // for download button on modal box with enlarged image
 downloadBtn.addEventListener("click", (e) => downloadImage(e.target.dataset.image));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const imagesWrapper = document.querySelector(".images");
-// const loadMoreBtn = document.querySelector(".load-more");
-// const searchInput = document.querySelector(".search-box input");
-// const galleryArea = document.querySelector(".gallery");
-// const deleteBtn = document.querySelector(".search-box .fa-xmark");
-// const enlargedBox = document.querySelector(".enlarged-box");
-// const closeBtn = document.querySelector(".enlarged-box .fa-xmark");
-
-// const apiKey = "BPMzMqljebkGhOZlvLsfHAuJLyyjbDnrsXaO8tiUaPJgTQY0VYUMX0QV";
-// const perPage = 16;
-// let currentPage = 1;
-// let searchWords = null;
-
-
-// const generateHTML = (images) => {
-//   if (images.length === 0) {
-//     setNoImgMessage();
-//   } else {
-//     imagesWrapper.innerHTML += images.map((img) =>
-//       `<li class="card" onclick="enlargeImage('${img.photographer}&nbsp;', '&nbsp;${img.width}x${img.height}', '${img.src.large2x}', '${img.alt || "Photo"}')">
-//         <img src="${img.src.large2x}" alt="${img.alt || 'Photo'}">
-//         <div class="details">
-//           <div class="photographer">
-//             <i class="fa-solid fa-camera"></i>
-//             <span>${img.photographer}</span>
-//           </div>
-//           <button onclick="downloadImage('${img.src.original}')">
-//             <i class="fa-solid fa-download"></i>
-//           </button>
-//         </div>
-//       </li>`
-//     ).join("");
-//   }
-// };
-
-// const getImages = (apiURL) => {
-//   setLoadingState();
-//   fetch(apiURL, { headers: { Authorization: apiKey } })
-//     .then(result => result.json())
-//     .then(data => {
-//       console.log(data);
-//       generateHTML(data.photos);
-//       setLoadMoreState();
-//     })
-//     .catch(() => {
-//       setErrorMessage();
-//     });
-// };
-
-
-// const loadMoreImages = () => {
-//   currentPage++;
-//   let apiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
-//   apiUrl = searchWords ? `https://api.pexels.com/v1/search?query=${searchWords}&page=${currentPage}&per_page=${perPage}` : apiUrl;
-//   getImages(apiUrl);
-// };
-
-
-// const initialApiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
-// getImages(initialApiUrl);
-
-
-// loadMoreBtn.addEventListener("click", loadMoreImages);
-
-
-// function setLoadingState() {
-//   loadMoreBtn.innerText = "Loading...";
-//   loadMoreBtn.classList.add("disabled");
-// };
-
-// function setLoadMoreState() {
-//   loadMoreBtn.innerText = "Load More";
-//   loadMoreBtn.classList.remove("disabled");
-// };
-
-// function setErrorMessage() {
-//   galleryArea.innerHTML =
-//     `     <p class="error-message">Failed to load images. Enter keywords in the search field.</p>
-//           <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
-// };
-
-// function setNoImgMessage() {
-//   galleryArea.innerHTML =
-//     `     <p class="no-images-message">Sorry, no images were found for this search.</p>
-//           <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
-// };
-
-
-// function autoReloadPage(timeInSeconds) {
-//   setTimeout(function() {
-//     location.reload();
-//   }, timeInSeconds * 1000);
-// };
-
-
-// const loadSearchImages = (e) => {
-//   if (e.key === "Enter") {
-//     currentPage = 1;
-//     searchWords = e.target.value;
-//     imagesWrapper.innerHTML = "";
-//     getImages(`https://api.pexels.com/v1/search?query=${searchWords}&page=${currentPage}&per_page=${perPage}`);
-//   }
-//   if (e.target.value.trim() === "") return searchWords = null;
-// };
-
-// searchInput.addEventListener("keyup", loadSearchImages);
-
-
-// const downloadImage = (imgUrl) => {
-//   console.log(imgUrl);
-//   fetch(imgUrl).then(result => result.blob()).then(file => {
-//     console.log(file);
-//     const a = document.createElement("a");
-//     a.href = URL.createObjectURL(file);
-//     a.download = new Date().getTime();
-//     a.click();
-//     console.log("The file was downloaded");
-//   }).catch(() => console.log("Failed to download image!"));
-// };
-
-
-// const deleteSearchValue = () => {
-//   searchInput.value = "";
-//   searchInput.focus();
-// };
-
-// deleteBtn.addEventListener("click", deleteSearchValue);
-
-
-// const enlargeImage = (name, size, image, alt) => {
-//   enlargedBox.querySelector("img").src = image;
-//   enlargedBox.querySelector("img").alt = alt;
-//   enlargedBox.querySelector(".name").innerText = name;
-//   enlargedBox.querySelector(".size").innerText = size;
-//   enlargedBox.classList.add("show");
-// };
-
-// const closeEnlargedImage = () => {
-//   enlargedBox.classList.remove("show");
-// }
-// closeBtn.addEventListener("click", closeEnlargedImage);
