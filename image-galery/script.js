@@ -4,11 +4,12 @@ const imagesWrapper = document.querySelector(".images");
 const loadMoreBtn = document.querySelector(".load-more");
 const searchInput = document.querySelector(".search-box input");
 const galleryArea = document.querySelector(".gallery");
+const deleteBtn = document.querySelector(".search-box .fa-xmark");
 
 // API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
 
 const apiKey = "BPMzMqljebkGhOZlvLsfHAuJLyyjbDnrsXaO8tiUaPJgTQY0VYUMX0QV";
-const perPage = 15;
+const perPage = 16;
 let currentPage = 1;
 let searchWords = null;
 
@@ -177,6 +178,14 @@ const downloadImage = (imgUrl) => {
   }).catch(() => console.log("Failed to download image!"));
 }
 
+
+// FUNCTION TO DELETE THE ENTERED VALUE IN THE SEARCH INPUT FIELD
+const deleteSearchValue = () => {
+  searchInput.value = "";
+  searchInput.focus();
+}
+
+deleteBtn.addEventListener("click", deleteSearchValue);
 
 
 
