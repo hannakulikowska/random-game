@@ -9,10 +9,12 @@ const enlargedBox = document.querySelector(".enlarged-box");
 const closeBtn = document.querySelector(".enlarged-box .fa-xmark");
 const downloadBtn = document.querySelector(".enlarged-box .fa-download");
 
+
 // API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
 
 const apiKey = "BPMzMqljebkGhOZlvLsfHAuJLyyjbDnrsXaO8tiUaPJgTQY0VYUMX0QV";
 const perPage = 16;
+const loadedImageIds = [];
 let currentPage = 1;
 let searchWords = null;
 
@@ -20,28 +22,39 @@ let searchWords = null;
 // FUNCTION FOR GENERATING IMAGES
 
 const generateHTML = (images) => {
-  // Check if the images array is empty 
   if (images.length === 0) {
-    // Display a message on the page 
+    // if the array is empty, display a message indicating that there are no images
     setNoImgMessage();
   } else {
-    // Append the images to the page
-    imagesWrapper.innerHTML += images.map((img) =>
-      `<li class="card" onclick="enlargeImage('${img.photographer}&nbsp;', '&nbsp;${img.width}x${img.height}', '${img.src.large2x}', '${img.alt.replaceAll("'", "\\'").replaceAll('"', '\\"') || "Photo"}')">
-        <img src="${img.src.large2x}" alt="${img.alt.replaceAll("'", "\\'").replaceAll('"', '\\"') || 'Photo'}">
-        <div class="details">
-          <div class="photographer">
-            <i class="fa-solid fa-camera"></i>
-            <span>${img.photographer}</span>
-          </div>
-          <button onclick="downloadImage('${img.src.original}');event.stopPropagation();">
-            <i class="fa-solid fa-download"></i>
-          </button>
-        </div>
-      </li>`
-    ).join("");
+    images.forEach((img) => {
+      // check if the photo's id is already in the array of loaded photos
+      if (!loadedImageIds.includes(img.id)) {
+        // if the id is not found, add the photo
+        const cardHTML = `
+          <li class="card" onclick="enlargeImage('${img.photographer}&nbsp;', '&nbsp;${img.width}x${img.height}', '${img.src.large2x}', '${img.alt.replaceAll("'", "\\'").replaceAll('"', '\\"') || "Photo"}')">
+            <img src="${img.src.large2x}" alt="${img.alt.replaceAll("'", "\\'").replaceAll('"', '\\"') || 'Photo'}">
+            <div class="details">
+              <div class="photographer">
+                <i class="fa-solid fa-camera"></i>
+                <span>${img.photographer}</span>
+              </div>
+              <button onclick="downloadImage('${img.src.original}');event.stopPropagation();">
+                <i class="fa-solid fa-download"></i>
+              </button>
+            </div>
+          </li>
+        `;
+        
+        // add the photo's id to the array of already loaded photos
+        loadedImageIds.push(img.id);
+
+        // add the photo to the gallery
+        imagesWrapper.innerHTML += cardHTML;
+      }
+    });
   }
 };
+
 
 // FUNCTION FOR FETCHING IMAGES FROM THE SERVER
 
@@ -130,7 +143,7 @@ function setErrorMessage() {
   searchInput.style.pointerEvents = "none";
   searchInput.removeAttribute("autofocus");
   galleryArea.innerHTML =
-    `     <p class="error-message">Failed to load images. Enter keywords in the search field.</p>
+    `     <p class="error-message">Oops! No images were found for your query.</p>
           <button class="reload-btn" onclick="autoReloadPage()">OK</button>`;
 };
 
