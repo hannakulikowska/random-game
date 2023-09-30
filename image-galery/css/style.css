@@ -179,7 +179,7 @@ An adaptive gallery is created even without flex/grid */
 
 .gallery .load-more,
 .gallery .reload-btn {
-  margin: 50px 0;
+  margin: 50px 0 80px;
   color:#fff;
   font-size: 1.2rem;
   padding: 12px 27px;
@@ -276,4 +276,47 @@ header .buttons i {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.footer {
+  width: 100%;
+  min-height: auto;
+  padding: 20px 20px 15px;
+  background-color: #bebebe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.footer svg,
+.pexels {
+  width: auto;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.footer svg {
+  height: 25px;
+}
+
+.pexels {
+  height: 25px;
+}
+
+.github {
+  font-weight: 300;
+  font-size: 1rem;
+  color: #000;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: .5s;
+  text-decoration: none;
+}
+
+.footer svg:hover,
+.pexels:hover,
+.github:hover {
+  opacity: 1;
 }
