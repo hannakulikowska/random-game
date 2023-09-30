@@ -8,12 +8,13 @@ const deleteBtn = document.querySelector(".search-box .fa-xmark");
 const enlargedBox = document.querySelector(".enlarged-box");
 const closeBtn = document.querySelector(".enlarged-box .fa-xmark");
 const downloadBtn = document.querySelector(".enlarged-box .fa-download");
+const wrapper = document.querySelector(".enlarged-box .wrapper");
 
 
 // API KEY, NUMBER OF IMAGES AND PAGES, SEARCH WORDS  
 
 const apiKey = "BPMzMqljebkGhOZlvLsfHAuJLyyjbDnrsXaO8tiUaPJgTQY0VYUMX0QV";
-const perPage = 16;
+const perPage = 15;
 const loadedImageIds = [];
 let currentPage = 1;
 let searchWords = null;
@@ -235,3 +236,13 @@ closeBtn.addEventListener("click", closeEnlargedImage);
 
 // for download button on modal box with enlarged image
 downloadBtn.addEventListener("click", (e) => downloadImage(e.target.dataset.image));
+
+// Closing `enlarged image` on click outside a `wrapper`
+enlargedBox.addEventListener("click", function(event) {
+  // Get the element that was clicked
+  const target = event.target;
+  // Check if enlarged-box contains a wrapper element inside it, then remove `show` class
+  if (target !== wrapper && !wrapper.contains(target)) {
+    enlargedBox.classList.remove("show");
+  }
+});
