@@ -31,11 +31,24 @@
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex: 1;
 }
 
 .search {
@@ -88,13 +101,18 @@
 
 .search-box .fa-magnifying-glass {
   left: 20px;
-  color: #246d74;
+  color: #05a081;
 }
 
 .search-box .fa-xmark {
   right: 20px;
-  color: #5e5e60;
+  color: #4a4a4a;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.search-box .fa-xmark:hover {
+  color: #059377;
 }
 
 input, button, i {
@@ -123,7 +141,7 @@ An adaptive gallery is created even without flex/grid */
 .gallery .images {
   max-width: 95%;
   margin-top: 40px;
-  gap: 15px;
+  gap: 30px;
   columns: 5 340px;
 }
 
@@ -132,7 +150,7 @@ An adaptive gallery is created even without flex/grid */
   overflow: hidden;
   position: relative;
   list-style: none;
-  margin-bottom: 14px;
+  margin-bottom: 30px;
   border-radius: 4px;
 }
 
@@ -177,14 +195,24 @@ An adaptive gallery is created even without flex/grid */
   cursor: pointer;
 }
 
+.card button .fa-download {
+  color: #4a4a4a;
+}
+
 .gallery .load-more,
 .gallery .reload-btn {
-  margin: 50px 0 80px;
+  margin: 70px 0 100px;
   color:#fff;
   font-size: 1.2rem;
   padding: 12px 27px;
-  background: #246d74;
+  background: #05a081;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.gallery .load-more:hover,
+.gallery .reload-btn:hover {
+  background: #059377;
 }
 
 .gallery .load-more.disabled {
@@ -197,7 +225,7 @@ An adaptive gallery is created even without flex/grid */
   font-weight: 500;
   font-size: 1.3rem;
   margin-top: 50px;
-  color: #246d74;
+  color: #4a4a4a;
   text-align: center;
 }
 
@@ -212,7 +240,7 @@ header {
 }
 
 header .photographer {
-  color: #5e5e60;
+  color: #4a4a4a;
 }
 
 header .photographer i,
@@ -225,7 +253,7 @@ header .buttons i {
   height: 40px;
   display: inline-block;
   line-height: 40px;
-  background: #5e5e60;
+  background: #4a4a4a;
   font-size: 1.2rem;
   text-align: center;
   color: #fff;
@@ -234,7 +262,7 @@ header .buttons i {
 
 .buttons i:last-child {
   margin-left: 10px;
-  background: #5e5e60;
+  background: #4a4a4a;
 }
 
 .enlarged-box {
@@ -282,11 +310,12 @@ header .buttons i {
   width: 100%;
   min-height: auto;
   padding: 20px 20px 15px;
-  background-color: #bebebe;
+  background-color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
+  bottom: 0;
 }
 
 .footer svg,
@@ -320,3 +349,4 @@ header .buttons i {
 .github:hover {
   opacity: 1;
 }
+

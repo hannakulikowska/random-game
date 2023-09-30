@@ -39,7 +39,7 @@ const generateHTML = (images) => {
                 <span>${img.photographer}</span>
               </div>
               <button onclick="downloadImage('${img.src.original}');event.stopPropagation();">
-                <i class="fa-solid fa-download"></i>
+                <i class="fa-solid fa-download" title="Download"></i>
               </button>
             </div>
           </li>
