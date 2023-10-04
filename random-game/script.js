@@ -186,13 +186,16 @@ function gameOver() {
       if (values[y][x] === expectedValue) {
         expectedValue++;
       } else {
+        // game over
         if (x === size - 1 && y === size - 1 && values[y][x] === 0) {
+          startBtn.checked = false; // !startBtn.checked
           return true;
         }
         return false;
       } 
     }
   }
+  startBtn.checked = false;
   return true;
 }
 
@@ -204,11 +207,10 @@ function init() {
 
 // START BUTTON
 startBtn.addEventListener('change', function () {
-  // if the checkbox is checked, then shuffle cells
   if (startBtn.checked) {
-    shuffle();
+    shuffle(); // shuffle cells and start game
   } else {
-    init();
+    init(); // inactive state
   }
 });
 
