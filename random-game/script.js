@@ -86,6 +86,11 @@ function draw() {
 
 // SWAP AN EMPTY CELL WITH ANOTHER CELL NEXT TO
 function makeMove(move) {
+  // check if startBtn is checked
+  if (!startBtn.checked) {
+    return false;
+  }
+
   let newX = emptyX + move.dx, newY = emptyY + move.dy;
   if ((newX >= size) || (newX < 0) ||
     (newY >= size) || (newY < 0))
