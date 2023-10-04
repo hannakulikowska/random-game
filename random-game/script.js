@@ -1,5 +1,6 @@
 const size = 4;
-const fieldCells = createField();
+const tableCells = createTable();
+const startBtn = document.getElementById('start-btn');
 let values;
 let emptyX, emptyY;
 let left = { dx: -1, dy: 0 };
@@ -7,9 +8,9 @@ let right = { dx: 1, dy: 0 };
 let up = { dx: 0, dy: -1 };
 let down = { dx: 0, dy: 1 };
 
-function createField() {
+function createTable() {
   const cells = [];
-  const table = document.getElementById('field');
+  const table = document.getElementById('table');
 
   for (let y = 0; y < size; y++) {
     const tr = document.createElement('tr');
@@ -26,9 +27,10 @@ function createField() {
   return cells;
 }
 
-// FILL FIELD WITH 1 TO 15
-function createInitialValues() {
+// ADD VALUES FROM 1 TO 15
+function reset() {
   emptyX = emptyY = size - 1;
+  // create array with values from 1 to 15
   let v = [];
   let i = 1;
   for (let y = 0; y < size; y++) { 
@@ -43,12 +45,12 @@ function createInitialValues() {
   return v;
 }
 
-// DRAW THE FIELD
+// DRAW THE TABLE
 function draw() {
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       let v = values[y][x];
-      let td = fieldCells[y][x];
+      let td = tableCells[y][x];
 
       if (v === 0) {
         // one cell is empty
@@ -115,7 +117,7 @@ function shuffle() {
   emptyX = emptyIndex % size;
   emptyY = Math.floor(emptyIndex / size);
 
-  draw(); // / Redraw the field (game board)
+  draw(); // / Redraw the table (game board)
 }
 
 // MOVE CELLS WITH KEYBOARD
@@ -140,16 +142,49 @@ document.addEventListener('keydown', function (e) {
   if (moved) {
     draw(); // Redraw the board only if the move was successful
   }
+  // After each movement check if the game over or not 
+  if (gameOver()) {
+    setTimeout(function () {
+      console.log('Game over. You won!');
+      // start the game again
+      init();
+    }, 1000);
+  }
 });
 
 // CHECK IF GAME IS OVER - ALL CELLS SHOULD CONTAIN CORRECT VALUES
+function gameOver() {
+  let expectedValue = 1;
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      if (values[y][x] === expectedValue) {
+        expectedValue++;
+      } else {
+        if (x === size - 1 && y === size - 1 && values[y][x] === 0) {
+          return true;
+        }
+        return false;
+      } 
+    }
+  }
+  return true;
+}
 
 // INITIALIZE THE GAME
 function init() {
-  values = createInitialValues();
-  shuffle();
+  values = reset();
   draw();
 }
+
+// START BUTTON
+startBtn.addEventListener('change', function () {
+  // if the checkbox is checked, then shuffle cells
+  if (startBtn.checked) {
+    shuffle();
+  } else {
+    init();
+  }
+});
 
 // At the end of the code:
 init(); 

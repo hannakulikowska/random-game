@@ -1,90 +1,126 @@
 /* nunito-sans-200 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 200;
-  src: url('..assets/fonts/nunito-sans-v15-latin-200.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-200.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-300 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 300;
-  src: url('..assets/fonts/nunito-sans-v15-latin-300.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-300.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-regular - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('..assets/fonts/nunito-sans-v15-latin-regular.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-regular.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-500 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 500;
-  src: url('..assets/fonts/nunito-sans-v15-latin-500.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-500.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-600 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 600;
-  src: url('..assets/fonts/nunito-sans-v15-latin-600.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-600.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-700 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 700;
-  src: url('..assets/fonts/nunito-sans-v15-latin-700.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-700.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-800 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 800;
-  src: url('..assets/fonts/nunito-sans-v15-latin-800.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-800.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* nunito-sans-900 - latin */
 @font-face {
   font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 900;
-  src: url('..assets/fonts/nunito-sans-v15-latin-900.woff2') format('woff2');
+  src: url('/random-game/assets/fonts/nunito-sans-v15-latin-900.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+
+
+/* poppins-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/random-game/assets/fonts/poppins-v20-latin-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* poppins-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/random-game/assets/fonts/poppins-v20-latin-700.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* poppins-800 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  src: url('/random-game/assets/fonts/poppins-v20-latin-800.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* poppins-900 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  src: url('/random-game/assets/fonts/poppins-v20-latin-900.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
 
 html {
   font-family: 'Nunito Sans', sans-serif;
@@ -96,36 +132,98 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  background-color: #EBECF0;
+}
+
 main {
   padding: 40px 20px;
 }
 
+.fifteen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .fifteen h1 {
-  font-weight: 400;
-  font-size: 2rem;
+  font-weight: 900;
+  font-size: 5rem;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
-  color: #adacac;
+  color: #EBECF0;
+  text-shadow: 8px 8px 12px rgba(72, 79, 96, 0.3),
+              -6px -6px 12px rgba(255, 255, 255, 1);
+  outline: none;
   text-align: center;
   margin-bottom: 3rem;
 }
 
-.field {
-  border: 15px solid #e8e8e8;
+.table {
   border-radius: 15px;
+  border-spacing: 15px 15px;
+  border-collapse: separate;
   empty-cells: hide;
   margin: 0 auto;
+  margin-bottom: 5rem;
 }
 
 .cell {
   width: 100px;
   height: 100px;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 1.5rem;
-  color:#adacac;
-  border-radius: 18px;
-  background: #e8e8e8;
-  box-shadow: inset -9px -9px 19px #cacaca,
-    inset 9px 9px 19px #ffffff;
+  border-radius: 16px;
+  color: #6C7587;
   text-align: center;
+  background-color: #EBECF0;
+  border: none;
+  box-shadow: 8px 8px 12px -2px rgba(72, 79, 96, 0.4),
+    -6px -6px 12px -1px rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  height: 70px;
+  width: 215px;
+  appearance: none;
+  -moz-appearance: none;    /* Firefox */
+  -webkit-appearance: none; /* Chrome Safari */
+  -ms-appearance: none;     /* Internet Explorer Edge */
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  background-color: #EBECF0;
+  box-shadow: 8px 8px 12px -2px rgba(72, 79, 96, 0.4),
+    -6px -6px 12px -1px rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:after {
+  content: 'start';
+  color: #6C7587;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: all 250ms ease-in-out;
+}
+
+input[type="checkbox"]:hover:after,
+.cell:hover {
+  color: #15e38a;
+}
+
+input[type="checkbox"]:checked {
+  transition: all 250ms ease-in-out;
+  box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
+      inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
+  border: none;
+}
+
+input[type="checkbox"]:checked:after {
+  content: 'exit';
 }
