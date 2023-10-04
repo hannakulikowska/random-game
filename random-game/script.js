@@ -105,6 +105,9 @@ function makeMove(move) {
     values[emptyY][emptyX] = c;
     emptyX = newX;
     emptyY = newY;
+
+    playMoveSound();
+    
     return true;
   }
 
@@ -199,12 +202,6 @@ function gameOver() {
   return true;
 }
 
-// INITIALIZE THE GAME
-function init() {
-  values = reset();
-  draw();
-}
-
 // START BUTTON
 startBtn.addEventListener('change', function () {
   if (startBtn.checked) {
@@ -213,6 +210,39 @@ startBtn.addEventListener('change', function () {
     init(); // inactive state
   }
 });
+
+// ADD EVENT LISTENER FOR EACH CELL BEFORE THE GAME WAS STARTED - SHAKE-ANIMATION
+for (let y = 0; y < size; y++) {
+  for (let x = 0; x < size; x++) {
+    const td = tableCells[y][x];
+
+    td.addEventListener('click', function () {
+      if (!startBtn.checked) {
+        startBtn.classList.add('shake-animation');
+        startBtn.classList.add('active');
+      }
+    });
+  }
+}
+
+// DELETE SHAKE-ANIMATION CLASS
+startBtn.addEventListener('animationend', function () {
+  startBtn.classList.remove('shake-animation');
+  startBtn.classList.remove('active');
+});
+
+// PLAY MOVE-SOUND
+function playMoveSound() {
+  const moveSound = document.getElementById('moveSound');
+  moveSound.currentTime = 0; // start playing immediately
+  moveSound.play();
+}
+
+// INITIALIZE THE GAME
+function init() {
+  values = reset();
+  draw();
+}
 
 // At the end of the code:
 init(); 
