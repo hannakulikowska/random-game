@@ -20,6 +20,27 @@ function createTable() {
     for (let x = 0; x < size; x++) {
       const td = document.createElement('td');
       td.setAttribute('class', 'cell');
+      // td.setAttribute('draggable', 'true');
+      td.setAttribute('id', `cell-${y}-${x}`); // add id for each cell
+
+      // move by clicking on a cell
+      td.addEventListener('click', function () {
+        const cellId = this.id;
+        const coordinates = cellId.split('-');
+        const clickedY = parseInt(coordinates[1]);
+        const clickedX = parseInt(coordinates[2]);
+        const dx = clickedX - emptyX;
+        const dy = clickedY - emptyY;
+        const move = { dx, dy };
+        makeMove(move);
+        draw();
+        if (gameOver()) {
+          setTimeout(function () {
+            console.log('Game over. You won!');
+          }, 1000);
+        }
+      });
+
       tr.appendChild(td);
       rowCells.push(td);
     }
@@ -147,7 +168,7 @@ document.addEventListener('keydown', function (e) {
     setTimeout(function () {
       console.log('Game over. You won!');
       // start the game again
-      init();
+      // init();
     }, 1000);
   }
 });
