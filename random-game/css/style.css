@@ -134,11 +134,11 @@ html {
 
 body {
   background-color: #EBECF0;
-}
-
-main {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .gameboard {
@@ -193,8 +193,9 @@ main {
   justify-content: center;
 }
 
-.sound,
-.results {
+#sound-btn,
+#results-btn,
+#footer-btn {
   height: 50px;
   width: 50px;
   appearance: none;
@@ -212,10 +213,24 @@ main {
   justify-content: center;
 }
 
-.sound i,
-.results i {
+#sound-btn:after,
+#footer-btn:after,
+#results-btn:after{
+  font-family: FontAwesome;
   color: #fff;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+}
+
+#sound-btn:after {
+  content: '\f027';
+}
+
+#results-btn:after {
+  content: '\f091';
+}
+
+#footer-btn:after {
+  content: '\f129';
 }
 
 .stopwatch:after {
@@ -247,7 +262,7 @@ main {
   cursor: pointer;
 }
 
-input[type="checkbox"] {
+#start-btn {
   height: 60px;
   width: 195px;
   appearance: none;
@@ -265,13 +280,12 @@ input[type="checkbox"] {
   justify-content: center;
 }
 
-.results,
 input[type="checkbox"] {
   transition: all 250ms ease-in-out;
   cursor: pointer;
 }
 
-input[type="checkbox"]:after {
+#start-btn:after {
   content: 'start';
   color: #6C7587;
   font-size: 20px;
@@ -279,27 +293,35 @@ input[type="checkbox"]:after {
   transition: all 250ms ease-in-out;
 }
 
-#start-btn.green-color::after {
+#start-btn.green-color:after {
   color: #15e38a;
 }
 
-input[type="checkbox"]:hover:after,
+#start-btn:hover:after,
 .stopwatch:hover:after,
-.sound i:hover,
-.results i:hover,
+#sound-btn:hover:after,
+#results-btn:hover:after,
+#footer-btn:hover:after,
 .cell:hover {
   color: #15e38a;
 }
 
-input[type="checkbox"]:checked {
+#start-btn:checked,
+#sound-btn:checked,
+#results-btn:checked,
+#footer-btn:checked {
   transition: all 250ms ease-in-out;
   box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
       inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
   border: none;
 }
 
-input[type="checkbox"]:checked:after {
+#start-btn:checked:after {
   content: 'exit';
+}
+
+#sound-btn:checked:after {
+  content: '\f6a9';
 }
 
 .shake-animation {
@@ -312,4 +334,18 @@ input[type="checkbox"]:checked:after {
   50% {transform: rotate(-7deg) translate3d(0, 0, 0);}
   75% {transform: rotate(1deg) translate3d(0, 0, 0);}
   100% {transform: rotate(0deg) translate3d(0, 0, 0);}
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  position: relative; 
+}
+
+footer input {
+  position: absolute;
+  right: 5vmin;
+  bottom: 3vmin;
 }

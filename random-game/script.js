@@ -267,7 +267,7 @@ function playShakeSound() {
   shakeSound.play();
 }
 
-// TIME
+// STOPWATCH
 const startTimer = () => {
   clearInterval(interval);
   interval = setInterval(startWatch, 10);

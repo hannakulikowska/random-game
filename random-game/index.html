@@ -21,12 +21,8 @@
           <span id="seconds">00</span>
         </div>
         <div class="buttons-wrapper">
-          <span class="sound">
-            <i class="fa-solid fa-volume-low"></i>
-          </span>
-          <span class="results">
-            <i class="fa-solid fa-trophy"></i>
-          </span>
+          <input type="checkbox" name="soundbtn" id="sound-btn">
+          <input type="checkbox" name="resultsbtn" id="results-btn">
         </div>
       </div>
 
@@ -36,12 +32,17 @@
 
     </section>
   </main>
-  <script src="script.js"></script>
+  <footer>
+    <input type="checkbox" name="footerbtn" id="footer-btn">
+  </footer>
+
   <audio id="moveSound">
     <source src="assets/audio/drag-sound.mp3" type="audio/mpeg">
   </audio>
   <audio id="shakeSound">
     <source src="assets/audio/shake-sound.mp3" type="audio/mpeg">
   </audio>
+  <script src="script.js"></script>
+  
 </body>
 </html>
