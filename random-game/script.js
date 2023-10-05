@@ -1,6 +1,9 @@
 const size = 4;
 const tableCells = createTable();
 const startBtn = document.getElementById('start-btn');
+const soundBtn = document.getElementById('sound-btn');
+const resultsBtn = document.getElementById('results-btn');
+const footerBtn = document.getElementById('footer-btn');
 let values;
 let emptyX, emptyY;
 let left = { dx: -1, dy: 0 };
@@ -112,9 +115,11 @@ function makeMove(move) {
     values[emptyY][emptyX] = c;
     emptyX = newX;
     emptyY = newY;
-
-    playMoveSound();
     
+    if (!soundBtn.checked) {
+      playMoveSound();
+    }
+
     return true;
   }
 
@@ -239,7 +244,9 @@ for (let y = 0; y < size; y++) {
 
     td.addEventListener('click', function () {
       if (!startBtn.checked) {
-        playShakeSound();
+        if (!soundBtn.checked) {
+          playShakeSound();
+        }
         startBtn.classList.add('shake-animation');
         startBtn.classList.add('green-color'); // to change color
       }
