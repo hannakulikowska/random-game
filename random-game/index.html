@@ -11,17 +11,37 @@
 
 <body>
   <main>
-    <section class="fifteen">
+    <section class="gameboard">
       <h1>Fifteen Puzzle</h1>
+
+      <div class="wrapper">
+        <div class="stopwatch">
+          <span id="hours">00</span>:
+          <span id="minutes">00</span>:
+          <span id="seconds">00</span>
+        </div>
+        <div class="buttons-wrapper">
+          <span class="sound">
+            <i class="fa-solid fa-volume-low"></i>
+          </span>
+          <span class="results">
+            <i class="fa-solid fa-trophy"></i>
+          </span>
+        </div>
+      </div>
+
       <table class="table" id="table"></table>
       
       <input type="checkbox" name="start" id="start-btn">
-      <audio id="moveSound">
-        <source src="assets/audio/drag-effect.mp3" type="audio/mpeg">
-      </audio>
-     
+
     </section>
   </main>
   <script src="script.js"></script>
+  <audio id="moveSound">
+    <source src="assets/audio/drag-sound.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="shakeSound">
+    <source src="assets/audio/shake-sound.mp3" type="audio/mpeg">
+  </audio>
 </body>
 </html>

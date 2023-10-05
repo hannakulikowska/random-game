@@ -8,6 +8,16 @@ let right = { dx: 1, dy: 0 };
 let up = { dx: 0, dy: -1 };
 let down = { dx: 0, dy: 1 };
 
+const hoursContainer = document.getElementById("hours");
+const minutesContainer = document.getElementById("minutes");
+const secondsContainer = document.getElementById("seconds");
+
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+let interval;
+
+// CREATE TABLE
 function createTable() {
   const cells = [];
   const table = document.getElementById('table');
@@ -20,7 +30,6 @@ function createTable() {
     for (let x = 0; x < size; x++) {
       const td = document.createElement('td');
       td.setAttribute('class', 'cell');
-      // td.setAttribute('draggable', 'true');
       td.setAttribute('id', `cell-${y}-${x}`); // add id for each cell
 
       // move by clicking on a cell
@@ -35,9 +44,7 @@ function createTable() {
         makeMove(move);
         draw();
         if (gameOver()) {
-          setTimeout(function () {
-            console.log('Game over. You won!');
-          }, 1000);
+          stopTimer();
         }
       });
 
@@ -149,6 +156,21 @@ function shuffle() {
   draw(); // / Redraw the table (game board)
 }
 
+
+// Testing
+// function shuffle() {
+//   const moves = [up, down, left, right];
+//   const numShuffles = 20; // Количество перемешиваний
+
+//   for (let i = 0; i < numShuffles; i++) {
+//     const randomMove = moves[Math.floor(Math.random() * moves.length)];
+//     makeMove(randomMove);
+//   }
+
+//   draw(); // Перерисовываем поле после перемешивания
+// }
+
+
 // MOVE CELLS WITH KEYBOARD
 document.addEventListener('keydown', function (e) {
   let moved = false; // Flag to check the success of the move
@@ -173,11 +195,8 @@ document.addEventListener('keydown', function (e) {
   }
   // After each movement check if the game over or not 
   if (gameOver()) {
-    setTimeout(function () {
-      console.log('Game over. You won!');
-      // start the game again
-      // init();
-    }, 1000);
+    stopTimer();
+    // init();
   }
 });
 
@@ -202,10 +221,12 @@ function gameOver() {
   return true;
 }
 
-// START BUTTON
+// START/END GAME - CHANGE START BUTTON STATE (CHECKED/UNCHECKED)
 startBtn.addEventListener('change', function () {
   if (startBtn.checked) {
+    init();
     shuffle(); // shuffle cells and start game
+    startTimer();
   } else {
     init(); // inactive state
   }
@@ -218,8 +239,9 @@ for (let y = 0; y < size; y++) {
 
     td.addEventListener('click', function () {
       if (!startBtn.checked) {
+        playShakeSound();
         startBtn.classList.add('shake-animation');
-        startBtn.classList.add('active');
+        startBtn.classList.add('green-color'); // to change color
       }
     });
   }
@@ -228,7 +250,7 @@ for (let y = 0; y < size; y++) {
 // DELETE SHAKE-ANIMATION CLASS
 startBtn.addEventListener('animationend', function () {
   startBtn.classList.remove('shake-animation');
-  startBtn.classList.remove('active');
+  startBtn.classList.remove('green-color'); 
 });
 
 // PLAY MOVE-SOUND
@@ -238,10 +260,72 @@ function playMoveSound() {
   moveSound.play();
 }
 
+// PLAY SHAKE-SOUND
+function playShakeSound() {
+  const shakeSound = document.getElementById('shakeSound');
+  shakeSound.currentTime = 0; // start playing immediately
+  shakeSound.play();
+}
+
+// TIME
+const startTimer = () => {
+  clearInterval(interval);
+  interval = setInterval(startWatch, 10);
+}
+
+const stopTimer = () => {
+  clearInterval(interval);
+}
+
+const resetTimer = () => {
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+  secondsContainer.innerHTML = '00';
+  minutesContainer.innerHTML = '00';
+  hoursContainer.innerHTML = '00';
+  clearInterval(interval);
+}
+
+function startWatch() {
+  seconds++;
+  if (seconds < 10) {
+    seconds.innerHTML = `0${seconds}`;
+  }
+  else if (seconds > 59) {
+    minutes++;
+    seconds = 0;
+    secondsContainer.innerHTML = '00';
+  }
+  else {
+    secondsContainer.innerHTML = seconds;
+  }
+
+  if (minutes < 10) {
+    minutesContainer.innerHTML = `0${minutes}`;
+  }
+  else if (minutes > 59) {
+    hours++;
+    minutes = 0;
+    minutesContainer.innerHTML = minutes;
+  }
+  else {
+    minutesContainer.innerHTML = minutes;
+  }
+
+  if (hours < 10) {
+    hoursContainer.innerHTML = `0${hours}`;
+  }
+  else {
+    hoursContainer.innerHTML = hours;
+  }
+}
+
 // INITIALIZE THE GAME
 function init() {
   values = reset();
   draw();
+  resetTimer();
 }
 
 // At the end of the code:
