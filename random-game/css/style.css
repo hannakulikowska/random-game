@@ -436,10 +436,8 @@ footer {
 #github {
   visibility: hidden;
   position: absolute;
-  right: -15px;
-  bottom: 70px;
   cursor: pointer;
-  transition: 0.1s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 #github:after {
@@ -449,10 +447,8 @@ footer {
 #rsschool {
   visibility: hidden;
   position: absolute;
-  right: 55px;
-  bottom: 50px;
   cursor: pointer;
-  transition: 0.1s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 #Layer_1 {
@@ -463,11 +459,9 @@ footer {
 #year {
   visibility: hidden;
   position: absolute;
-  right: 80px;
-  bottom: -15px;
   color: black;
   font-weight: 700;
   font-size: 0.8rem;
   text-align: center;
-  transition: 0.1s ease;
+  transition: all 0.1s ease-in-out;
 }

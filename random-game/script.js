@@ -380,10 +380,24 @@ resultsCheckbox.addEventListener("change", ()=> {
 footerBtn.addEventListener("click", () => {
   if (footerBtn.checked) {
     github.style.visibility = "visible";
+    github.style.right = "-15px";
+    github.style.bottom = "70px";
+
     rsschool.style.visibility = "visible";
+    rsschool.style.right = "55px";
+    rsschool.style.bottom = "50px";
+
     year.style.visibility = "visible";
+    year.style.right = "80px";
+    year.style.bottom = "-15px";
   }
   else {
+    github.style.right = "0px";
+    github.style.bottom = "0px";
+    rsschool.style.right = "0px";
+    rsschool.style.bottom = "0px";
+    year.style.right = "0px";
+    year.style.bottom = "0px";
     github.style.visibility = "hidden";
     rsschool.style.visibility = "hidden";
     year.style.visibility = "hidden";
