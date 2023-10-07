@@ -122,6 +122,13 @@
 
 
 
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+
 html {
   font-family: 'Nunito Sans', sans-serif;
 }
@@ -144,9 +151,9 @@ body {
 .gameboard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 5vmin;
+  gap: 10vmin;
 }
 
 .gameboard h1 {
@@ -162,11 +169,11 @@ body {
 }
 
 .wrapper {
-  max-width: 405px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 6vmin;
+  padding: 15px 0;
 }
 
 .buttons-wrapper {
@@ -195,7 +202,11 @@ body {
 
 #sound-btn,
 #results-btn,
-#footer-btn {
+#rules-btn,
+#footer-btn,
+#github,
+#rsschool,
+#year {
   height: 50px;
   width: 50px;
   appearance: none;
@@ -215,9 +226,16 @@ body {
 
 #sound-btn:after,
 #footer-btn:after,
-#results-btn:after{
+#results-btn:after,
+#rules-btn:after {
   font-family: FontAwesome;
   color: #fff;
+  font-size: 1.6rem;
+}
+
+#github:after {
+  font-family: FontAwesome;
+  color: black;
   font-size: 1.6rem;
 }
 
@@ -229,16 +247,18 @@ body {
   content: '\f091';
 }
 
-#footer-btn:after {
+#rules-btn:after {
   content: '\f129';
 }
 
-.stopwatch:after {
-  font-family: FontAwesome;
-  color: #fff;
-  content: '\f2f2';
-  font-size: 1.6rem;
-  padding-left: 10px;
+#footer-btn:after {
+  content: '\f141';
+}
+
+.board-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4vmin;
 }
 
 .table {
@@ -262,8 +282,64 @@ body {
   cursor: pointer;
 }
 
-#start-btn {
+.concave {
+  border-radius: 16px;
+  background-color: #EBECF0;
+  border: none;
+  box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
+    inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
+}
+
+.stopwatch {
+  font-size: 1.3rem;
   height: 60px;
+  width: 195px;
+}
+
+.right-table {
+  perspective: 1000px;
+  width: 270px;
+  transform-style: preserve-3d;
+  cursor: ns-resize;
+}
+
+.rules-table,
+.results-table {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 405px;
+  padding: 13px 16px;  
+  
+  font-weight: 300;
+  font-size: 1rem;
+  color: #6C7587;
+  margin-top: 15px;
+  
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+  transform: rotateY(0deg);
+}
+
+.rules-table {
+  overflow-y: scroll;
+  text-align: justify;
+}
+
+.results-table {
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#start-btn {
+  height: 195px;
   width: 195px;
   appearance: none;
   -moz-appearance: none;    /* Firefox */
@@ -293,23 +369,30 @@ input[type="checkbox"] {
   transition: all 250ms ease-in-out;
 }
 
-#start-btn.green-color:after {
-  color: #15e38a;
-}
-
+#start-btn.green-color:after,
 #start-btn:hover:after,
 .stopwatch:hover:after,
 #sound-btn:hover:after,
 #results-btn:hover:after,
+#rules-btn:hover:after,
 #footer-btn:hover:after,
+#github:hover:after,
+#year:hover,
 .cell:hover {
   color: #15e38a;
+}
+
+#rsschool:hover svg {
+  fill: #15e38a;
 }
 
 #start-btn:checked,
 #sound-btn:checked,
 #results-btn:checked,
-#footer-btn:checked {
+#rules-btn:checked,
+#footer-btn:checked,
+#github:active,
+#rsschool:active {
   transition: all 250ms ease-in-out;
   box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
       inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
@@ -344,8 +427,47 @@ footer {
   position: relative; 
 }
 
-footer input {
-  position: absolute;
+.footerbtn-wrapper {
+  position: relative;
   right: 5vmin;
   bottom: 3vmin;
+}
+
+#github {
+  visibility: hidden;
+  position: absolute;
+  right: -15px;
+  bottom: 70px;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+
+#github:after {
+  content: '\f09b';
+}
+
+#rsschool {
+  visibility: hidden;
+  position: absolute;
+  right: 55px;
+  bottom: 50px;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+
+#Layer_1 {
+  width: 35px;
+  height: auto;
+}
+
+#year {
+  visibility: hidden;
+  position: absolute;
+  right: 80px;
+  bottom: -15px;
+  color: black;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-align: center;
+  transition: 0.1s ease;
 }

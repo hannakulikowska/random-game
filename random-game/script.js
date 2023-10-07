@@ -4,6 +4,9 @@ const startBtn = document.getElementById('start-btn');
 const soundBtn = document.getElementById('sound-btn');
 const resultsBtn = document.getElementById('results-btn');
 const footerBtn = document.getElementById('footer-btn');
+const github = document.getElementById('github');
+const rsschool = document.getElementById('rsschool');
+const year = document.getElementById('year');
 let values;
 let emptyX, emptyY;
 let left = { dx: -1, dy: 0 };
@@ -115,7 +118,7 @@ function makeMove(move) {
     values[emptyY][emptyX] = c;
     emptyX = newX;
     emptyY = newY;
-    
+
     if (!soundBtn.checked) {
       playMoveSound();
     }
@@ -334,6 +337,59 @@ function init() {
   draw();
   resetTimer();
 }
+
+
+
+const rulesCheckbox=document.getElementById("rules-btn");
+const resultsCheckbox=document.getElementById("results-btn");
+const rulesContent=document.querySelector(".rules-table");
+const resultsContent=document.querySelector(".results-table");
+
+rulesCheckbox.addEventListener("change", ()=> {
+  if (rulesCheckbox.checked) {
+      resultsCheckbox.disabled = false; 
+      rulesContent.style.transform="rotateY(0deg)";
+      resultsContent.style.transform="rotateY(180deg)";
+      resultsCheckbox.checked = false;      
+      rulesCheckbox.disabled = true; 
+  }
+
+  else {
+    if (!resultsCheckbox.checked) {
+      resultsContent.style.transform = "rotateY(180deg)";
+    }
+  }
+});
+
+resultsCheckbox.addEventListener("change", ()=> {
+  if (resultsCheckbox.checked) {
+    rulesCheckbox.disabled = false; 
+    resultsContent.style.transform="rotateY(0deg)";
+    rulesContent.style.transform="rotateY(180deg)";
+    rulesCheckbox.checked = false;
+    resultsCheckbox.disabled = true; 
+  }
+
+  else {
+    if (!rulesCheckbox.checked) {
+      rulesContent.style.transform = "rotateY(180deg)";
+    }
+  }
+});
+  
+footerBtn.addEventListener("click", () => {
+  if (footerBtn.checked) {
+    github.style.visibility = "visible";
+    rsschool.style.visibility = "visible";
+    year.style.visibility = "visible";
+  }
+  else {
+    github.style.visibility = "hidden";
+    rsschool.style.visibility = "hidden";
+    year.style.visibility = "hidden";
+  }
+})
+
 
 // At the end of the code:
 init(); 
