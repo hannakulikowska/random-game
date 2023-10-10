@@ -168,7 +168,7 @@ body {
   text-align: center;
 }
 
-.wrapper {
+.left-side {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -176,7 +176,7 @@ body {
   padding: 15px 0;
 }
 
-.buttons-wrapper {
+.checkboxes {
   display: flex;
   flex-wrap: nowrap;
   gap: 2vmin;
@@ -495,4 +495,113 @@ footer {
   font-size: 0.8rem;
   text-align: center;
   transition: all 0.1s ease-in-out;
+}
+
+/* RADIO */
+.radio {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  height: 60px;
+  width: 195px;
+  border-radius: 15px;
+  background: #EBECF0;
+  color: #6C7587;
+  font-weight: 400;
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-shadow: 8px 8px 12px -2px rgba(72, 79, 96, 0.4),
+    -6px -6px 12px -1px rgba(255, 255, 255, 1);
+  z-index: 1;
+}
+
+.radio::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  display: block;
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  background: #EBECF0;
+  box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
+    inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
+  z-index: 1;
+  top: calc(50% - 20px);
+  left: calc(50% - 80px);
+  transition: all 0.4s cubic-bezier(1, 0.04, 0.66, 1.23);
+}
+
+.level1-selected {
+  animation: pressed-left 0.4s cubic-bezier(1, 0.04, 0.66, 1.23);
+}
+
+.level2-selected {
+  animation: pressed-right 0.4s cubic-bezier(1, 0.04, 0.66, 1.23);
+}
+
+.level1-selected::after {
+  left: calc(50% - 80px);
+}
+
+.level2-selected::after {
+  left: calc(50% - 0px);
+}
+
+.radio label {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  width: 44%;
+  cursor: pointer;
+  height: 100%;
+  z-index: 2;
+}
+
+.radio label span {
+  position: relative;
+  z-index: 2;
+}
+
+.radio input {
+  display: none;
+}
+
+.radio input:checked+label {
+  color: #15e38a;
+}
+
+.radio input:checked+label::after {
+  display: block;
+}
+
+@keyframes pressed-left {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(0.98, 0.98);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes pressed-right {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(0.98, 0.98);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
 }

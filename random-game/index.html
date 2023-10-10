@@ -16,18 +16,31 @@
       
       <div class="board-wrapper">
 
-        <div class="wrapper">
-          <div class="buttons-wrapper">
-            <input type="checkbox" name="soundbtn" id="sound-btn">
-            <input type="checkbox" name="resultsbtn" id="results-btn">
-            <input type="checkbox" name="rulesbtn" id="rules-btn" checked disabled>
+        <div class="left-side">
+          <div class="checkboxes">
+            <input type="checkbox" name="soundbtn" id="sound-btn" title="Sounds on/off">
+            <input type="checkbox" name="resultsbtn" id="results-btn" title="Results">
+            <input type="checkbox" name="rulesbtn" id="rules-btn" title="Game Rules" checked disabled>
           </div>
+
+          <div class="radio" title="Game Levels">
+            <input type="radio" id="level1" value="Level 1" name="levels" onchange="setGameLevel('level1')" checked />
+            <label for="level1">
+              <span>&nbsp;Level 1</span>
+            </label>
+          
+            <input type="radio" name="levels" id="level2" value="Level 2" onchange="setGameLevel('level2')" />
+            <label for="level2">
+              <span>Level 2&nbsp;</span>
+            </label>
+          </div>
+
           <div class="stopwatch concave">
             <span id="minutes">00</span>:
             <span id="seconds">00</span>:
             <span id="milliseconds">00</span>
           </div>
-          
+
           <input type="checkbox" name="start" id="start-btn">
         </div>
 

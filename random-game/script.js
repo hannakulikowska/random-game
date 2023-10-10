@@ -6,10 +6,13 @@ const footerBtn = document.getElementById('footer-btn');
 const github = document.getElementById('github');
 const rsschool = document.getElementById('rsschool');
 const year = document.getElementById('year');
-const rulesCheckbox=document.getElementById("rules-btn");
-const resultsCheckbox=document.getElementById("results-btn");
-const rulesContent=document.querySelector(".rules-table");
-const resultsContent=document.querySelector(".results-table");
+const rulesCheckbox=document.getElementById('rules-btn');
+const resultsCheckbox = document.getElementById('results-btn');
+const level1 = document.getElementById('level1');
+const level2 = document.getElementById('level2');
+const radio = document.querySelector('.radio');
+const rulesContent = document.querySelector('.rules-table');
+const resultsContent = document.querySelector('.results-table');
 
 let values;
 let emptyX, emptyY;
@@ -134,46 +137,45 @@ function makeMove(move) {
   return false; // Return false if the movement is not performed
 }
 
-// SHUFFLE CELLS USING FISHER-YATES SHUFFLE
-// function shuffle() {
-//   let valuesFlat = values.flat(); // Convert a 2D array to a 1D array
-//   let currentIndex = valuesFlat.length, randomIndex, tempValue;
+// SHUFFLE CELLS USING FISHER-YATES SHUFFLE - LEVEL 2
+function shuffle2() {
+  let valuesFlat = values.flat(); // Convert a 2D array to a 1D array
+  let currentIndex = valuesFlat.length, randomIndex, tempValue;
 
-//   // While there are elements left to shuffle
-//   while (currentIndex !== 0) {
-//     // Select a random index
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex--;
+  // While there are elements left to shuffle
+  while (currentIndex !== 0) {
+    // Select a random index
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
-//     // Swap the elements
-//     tempValue = valuesFlat[currentIndex];
-//     valuesFlat[currentIndex] = valuesFlat[randomIndex];
-//     valuesFlat[randomIndex] = tempValue;
-//   }
+    // Swap the elements
+    tempValue = valuesFlat[currentIndex];
+    valuesFlat[currentIndex] = valuesFlat[randomIndex];
+    valuesFlat[randomIndex] = tempValue;
+  }
 
-//   // Update the 2D array with shuffled values
-//   let currentIndexFlat = 0;
-//   for (let y = 0; y < size; y++) {
-//     for (let x = 0; x < size; x++) {
-//       values[y][x] = valuesFlat[currentIndexFlat];
-//       currentIndexFlat++;
-//     }
-//   }
+  // Update the 2D array with shuffled values
+  let currentIndexFlat = 0;
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      values[y][x] = valuesFlat[currentIndexFlat];
+      currentIndexFlat++;
+    }
+  }
 
-//   // Find the index of the empty cell in the 1D array
-//   let emptyIndex = valuesFlat.indexOf(0);
-//   // Convert it to coordinates in the 2D array
-//   emptyX = emptyIndex % size;
-//   emptyY = Math.floor(emptyIndex / size);
+  // Find the index of the empty cell in the 1D array
+  let emptyIndex = valuesFlat.indexOf(0);
+  // Convert it to coordinates in the 2D array
+  emptyX = emptyIndex % size;
+  emptyY = Math.floor(emptyIndex / size);
 
-//   draw(); // / Redraw the table (game board)
-// }
+  draw(); // / Redraw the table (game board)
+}
 
-
-// Testing
-function shuffle() {
+// SHUFFLE FOR LEVEL 1
+function shuffle1() {
   const moves = [up, down, left, right];
-  const numShuffles = 20; // Количество перемешиваний
+  const numShuffles = 40; // Количество перемешиваний
 
   for (let i = 0; i < numShuffles; i++) {
     const randomMove = moves[Math.floor(Math.random() * moves.length)];
@@ -245,7 +247,13 @@ function gameOver() {
 startBtn.addEventListener('change', function () {
   if (startBtn.checked) {
     init();
-    shuffle(); // shuffle cells and start game
+    if (level1.checked) {
+      shuffle1();
+    }
+    else if (level2.checked) {
+      shuffle2();
+    }
+    // shuffle(); // shuffle cells and start game
     startTimer();
   } else {
     init(); // inactive state
@@ -435,7 +443,19 @@ footerBtn.addEventListener("click", () => {
     rsschool.style.visibility = "hidden";
     year.style.visibility = "hidden";
   }
-})
+});
+
+// RADIO TOGGLE
+function setGameLevel(level){
+  if(level === 'level1'){
+    radio.classList.add('level1-selected');
+    radio.classList.remove('level2-selected');
+  } else {
+    radio.classList.add('level2-selected');
+    radio.classList.remove('level1-selected');
+  }
+}
+
 
 // INITIALIZE THE GAME
 function init() {
