@@ -2,11 +2,15 @@ const size = 4;
 const tableCells = createTable();
 const startBtn = document.getElementById('start-btn');
 const soundBtn = document.getElementById('sound-btn');
-const resultsBtn = document.getElementById('results-btn');
 const footerBtn = document.getElementById('footer-btn');
 const github = document.getElementById('github');
 const rsschool = document.getElementById('rsschool');
 const year = document.getElementById('year');
+const rulesCheckbox=document.getElementById("rules-btn");
+const resultsCheckbox=document.getElementById("results-btn");
+const rulesContent=document.querySelector(".rules-table");
+const resultsContent=document.querySelector(".results-table");
+
 let values;
 let emptyX, emptyY;
 let left = { dx: -1, dy: 0 };
@@ -14,14 +18,15 @@ let right = { dx: 1, dy: 0 };
 let up = { dx: 0, dy: -1 };
 let down = { dx: 0, dy: 1 };
 
-const hoursContainer = document.getElementById("hours");
 const minutesContainer = document.getElementById("minutes");
 const secondsContainer = document.getElementById("seconds");
+const millisecondsContainer = document.getElementById("milliseconds");
 
-let hours = 0;
 let minutes = 0;
 let seconds = 0;
+let milliseconds = 0;
 let interval;
+
 
 // CREATE TABLE
 function createTable() {
@@ -130,53 +135,53 @@ function makeMove(move) {
 }
 
 // SHUFFLE CELLS USING FISHER-YATES SHUFFLE
-function shuffle() {
-  let valuesFlat = values.flat(); // Convert a 2D array to a 1D array
-  let currentIndex = valuesFlat.length, randomIndex, tempValue;
+// function shuffle() {
+//   let valuesFlat = values.flat(); // Convert a 2D array to a 1D array
+//   let currentIndex = valuesFlat.length, randomIndex, tempValue;
 
-  // While there are elements left to shuffle
-  while (currentIndex !== 0) {
-    // Select a random index
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+//   // While there are elements left to shuffle
+//   while (currentIndex !== 0) {
+//     // Select a random index
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex--;
 
-    // Swap the elements
-    tempValue = valuesFlat[currentIndex];
-    valuesFlat[currentIndex] = valuesFlat[randomIndex];
-    valuesFlat[randomIndex] = tempValue;
-  }
+//     // Swap the elements
+//     tempValue = valuesFlat[currentIndex];
+//     valuesFlat[currentIndex] = valuesFlat[randomIndex];
+//     valuesFlat[randomIndex] = tempValue;
+//   }
 
-  // Update the 2D array with shuffled values
-  let currentIndexFlat = 0;
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      values[y][x] = valuesFlat[currentIndexFlat];
-      currentIndexFlat++;
-    }
-  }
+//   // Update the 2D array with shuffled values
+//   let currentIndexFlat = 0;
+//   for (let y = 0; y < size; y++) {
+//     for (let x = 0; x < size; x++) {
+//       values[y][x] = valuesFlat[currentIndexFlat];
+//       currentIndexFlat++;
+//     }
+//   }
 
-  // Find the index of the empty cell in the 1D array
-  let emptyIndex = valuesFlat.indexOf(0);
-  // Convert it to coordinates in the 2D array
-  emptyX = emptyIndex % size;
-  emptyY = Math.floor(emptyIndex / size);
+//   // Find the index of the empty cell in the 1D array
+//   let emptyIndex = valuesFlat.indexOf(0);
+//   // Convert it to coordinates in the 2D array
+//   emptyX = emptyIndex % size;
+//   emptyY = Math.floor(emptyIndex / size);
 
-  draw(); // / Redraw the table (game board)
-}
+//   draw(); // / Redraw the table (game board)
+// }
 
 
 // Testing
-// function shuffle() {
-//   const moves = [up, down, left, right];
-//   const numShuffles = 20; // Количество перемешиваний
+function shuffle() {
+  const moves = [up, down, left, right];
+  const numShuffles = 20; // Количество перемешиваний
 
-//   for (let i = 0; i < numShuffles; i++) {
-//     const randomMove = moves[Math.floor(Math.random() * moves.length)];
-//     makeMove(randomMove);
-//   }
+  for (let i = 0; i < numShuffles; i++) {
+    const randomMove = moves[Math.floor(Math.random() * moves.length)];
+    makeMove(randomMove);
+  }
 
-//   draw(); // Перерисовываем поле после перемешивания
-// }
+  draw(); // Перерисовываем поле после перемешивания
+}
 
 
 // MOVE CELLS WITH KEYBOARD
@@ -204,7 +209,6 @@ document.addEventListener('keydown', function (e) {
   // After each movement check if the game over or not 
   if (gameOver()) {
     stopTimer();
-    // init();
   }
 });
 
@@ -218,12 +222,20 @@ function gameOver() {
       } else {
         // game over
         if (x === size - 1 && y === size - 1 && values[y][x] === 0) {
-          startBtn.checked = false; // !startBtn.checked
+          if (startBtn.checked) {
+            saveGameTime();
+            displayGameResults();
+          }
+          startBtn.checked = false;
           return true;
         }
         return false;
       } 
     }
+  }
+  if (startBtn.checked) {
+    saveGameTime();
+    displayGameResults();
   }
   startBtn.checked = false;
   return true;
@@ -266,14 +278,14 @@ startBtn.addEventListener('animationend', function () {
 // PLAY MOVE-SOUND
 function playMoveSound() {
   const moveSound = document.getElementById('moveSound');
-  moveSound.currentTime = 0; // start playing immediately
+  moveSound.currentTime = 1;
   moveSound.play();
 }
 
 // PLAY SHAKE-SOUND
 function playShakeSound() {
   const shakeSound = document.getElementById('shakeSound');
-  shakeSound.currentTime = 0; // start playing immediately
+  shakeSound.currentTime = 0;
   shakeSound.play();
 }
 
@@ -288,24 +300,36 @@ const stopTimer = () => {
 }
 
 const resetTimer = () => {
+  milliseconds = 0;
   seconds = 0;
   minutes = 0;
-  hours = 0;
+  millisecondsContainer.innerHTML = '00';
   secondsContainer.innerHTML = '00';
   minutesContainer.innerHTML = '00';
-  hoursContainer.innerHTML = '00';
   clearInterval(interval);
 }
 
 function startWatch() {
-  seconds++;
+  milliseconds++;
+  if (milliseconds < 10) {
+    milliseconds.innerHTML = `0${milliseconds}`;
+  }
+  else if (milliseconds > 59) {
+    seconds++;
+    milliseconds = 0;
+    millisecondsContainer.innerHTML = '00';
+  }
+  else {
+    millisecondsContainer.innerHTML = milliseconds;
+  }
+
   if (seconds < 10) {
-    seconds.innerHTML = `0${seconds}`;
+    secondsContainer.innerHTML = `0${seconds}`;
   }
   else if (seconds > 59) {
     minutes++;
     seconds = 0;
-    secondsContainer.innerHTML = '00';
+    secondsContainer.innerHTML = seconds;
   }
   else {
     secondsContainer.innerHTML = seconds;
@@ -314,37 +338,45 @@ function startWatch() {
   if (minutes < 10) {
     minutesContainer.innerHTML = `0${minutes}`;
   }
-  else if (minutes > 59) {
-    hours++;
-    minutes = 0;
-    minutesContainer.innerHTML = minutes;
-  }
   else {
     minutesContainer.innerHTML = minutes;
   }
+}
 
-  if (hours < 10) {
-    hoursContainer.innerHTML = `0${hours}`;
-  }
-  else {
-    hoursContainer.innerHTML = hours;
+// SAVE GAME TIME TO LOCAL STORAGE
+function saveGameTime() {
+  // Get game time
+  let gameTime = {
+    minutes: minutesContainer.innerHTML,
+    seconds: secondsContainer.innerHTML,
+    milliseconds: millisecondsContainer.innerHTML
+  };
+  // Total game time in milliseconds
+  let totalMilliseconds = gameTime.minutes * 60 * 1000 + gameTime.seconds * 1000 + gameTime.milliseconds;
+  // Get array from the Local Storage
+  let gameTimes = JSON.parse(localStorage.getItem('gameTimes')) || [];
+  // Add game time to the array, sort and slise up to 10 results
+  gameTimes.push({ gameTime, totalMilliseconds });
+  gameTimes.sort((a, b) => a.totalMilliseconds - b.totalMilliseconds);
+  gameTimes = gameTimes.slice(0, 10);
+  // Save the updated array in Local Storage
+  localStorage.setItem('gameTimes', JSON.stringify(gameTimes));
+}
+
+
+function displayGameResults() {
+  let results = document.querySelector('.results');
+  results.innerHTML = '';
+  // Get the array from Local Storage
+  let gameTimes = JSON.parse(localStorage.getItem('gameTimes'));
+  // Add game results to HTML
+  for (let i = 0; i < gameTimes.length; i++) {
+    let time = gameTimes[i].gameTime;
+    results.innerHTML += `<span>${i+1} - ${time.minutes}:${time.seconds}:${time.milliseconds}</span>`;
   }
 }
 
-// INITIALIZE THE GAME
-function init() {
-  values = reset();
-  draw();
-  resetTimer();
-}
-
-
-
-const rulesCheckbox=document.getElementById("rules-btn");
-const resultsCheckbox=document.getElementById("results-btn");
-const rulesContent=document.querySelector(".rules-table");
-const resultsContent=document.querySelector(".results-table");
-
+// SHOW GAME RESULTS OR GAME RULES
 rulesCheckbox.addEventListener("change", ()=> {
   if (rulesCheckbox.checked) {
       resultsCheckbox.disabled = false; 
@@ -377,6 +409,7 @@ resultsCheckbox.addEventListener("change", ()=> {
   }
 });
   
+// SHOW FOOTER ICONS 
 footerBtn.addEventListener("click", () => {
   if (footerBtn.checked) {
     github.style.visibility = "visible";
@@ -404,6 +437,13 @@ footerBtn.addEventListener("click", () => {
   }
 })
 
+// INITIALIZE THE GAME
+function init() {
+  values = reset();
+  draw();
+  resetTimer();
+  displayGameResults();
+}
 
 // At the end of the code:
 init(); 

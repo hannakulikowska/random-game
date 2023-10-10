@@ -23,10 +23,11 @@
             <input type="checkbox" name="rulesbtn" id="rules-btn" checked disabled>
           </div>
           <div class="stopwatch concave">
-            <span id="hours">00</span>:
             <span id="minutes">00</span>:
-            <span id="seconds">00</span>
+            <span id="seconds">00</span>:
+            <span id="milliseconds">00</span>
           </div>
+          
           <input type="checkbox" name="start" id="start-btn">
         </div>
 
@@ -34,20 +35,15 @@
 
         <div class="right-table">
           <div class="rules-table concave">
-            The objective of the game is to arrange the numbered tiles in ascending order, starting from the top-left corner and
-            ending in the bottom-right corner, with the empty space at the bottom-right corner. The tiles are initially placed randomly on the grid. You can move a tile into the empty space by sliding it horizontally or vertically, but not diagonally. You can only move tiles that are adjacent to the empty space. You can move tiles by clicking them or using your keyboard arrows. The game is won when all the tiles are arranged in numerical order, with the empty space in the bottom-right corner. The challenge of the game is to find the most efficient sequence of moves to solve the puzzle. Some configurations may be unsolvable, and the player may need to reset and reshuffle the tiles to continue. The less time spent solving the puzzle, the better. The game keeps statistics of the best time results and indicates the number of moves.
+            <h3>Game rules</h3>
+            <p class="rules-description">
+              The objective of the game is to arrange the numbered tiles in ascending order, starting from the top-left corner and
+              ending in the bottom-right corner, with the empty space at the bottom-right corner. The tiles are initially placed randomly on the grid. You can move a tile into the empty space by sliding it horizontally or vertically, but not diagonally. You can only move tiles that are adjacent to the empty space. You can move tiles by clicking them or using your keyboard arrows. The game is won when all the tiles are arranged in numerical order, with the empty space in the bottom-right corner. The challenge of the game is to find the most efficient sequence of moves to solve the puzzle. Some configurations may be unsolvable, and the player may need to reset and reshuffle the tiles to continue. The less time spent solving the puzzle, the better. The game keeps statistics of the best 10 time results.
+            </p>
           </div>
-          <div class="results-table concave flex-col">
-            <span>00:06:04 - 12 moves</span>
-            <span>00:09:00 - 23 moves</span>
-            <span>00:24:58 - 15 moves</span>
-            <span>00:06:04 - 12 moves</span>
-            <span>00:06:04 - 12 moves</span>
-            <span>00:06:04 - 12 moves</span>
-            <span>00:06:04 - 12 moves</span>
-            <span>00:06:04 - 12 moves</span>
-            <span>00:06:04 - 12 moves</span>
-            <span>00:06:04 - 12 moves</span>
+          <div class="results-table concave">
+            <h3>TOP 10</h3>
+            <div class="results"></div>
           </div>
         </div>
 
