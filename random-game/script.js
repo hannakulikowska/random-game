@@ -477,7 +477,6 @@ function setGameLevel(level){
   }
 }
 
-
 // INITIALIZE THE GAME
 function init() {
   values = reset();

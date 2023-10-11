@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
   <title>15 Puzzle</title>
+  
 </head>
 
 <body>
@@ -22,7 +23,7 @@
             <input type="checkbox" name="resultsbtn" id="results-btn" title="Results">
             <input type="checkbox" name="rulesbtn" id="rules-btn" title="Game Rules" checked disabled>
           </div>
-
+          <div class="buttons-wrapper">
           <div class="radio" title="Game Levels">
             <input type="radio" id="level1" value="Level 1" name="levels" onchange="setGameLevel('level1')" checked />
             <label for="level1">
@@ -42,6 +43,7 @@
           </div>
 
           <input type="checkbox" name="start" id="start-btn">
+          </div>
         </div>
 
         <table class="table" id="table"></table>
@@ -62,6 +64,12 @@
 
       </div>
 
+      <audio id="moveSound">
+        <source src="assets/audio/drag-sound.mp3" type="audio/mpeg">
+      </audio>
+      <audio id="shakeSound">
+        <source src="assets/audio/shake-sound.mp3" type="audio/mpeg">
+      </audio>
     </section>
   </main>
 
@@ -197,14 +205,7 @@
       <button id="year" title="Year" disabled>2023</button>
     </div>
   </footer>
-
-  <audio id="moveSound">
-    <source src="assets/audio/drag-sound.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="shakeSound">
-    <source src="assets/audio/shake-sound.mp3" type="audio/mpeg">
-  </audio>
-  <script src="script.js"></script>
   
+  <script src="script.js"></script>
 </body>
 </html>
