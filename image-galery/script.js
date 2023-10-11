@@ -244,5 +244,6 @@ enlargedBox.addEventListener("click", function(event) {
   // Check if enlarged-box contains a wrapper element inside it, then remove `show` class
   if (target !== wrapper && !wrapper.contains(target)) {
     enlargedBox.classList.remove("show");
+    document.body.style.overflow = "auto";
   }
 });
