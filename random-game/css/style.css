@@ -58,10 +58,12 @@ html {
 
 body {
   background-color: #EBECF0;
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
+  min-height: 100vh;
 }
 
 .gameboard {
@@ -273,7 +275,7 @@ body {
 .buttons-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 42px;
 }
 
 #start-btn {
