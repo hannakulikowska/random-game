@@ -460,7 +460,7 @@ footerBtn.addEventListener("click", () => {
     year.style.bottom = "0px";
     github.style.visibility = "hidden";
     rsschool.style.visibility = "hidden";
-    year.style.visibility = "hidden";
+    year.style.visibility = "hidden"; 
   }
 });
 

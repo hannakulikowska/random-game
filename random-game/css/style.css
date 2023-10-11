@@ -360,15 +360,11 @@ footer {
   justify-content: end;
   align-items: end;
   margin-top: auto;
-  padding: 20px;
-  /* position: absolute; */
-  /* bottom: 0; */
+  padding: 40px;
 }
 
 .footerbtn-wrapper {
   position: relative;
-  /* right: 20px;
-  bottom: 20px; */
 }
 
 #footer-btn:checked {
