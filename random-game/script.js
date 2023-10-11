@@ -440,16 +440,16 @@ resultsCheckbox.addEventListener("change", ()=> {
 footerBtn.addEventListener("click", () => {
   if (footerBtn.checked) {
     github.style.visibility = "visible";
-    github.style.right = "-15px";
-    github.style.bottom = "70px";
+    github.style.right = "0px";
+    github.style.bottom = "80px";
 
     rsschool.style.visibility = "visible";
-    rsschool.style.right = "55px";
-    rsschool.style.bottom = "50px";
+    rsschool.style.right = "60px";
+    rsschool.style.bottom = "60px";
 
     year.style.visibility = "visible";
     year.style.right = "80px";
-    year.style.bottom = "-15px";
+    year.style.bottom = "0px";
   }
   else {
     github.style.right = "0px";
@@ -460,7 +460,7 @@ footerBtn.addEventListener("click", () => {
     year.style.bottom = "0px";
     github.style.visibility = "hidden";
     rsschool.style.visibility = "hidden";
-    year.style.visibility = "hidden";
+    year.style.visibility = "hidden"; 
   }
 });
 
