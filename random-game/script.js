@@ -227,10 +227,14 @@ function gameOver() {
           if (startBtn.checked) {
             saveGameTime();
             displayGameResults();
+            
           }
           startBtn.checked = false;
+          level1.disabled = false;
+          level2.disabled = false;
           return true;
         }
+        
         return false;
       } 
     }
@@ -240,12 +244,17 @@ function gameOver() {
     displayGameResults();
   }
   startBtn.checked = false;
+  level1.disabled = false;
+  level2.disabled = false;
   return true;
 }
 
 // START/END GAME - CHANGE START BUTTON STATE (CHECKED/UNCHECKED)
 startBtn.addEventListener('change', function () {
   if (startBtn.checked) {
+    level1.disabled = true;
+    level2.disabled = true;
+
     init();
     if (level1.checked) {
       shuffle1();
@@ -256,7 +265,11 @@ startBtn.addEventListener('change', function () {
     // shuffle(); // shuffle cells and start game
     startTimer();
   } else {
+    level1.disabled = false;
+    level2.disabled = false;
+
     init(); // inactive state
+
   }
 });
 
@@ -361,22 +374,28 @@ function saveGameTime() {
   };
   // Total game time in milliseconds
   let totalMilliseconds = gameTime.minutes * 60 * 1000 + gameTime.seconds * 1000 + gameTime.milliseconds;
-  // Get array from the Local Storage
-  let gameTimes = JSON.parse(localStorage.getItem('gameTimes')) || [];
-  // Add game time to the array, sort and slise up to 10 results
+  // Get the game level
+  let gameLevel = level1.checked ? 'Level 1' : 'Level 2';
+   // Get array from the Local Storage for the specific level
+  let gameTimes = JSON.parse(localStorage.getItem(gameLevel)) || [];
+  // Add game time to the array, sort and slice up to 10 results
   gameTimes.push({ gameTime, totalMilliseconds });
   gameTimes.sort((a, b) => a.totalMilliseconds - b.totalMilliseconds);
   gameTimes = gameTimes.slice(0, 10);
-  // Save the updated array in Local Storage
-  localStorage.setItem('gameTimes', JSON.stringify(gameTimes));
+  // Save the updated array in Local Storage for the specific level
+  localStorage.setItem(gameLevel, JSON.stringify(gameTimes));
 }
 
-
+// DISPLAY RESULTS
 function displayGameResults() {
   let results = document.querySelector('.results');
+  let resultsTitle = document.querySelector('.results-table h3');
+  // Get the game level
+  let gameLevel = level1.checked ? 'Level 1' : 'Level 2';
   results.innerHTML = '';
-  // Get the array from Local Storage
-  let gameTimes = JSON.parse(localStorage.getItem('gameTimes'));
+  resultsTitle.innerHTML = `Top 10 for ${gameLevel}`;
+  // Get the array from Local Storage for the specific level
+  let gameTimes = JSON.parse(localStorage.getItem(gameLevel)) || [];
   // Add game results to HTML
   for (let i = 0; i < gameTimes.length; i++) {
     let time = gameTimes[i].gameTime;
@@ -450,9 +469,11 @@ function setGameLevel(level){
   if(level === 'level1'){
     radio.classList.add('level1-selected');
     radio.classList.remove('level2-selected');
+    displayGameResults();
   } else {
     radio.classList.add('level2-selected');
     radio.classList.remove('level1-selected');
+    displayGameResults();
   }
 }
 
