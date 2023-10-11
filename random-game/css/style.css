@@ -58,7 +58,6 @@ html {
 
 body {
   background-color: #EBECF0;
-  /* width: 100vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -342,17 +341,6 @@ input[type="checkbox"] {
   border: none;
 }
 
-#footer-btn,
-#footer-btn:checked {
-  transition: all 1s ease-in-out;
-}
-
-#footer-btn:checked {
-  box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
-      inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
-  border: none;
-}
-
 #start-btn:checked:after {
   content: 'exit';
 }
@@ -365,26 +353,29 @@ input[type="checkbox"] {
   animation: shake 0.5s ease-in-out both;
 }
 
-@keyframes shake {
-  0% {transform: rotate(0deg) translate3d(0, 0, 0);}
-  25% {transform: rotate(7deg) translate3d(0, 0, 0);}
-  50% {transform: rotate(-7deg) translate3d(0, 0, 0);}
-  75% {transform: rotate(1deg) translate3d(0, 0, 0);}
-  100% {transform: rotate(0deg) translate3d(0, 0, 0);}
-}
-
 footer {
   width: 100%;
+  min-height: auto;
   display: flex;
   justify-content: end;
   align-items: end;
   margin-top: auto;
+  padding: 20px;
+  /* position: absolute; */
+  /* bottom: 0; */
 }
 
 .footerbtn-wrapper {
   position: relative;
-  right: 20px;
-  bottom: 20px;
+  /* right: 20px;
+  bottom: 20px; */
+}
+
+#footer-btn:checked {
+  box-shadow: inset -4px -4px 6px -1px rgba(255, 255, 255, 1),
+    inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
+  border: none;
+  transition: all 1s ease-in-out;
 }
 
 #github {
@@ -419,6 +410,14 @@ footer {
   font-size: 0.8rem;
   text-align: center;
   transition: all 0.1s ease-in-out;
+}
+
+@keyframes shake {
+  0% {transform: rotate(0deg) translate3d(0, 0, 0);}
+  25% {transform: rotate(7deg) translate3d(0, 0, 0);}
+  50% {transform: rotate(-7deg) translate3d(0, 0, 0);}
+  75% {transform: rotate(1deg) translate3d(0, 0, 0);}
+  100% {transform: rotate(0deg) translate3d(0, 0, 0);}
 }
 
 /* RADIO */
