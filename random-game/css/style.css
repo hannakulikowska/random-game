@@ -4,7 +4,7 @@
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/fonts/nunito-sans-v15-latin-regular.woff2') format('woff2');
+  src: url('../assets/fonts/nunito-sans-v15-latin-regular.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -14,7 +14,7 @@
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 500;
-  src: url('/assets/fonts/nunito-sans-v15-latin-500.woff2') format('woff2');
+  src: url('../assets/fonts/nunito-sans-v15-latin-500.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -24,7 +24,7 @@
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 700;
-  src: url('/assets/fonts/nunito-sans-v15-latin-700.woff2') format('woff2');
+  src: url('../assets/fonts/nunito-sans-v15-latin-700.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -34,7 +34,7 @@
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 900;
-  src: url('/assets/fonts/nunito-sans-v15-latin-900.woff2') format('woff2');
+  src: url('../assets/fonts/nunito-sans-v15-latin-900.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -71,7 +71,6 @@ body {
 
 .gameboard h1 {
   font-weight: 700;
-  /* font-size: 9vmin; */
   font-size: 80px;
   letter-spacing: 0.2rem;
   text-transform: uppercase;
