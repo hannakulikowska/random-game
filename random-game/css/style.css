@@ -89,10 +89,9 @@ body {
   margin-top: 5vh;
   width: 970px;
   height: 78px;
-  background-image: url('/assets/svg/title1.svg');
+  background-image: url('../assets/svg/title1.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  
 }
 
 
